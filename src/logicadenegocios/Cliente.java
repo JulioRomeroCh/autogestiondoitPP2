@@ -3,26 +3,23 @@ package logicadenegocios;
 import java.util.Date;
 
 
-public class Cliente  extends Persona{
+public class Cliente extends Persona{
    
     
   private String codigo;
-  private int cantidadCliente = 0;
-  private String numeroTelefonico;
-  private String correoElectronico;
+  private static int cantidadClientes = 0;
+  public String numeroTelefonico;
+  public String correoElectronico;
   
   public Cliente(String pIdentificacion, String pNombre,  String pPrimerApellido, String pSegundoApellido,
       Date pFechaNacimiento, String pNumeroTelefonico, String pCorreoElectronico){
   
     super(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, pFechaNacimiento);
-            
+    this.cantidadClientes += 1;
+    this.codigo = "CIF_" + cantidadClientes;        
     this.numeroTelefonico = pNumeroTelefonico;
     this.correoElectronico = pCorreoElectronico;
   }
-  
-  /*public boolean comparar(Comparable pPersonas){
-      
-  }*/
   
   public String toString(){
   
@@ -36,4 +33,7 @@ public class Cliente  extends Persona{
     return mensaje;
   }    
     
+  public String getCorreoElectronico(){
+    return this.correoElectronico;
+  }
 }

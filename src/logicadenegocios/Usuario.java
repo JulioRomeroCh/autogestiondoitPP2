@@ -12,9 +12,7 @@ public class Usuario extends Persona {
     
   }
   
-  public String consultarDatosCliente(Persona pCliente){
-    return "";    
-  }
+ 
   
   public String toString(){
    String mensaje = "";
@@ -23,9 +21,5 @@ public class Usuario extends Persona {
     
    return mensaje;   
   }
-  
-  /*public boolean comparar(Comparable pUsuario){
-      
-  }*/
     
 }

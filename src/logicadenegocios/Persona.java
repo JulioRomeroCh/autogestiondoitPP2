@@ -3,7 +3,7 @@ package logicadenegocios;
 import java.util.ArrayList;
 import java.util.Date;
 
-public /*abstract*/ class Persona /*implements Comparable*/{
+public class Persona implements Comparable{
     
   protected String identificacion;
   protected String nombre;
@@ -26,8 +26,9 @@ public /*abstract*/ class Persona /*implements Comparable*/{
     
   } 
   
-  public void registrarCuenta(double pSaldo, String pPin){
-       
+  public void registrarCuenta(double pMonto, String pPin){
+    Cuenta nuevaCuenta = new Cuenta(pMonto, pPin);
+    cuentas.add(nuevaCuenta);
   }
   
   
@@ -50,5 +51,21 @@ public /*abstract*/ class Persona /*implements Comparable*/{
        
   }
   
+  public String getPrimerApellido(){
+    return this.primerApellido;
+  }
+  
+  public boolean comparar (Comparable pPersona){
+    Persona nuevaPersona = (Persona) pPersona;
+    
+    if (this.getPrimerApellido().compareTo(nuevaPersona.getPrimerApellido()) < 1){
+    
+      return true;
+    }
+    
+    else{
+      return false;
+    }
+  }
 }
 

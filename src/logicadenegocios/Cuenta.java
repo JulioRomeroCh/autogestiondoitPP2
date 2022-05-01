@@ -3,7 +3,7 @@ package logicadenegocios;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Cuenta {
+public class Cuenta implements Comision {
  
   private String numeroCuenta;
   private Date fechaCreacion;
@@ -27,9 +27,16 @@ public class Cuenta {
     this.fechaCreacion = new Date();
   }  
   
-  public void registrarOperacion(String pTipo, boolean pCargoComision, int pMonto,
+  public void registrarOperacion(TipoOperacion pTipo, boolean pCargoComision, int pMonto,
       double pMontoComision){
+    
+      Operacion nuevaOperacion = new Operacion(pTipo, pCargoComision, pMonto, pMontoComision);
+      operaciones.add(nuevaOperacion);
+      
+  }
   
+  public double getSaldo(){
+    return this.saldo;
   }
   
   public void bloquearCuenta(){
@@ -60,6 +67,7 @@ public class Cuenta {
     return "";    
   }
   
+  /*
   public String depositarDolares(TipoCambio pCompra, String pNumeroCuenta, int pMonto){
     return "";    
   }
@@ -78,15 +86,18 @@ public class Cuenta {
       int pMonto, String pCuentaDestino){
     return "";    
   }
-  
+  */
+  @Override
   public double calcularComisionesDepositos(){
     return 0.0;    
   }
   
+  @Override
   public double calcularComisionesRetiros(){
     return 0.0;    
   }
     
+  @Override
   public double calcularComisionesTotales(){
     return 0.0;    
   }
@@ -102,11 +113,11 @@ public class Cuenta {
   public String consultarSaldoColones(String pNumeroCuenta, String pPin){
     return "";    
   }
-  
+  /*
   public String consultarSaldoDolares(TipoCambio pCompra, String pNumeroCuenta, String pPin){
     return "";    
   }
-  
+  */
   public String consultarEstatus(String pNumeroCuenta){
     return "";    
   }
@@ -114,11 +125,11 @@ public class Cuenta {
   public String generarEstadoCuentaColones(String pNumeroCuenta, String pPin){
     return "";    
   }
-  
+  /*
   public String generarEstadoCuentaDolares(TipoCambio pCompra, String pNumeroCuenta, String pPin){
     return "";    
   }
-  
+  */
   private int generarNumeroCuenta(){
   
     int numeroAleatorio;
@@ -129,9 +140,9 @@ public class Cuenta {
       
   }
   
-  /*public boolean comparar (Comparable pPersona){
-      
-  }*/
+  public boolean comparar (Comparable pCuenta){
+      return this.getSaldo() > ((Cuenta) pCuenta).getSaldo();
+  }
       
     
 }
