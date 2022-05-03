@@ -17,13 +17,14 @@ public class ClienteDao {
     Conexion nuevaConexion = new Conexion();
     Connection conectar = nuevaConexion.conectar();
     try{        
-        CallableStatement insertar = conectar.prepareCall("{CALL insertarCliente(?,?,?,?,?,?)}");
+        CallableStatement insertar = conectar.prepareCall("{CALL insertarCliente(?,?,?)}");
         insertar.setString(1, pCodigoCliente);
         insertar.setString(2, pNumeroTelefonico);
         insertar.setString(3, pCorreo);
         insertar.execute();
     }
     catch (Exception error){
+      error.printStackTrace();
       salida = false;
     }
      

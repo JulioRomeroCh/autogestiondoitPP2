@@ -5,6 +5,7 @@
 package logicadeaccesoadatos;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
 public class CuentaDao {
      
@@ -17,7 +18,7 @@ public class CuentaDao {
     try{        
         CallableStatement insertar = conectar.prepareCall("{CALL insertarCuenta(?,?,?,?,?)}");
         insertar.setString(1, pNumeroCuenta);
-        insertar.setDate(2, (java.sql.Date) pFechaCreacion);
+        insertar.setDate(2, pFechaCreacion);
         insertar.setDouble(3, pSaldo);
         insertar.setString(4, pPin);
         insertar.setString(5, pEstatus);
@@ -91,7 +92,7 @@ public class CuentaDao {
     Conexion nuevaConexion = new Conexion();
     Connection conectar = nuevaConexion.conectar();
     try{        
-        CallableStatement insertar = conectar.prepareCall("{CALL updateEstatus(?,?)}");
+        CallableStatement insertar = conectar.prepareCall("{CALL updateEstatus(?)}");
         insertar.setString(1, pNumeroCuenta);
         insertar.execute();
     }
@@ -148,6 +149,42 @@ public class CuentaDao {
         }
      
     }
+    
+    private ResultSet consultarClienteCuenta (String pNumeroCuenta){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL consultarClienteCuenta(?)}");
+        consulta.setString(1, pNumeroCuenta);
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          System.out.println("Error al consultar datos de la cuenta");
+      }
+      return resultado;
+    }
+
+    public String recorrerconsultarClienteCuenta(String pNumeroCuenta){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = consultarClienteCuenta(pNumeroCuenta);
+       while (resultado.next()){
+          datosCliente += resultado.getObject(1).toString() + "\n";
+          datosCliente += resultado.getObject(2).toString() + "\n";
+          datosCliente += resultado.getObject(3).toString() + "\n";
+          datosCliente += resultado.getObject(4).toString() + "\n";
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer resultado del cliente");
+          return "0";
+      }
+    }    
     
     private ResultSet consultarExistenciaNumeroCuenta (String pNumeroCuenta){
        Conexion nuevaConexion = new Conexion();
@@ -242,7 +279,73 @@ public class CuentaDao {
     }
     
       
+      
+      
+    private ResultSet referenciarIdentificadorCuenta (String pNumeroCuenta){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL referenciarCuenta(?)}");
+        consulta.setString(1, pNumeroCuenta);
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          System.out.println("Error al referenciar la cuenta");
+      }
+      return resultado;
+    }
 
+    public String recorrerReferenciaNumeroCuenta(String pNumeroCuenta){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = referenciarIdentificadorCuenta(pNumeroCuenta);
+       while (resultado.next()){
+          datosCliente += resultado.getObject(1).toString();
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la referencia del número de cuenta");
+          return "0";
+      }
+    }  
+      
+    private ResultSet consultarCorreoClientePorCuenta (String pNumeroCuenta){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL consultarCorreoCliente(?)}");
+        consulta.setString(1, pNumeroCuenta);
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          System.out.println("Error al consultar el correo del cliente");
+      }
+      return resultado;
+    }
+
+    public String recorrerConsultarCorreoClientePorCuenta (String pNumeroCuenta){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = consultarCorreoClientePorCuenta(pNumeroCuenta);
+       while (resultado.next()){
+          datosCliente += resultado.getObject(1).toString();
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer resultado de correo del cliente");
+          return "0";
+      }
+    }  
    
    
 }

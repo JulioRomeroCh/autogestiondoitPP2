@@ -1,6 +1,8 @@
 package logicadenegocios;
 
 import java.util.Date;
+import logicadeaccesoadatos.*;
+import webservice.TipoCambio;
 
 public class Operacion {
  
@@ -17,6 +19,10 @@ public class Operacion {
     this.cargoComision = pCargoComision;
     this.monto = pMonto;
     this.montoComision = pMontoComision;
+    
+    OperacionDao nuevoDaoOperacion = new OperacionDao();
+    java.sql.Date fechaSQL = new java.sql.Date((new Date()).getDate());
+    nuevoDaoOperacion.insertarOperacion(fechaSQL, pTipo.name(), pMonto, pCargoComision, pMontoComision);
       
   }
   
@@ -28,11 +34,25 @@ public class Operacion {
     mensaje+= "Tipo: " + this.tipo + "\n";
     mensaje+= "Cargo comisión: " + this.cargoComision + "\n";
     mensaje+= "Monto operación: " + this.monto + "\n";
-    mensaje+= "Monto comisión: " + this.montoComision + "\n";
+    mensaje+= "Monto comisión: " + this.montoComision + "\n"+"\n"+"\n";
     
     return mensaje; 
       
   }    
+  
+  public String dolarizar(TipoCambio pCompra){
+   
+    String mensaje = "";
+
+    mensaje = "Fecha operación: " + this.fechaOperacion + "\n";
+    mensaje+= "Tipo: " + this.tipo + "\n";
+    mensaje+= "Cargo comisión: " + this.cargoComision + "\n";
+    mensaje+= "Monto operación: " + (this.monto / pCompra.consultarCompraDolar()) + "\n";
+    mensaje+= "Monto comisión: " + (this.montoComision / pCompra.consultarCompraDolar()) + "\n"+"\n"+"\n";
+    
+    return mensaje; 
+      
+  } 
     
     
 }

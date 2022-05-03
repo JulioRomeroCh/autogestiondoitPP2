@@ -1,6 +1,9 @@
 package logicadenegocios;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import logicadeaccesoadatos.*;
 
 
 public class Cliente extends Persona{
@@ -21,8 +24,63 @@ public class Cliente extends Persona{
     this.correoElectronico = pCorreoElectronico;
   }
   
-  public String toString(){
+  public Cliente (){
+      
+  }
   
+  
+    public String registrarCuenta(double pMonto, String pPin, String pIdentificacion){
+    logicadenegocios.Cuenta nuevaCuenta = new logicadenegocios.Cuenta(pMonto, pPin);
+    super.cuentas.add(nuevaCuenta);
+    CuentaDao nuevoDaoCuenta = new CuentaDao();
+    java.sql.Date fechaSQL = new java.sql.Date((new Date()).getDate());
+    nuevoDaoCuenta.insertarCuenta(nuevaCuenta.getNumeroCuenta(), fechaSQL, pMonto, pPin, "activa");
+    PersonaDao nuevoDaoPersona = new PersonaDao();
+    nuevoDaoPersona.insertarPersonaTieneCuenta(pIdentificacion, nuevaCuenta.getNumeroCuenta());
+    
+    DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
+    
+    String mensaje = "";
+    
+    mensaje = "Se ha creado una nueva cuenta en el sistema, los datos de la cuenta son:" + "\n";
+    mensaje+= "Número de cuenta: " + nuevaCuenta.getNumeroCuenta() + "\n";
+    mensaje+= "Estatus de la cuenta: " + nuevaCuenta.getEstatus() + "\n";
+    
+    mensaje+= "Saldo actual: " + formatoDosDecimales.format(nuevaCuenta.getSaldo()) + "\n";
+    mensaje+= "---" + "\n";
+    mensaje+= "Nombre del dueño de la cuenta: " + getNombre() + " " + getPrimerApellido() + " " + getSegundoApellido() + "\n";
+    mensaje+= "Número del teléfono 'asociado' a la cuenta: " + numeroTelefonico + "\n";
+    mensaje+= "Dirección de correo electrónico 'asociada' a la cuenta: " + correoElectronico + "\n";
+           
+    return mensaje;
+     
+  }
+  
+  public String registrarPersona(){
+      
+   PersonaDao nuevoDaoPersona = new PersonaDao();
+   ClienteDao nuevoDaoCliente = new ClienteDao();
+   
+   nuevoDaoPersona.insertarPersona(super.identificacion, super.nombre, super.primerApellido, super.segundoApellido, super.fechaNacimiento, "Cliente");
+   nuevoDaoCliente.insertarCliente(codigo, numeroTelefonico, correoElectronico);
+   nuevoDaoPersona.insertarClienteEsPersona(super.identificacion, this.codigo);
+   
+   SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+   String fechaNacimiento = formatoFecha.format(super.fechaNacimiento);
+   
+   String mensaje = "Se ha creado un nuevo cliente en el sistema, los datos que fueron almacenados son: " + "\n";
+   mensaje+= "Código: " + this.codigo+ "\n";
+   mensaje+= "Nombre: " + super.nombre + " " + super.primerApellido + " " + super.segundoApellido + "\n";
+   mensaje+= "Identificación: " + super.identificacion + "\n";
+   mensaje+= "Fecha de Nacimiento: " + fechaNacimiento + "\n";
+   mensaje+= "Número telefónico: " + this.numeroTelefonico+ "\n";
+   
+   return mensaje;
+   
+  }
+  
+  public String toString(){
+    
     String mensaje = "";
     
     mensaje = "Código: " + this.codigo + "\n";
@@ -33,7 +91,14 @@ public class Cliente extends Persona{
     return mensaje;
   }    
     
-  public String getCorreoElectronico(){
-    return this.correoElectronico;
+  public String getSegundoApellido(){
+    return this.segundoApellido;
   }
+  
+  public String getNombre(){
+    return this.nombre;
+  }
+  
+
+  
 }
