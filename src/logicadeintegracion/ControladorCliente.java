@@ -28,10 +28,10 @@ public class ControladorCliente {
       return cliente;
   }
   
-  public static String llamarMetodoRegistrarCuentaPersonaCLI(int pMonto, String pPin, String pIdentificacion){
-   if(ExpresionRegular.validarNumerosEnterosPositivos(String.valueOf(pMonto)) == true){
+  public static String llamarMetodoRegistrarCuentaPersonaCLI(String pMonto, String pPin, String pIdentificacion){
+   if(ExpresionRegular.validarNumerosEnterosPositivos(pMonto) == true){
      Cliente nuevoCliente = buscarCliente(pIdentificacion);
-     String mensaje = nuevoCliente.registrarCuenta(pMonto, pPin, pIdentificacion);
+     String mensaje = nuevoCliente.registrarCuenta(Integer.parseInt(pMonto), pPin, pIdentificacion);
      ControladorCuenta.cuentas.add(nuevoCliente.cuentas.get(nuevoCliente.cuentas.size()-1));       
      return mensaje;         
    }

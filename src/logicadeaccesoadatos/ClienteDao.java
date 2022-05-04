@@ -11,7 +11,7 @@ import java.sql.*;
  */
 public class ClienteDao {
     
-    public boolean insertarCliente(String pCodigoCliente, String pNumeroTelefonico, String pCorreo){
+    public static boolean insertarCliente(String pCodigoCliente, String pNumeroTelefonico, String pCorreo){
       
     boolean salida = true;
     Conexion nuevaConexion = new Conexion();

@@ -32,11 +32,9 @@ public class Cliente extends Persona{
     public String registrarCuenta(double pMonto, String pPin, String pIdentificacion){
     logicadenegocios.Cuenta nuevaCuenta = new logicadenegocios.Cuenta(pMonto, pPin);
     super.cuentas.add(nuevaCuenta);
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
     java.sql.Date fechaSQL = new java.sql.Date((new Date()).getDate());
-    nuevoDaoCuenta.insertarCuenta(nuevaCuenta.getNumeroCuenta(), fechaSQL, pMonto, pPin, "activa");
-    PersonaDao nuevoDaoPersona = new PersonaDao();
-    nuevoDaoPersona.insertarPersonaTieneCuenta(pIdentificacion, nuevaCuenta.getNumeroCuenta());
+    CuentaDao.insertarCuenta(nuevaCuenta.getNumeroCuenta(), fechaSQL, pMonto, pPin, "activa");
+    PersonaDao.insertarPersonaTieneCuenta(pIdentificacion, nuevaCuenta.getNumeroCuenta());
     
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
     
@@ -57,13 +55,10 @@ public class Cliente extends Persona{
   }
   
   public String registrarPersona(){
-      
-   PersonaDao nuevoDaoPersona = new PersonaDao();
-   ClienteDao nuevoDaoCliente = new ClienteDao();
    
-   nuevoDaoPersona.insertarPersona(super.identificacion, super.nombre, super.primerApellido, super.segundoApellido, super.fechaNacimiento, "Cliente");
-   nuevoDaoCliente.insertarCliente(codigo, numeroTelefonico, correoElectronico);
-   nuevoDaoPersona.insertarClienteEsPersona(super.identificacion, this.codigo);
+   PersonaDao.insertarPersona(super.identificacion, super.nombre, super.primerApellido, super.segundoApellido, super.fechaNacimiento, "Cliente");
+   ClienteDao.insertarCliente(codigo, numeroTelefonico, correoElectronico);
+   PersonaDao.insertarClienteEsPersona(super.identificacion, this.codigo);
    
    SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
    String fechaNacimiento = formatoFecha.format(super.fechaNacimiento);

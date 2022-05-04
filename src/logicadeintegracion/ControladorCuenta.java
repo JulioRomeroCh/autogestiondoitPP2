@@ -8,6 +8,7 @@ import logicadeintegracion.*;
 import logicadepresentacion.InterfazComandos;
 import logicadevalidacion.ExpresionRegular;
 import logicadevalidacion.ValidacionIntentos;
+import webservice.TipoCambio;
 
 public class ControladorCuenta {
   
@@ -29,15 +30,13 @@ public class ControladorCuenta {
 
   
  public static String consultarDatosCuentaCliente(String pNumeroCuenta){
-   CuentaDao accesoACuenta = new CuentaDao();
-   return accesoACuenta.recorrerconsultarClienteCuenta(pNumeroCuenta);
+   return CuentaDao.recorrerconsultarClienteCuenta(pNumeroCuenta);
  }
  
  
  public static String llamarCambiarPinCLI(String pNumeroCuenta, String pPinActual, String pNuevoPin){
-   CuentaDao nuevoDaoCuenta = new CuentaDao();
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   if(nuevoDaoCuenta.verificarCorrectitudPin(pNumeroCuenta, pPinActual) == true){
+   if(CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPinActual) == true){
     return nuevaCuenta.cambiarPin(pNumeroCuenta, pPinActual, pNuevoPin);
 
    }
@@ -45,21 +44,39 @@ public class ControladorCuenta {
  }
  
  public static String llamarBloquearCuenta(String pNumeroCuenta) throws MessagingException{
-   CuentaDao nuevoAccesoACuenta = new CuentaDao();
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   return nuevaCuenta.bloquearCuenta("Dos intentos consecutivos fallidos de PIN", nuevoAccesoACuenta.recorrerConsultarCorreoClientePorCuenta(pNumeroCuenta));
+   return nuevaCuenta.bloquearCuenta("Dos intentos consecutivos fallidos de PIN", CuentaDao.recorrerConsultarCorreoClientePorCuenta(pNumeroCuenta));
  
  }
  
  public static String llamarConsultarCuentaParticular(String pNumeroCuenta){
-   CuentaDao accesoACuenta = new CuentaDao();
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
    String mensaje = nuevaCuenta.getNumeroCuenta()+ "\n";
    mensaje += nuevaCuenta.getEstatus() + "\n";
    mensaje += nuevaCuenta.getSaldo() + "\n";
-   mensaje += accesoACuenta.recorrerconsultarClienteCuenta(pNumeroCuenta) + "\n";
+   mensaje += CuentaDao.recorrerconsultarClienteCuenta(pNumeroCuenta) + "\n";
    
    return mensaje;
+ }
+ 
+ public static String llamarDepositarColones(String pNumeroCuenta, String pMonto){
+   if (ExpresionRegular.validarNumerosEnterosPositivos(pMonto) == true && CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) == true){
+     Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+     return nuevaCuenta.depositarColones(pNumeroCuenta, Integer.parseInt(pMonto));
+   }
+   else{
+     return "El monto no es un número entero y/o la cuenta no existe";
+   }
+ }
+ 
+ public static String llamarDepositarDolares(String pNumeroCuenta, String pMonto){
+   if (ExpresionRegular.validarNumerosEnterosPositivos(pMonto) == true && CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) == true){
+     Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+     return nuevaCuenta.depositarDolares(new TipoCambio(), pNumeroCuenta, Integer.parseInt(pMonto));
+   }
+   else{
+     return "El monto no es un número entero y/o la cuenta no existe";
+   }
  }
  
   
@@ -68,12 +85,11 @@ public class ControladorCuenta {
    Ordenacion ordenCuentas = new Ordenacion();
    Cuenta[] arregloCuentas = convertirListaCuentasEnArreglo();
    ordenCuentas.ordenamientoInsercion(arregloCuentas);
-   CuentaDao accesoACuenta = new CuentaDao();
    for (int contador = 0; contador != arregloCuentas.length; contador++){ 
      mensaje += arregloCuentas[contador].getNumeroCuenta() + "\n";
      mensaje += arregloCuentas[contador].getEstatus() + "\n";
      mensaje += arregloCuentas[contador].getSaldo() + "\n";
-     mensaje += accesoACuenta.recorrerconsultarClienteCuenta(arregloCuentas[contador].getNumeroCuenta()) + "\n";
+     mensaje += CuentaDao.recorrerconsultarClienteCuenta(arregloCuentas[contador].getNumeroCuenta()) + "\n";
    }
    return mensaje;
   }

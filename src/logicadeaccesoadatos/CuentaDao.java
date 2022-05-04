@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 
 public class CuentaDao {
      
-  public boolean insertarCuenta(String pNumeroCuenta, Date pFechaCreacion, double pSaldo,
+  public static boolean insertarCuenta(String pNumeroCuenta, Date pFechaCreacion, double pSaldo,
       String pPin, String pEstatus){
       
     boolean salida = true;
@@ -31,7 +31,7 @@ public class CuentaDao {
      return salida; 
   }
   
-   public boolean insertarCuentaTieneOperacion (String pNumeroCuenta, int pIdentificadorOperacion){
+   public static boolean insertarCuentaTieneOperacion (String pNumeroCuenta, int pIdentificadorOperacion){
       
     boolean salida = true;
     Conexion nuevaConexion = new Conexion();
@@ -39,10 +39,12 @@ public class CuentaDao {
     try{        
         CallableStatement insertar = conectar.prepareCall("{CALL insertarCuentaTieneOperacion(?,?)}");
         insertar.setInt(1, pIdentificadorOperacion);
-        insertar.setString(2, pNumeroCuenta);
+        insertar.setString(2, recorrerReferenciaNumeroCuenta(pNumeroCuenta));
         insertar.execute();
     }
     catch (Exception error){
+      System.out.println("Excepción de insertar cuenta tiene operación: " + "\n");
+      error.printStackTrace();
       salida = false;
     }
      
@@ -50,7 +52,7 @@ public class CuentaDao {
   }
    
   
-   public boolean actualizarPin (String pNumeroCuenta,String pPin){
+   public static boolean actualizarPin (String pNumeroCuenta,String pPin){
       
     boolean salida = true;
     Conexion nuevaConexion = new Conexion();
@@ -68,7 +70,7 @@ public class CuentaDao {
      return salida; 
   }
    
-   public boolean actualizarSaldo (String pNumeroCuenta, double pSaldo){
+   public static boolean actualizarSaldo (String pNumeroCuenta, double pSaldo){
       
     boolean salida = true;
     Conexion nuevaConexion = new Conexion();
@@ -86,7 +88,7 @@ public class CuentaDao {
      return salida; 
   }
    
-    public boolean inactivarCuentaBaseDeDatos (String pNumeroCuenta){
+    public static boolean inactivarCuentaBaseDeDatos (String pNumeroCuenta){
       
     boolean salida = true;
     Conexion nuevaConexion = new Conexion();
@@ -103,7 +105,7 @@ public class CuentaDao {
      return salida; 
   }
     
-    private ResultSet consultarExistenciaPin (String pNumeroCuenta, String pPin){
+    private static ResultSet consultarExistenciaPin (String pNumeroCuenta, String pPin){
        Conexion nuevaConexion = new Conexion();
        Connection conectar = nuevaConexion.conectar();
        ResultSet resultado = null;
@@ -121,7 +123,7 @@ public class CuentaDao {
       return resultado;
     }
     
-    private String recorrerResultadoPin(String pNumeroCuenta, String pPin){
+    private static String recorrerResultadoPin(String pNumeroCuenta, String pPin){
      
       try{
          String valorVerdad = "";
@@ -137,7 +139,7 @@ public class CuentaDao {
       }
     }
     
-    public boolean verificarCorrectitudPin(String pNumeroCuenta, String pPin){
+    public static boolean verificarCorrectitudPin(String pNumeroCuenta, String pPin){
       
         String valorVerdad = recorrerResultadoPin(pNumeroCuenta, pPin);
         
@@ -150,7 +152,7 @@ public class CuentaDao {
      
     }
     
-    private ResultSet consultarClienteCuenta (String pNumeroCuenta){
+    private static ResultSet consultarClienteCuenta (String pNumeroCuenta){
        Conexion nuevaConexion = new Conexion();
        Connection conectar = nuevaConexion.conectar();
        ResultSet resultado = null;
@@ -167,7 +169,7 @@ public class CuentaDao {
       return resultado;
     }
 
-    public String recorrerconsultarClienteCuenta(String pNumeroCuenta){
+    public static String recorrerconsultarClienteCuenta(String pNumeroCuenta){
      
       try{
          String datosCliente = "";
@@ -186,7 +188,7 @@ public class CuentaDao {
       }
     }    
     
-    private ResultSet consultarExistenciaNumeroCuenta (String pNumeroCuenta){
+    private static ResultSet consultarExistenciaNumeroCuenta (String pNumeroCuenta){
        Conexion nuevaConexion = new Conexion();
        Connection conectar = nuevaConexion.conectar();
        ResultSet resultado = null;
@@ -203,7 +205,7 @@ public class CuentaDao {
       return resultado;
     }
     
-    private String recorrerResultadoNumeroCuenta(String pNumeroCuenta){
+    private static String recorrerResultadoNumeroCuenta(String pNumeroCuenta){
      
       try{
          String valorVerdad = "";
@@ -219,7 +221,7 @@ public class CuentaDao {
       }
     }
     
-      public boolean verificarExistenciaCuenta(String pNumeroCuenta){
+      public static boolean verificarExistenciaCuenta(String pNumeroCuenta){
       
         String valorVerdad = recorrerResultadoNumeroCuenta(pNumeroCuenta);
         
@@ -232,7 +234,7 @@ public class CuentaDao {
      
     }
       
-      private ResultSet consultarSaldo (String pNumeroCuenta){
+      private static ResultSet consultarSaldo (String pNumeroCuenta){
        Conexion nuevaConexion = new Conexion();
        Connection conectar = nuevaConexion.conectar();
        ResultSet resultado = null;
@@ -249,7 +251,7 @@ public class CuentaDao {
       return resultado;
     }
       
-    private double recorrerResultadoSaldo(String pNumeroCuenta){
+    private static double recorrerResultadoSaldo(String pNumeroCuenta){
      
       try{
          double saldo = 0.0;
@@ -265,7 +267,7 @@ public class CuentaDao {
       }
     }
     
-      public boolean verificarSuficienciaDeFondos(String pNumeroCuenta, double pMonto){
+      public static boolean verificarSuficienciaDeFondos(String pNumeroCuenta, double pMonto){
       
         double saldo = recorrerResultadoSaldo(pNumeroCuenta);
         
@@ -281,7 +283,7 @@ public class CuentaDao {
       
       
       
-    private ResultSet referenciarIdentificadorCuenta (String pNumeroCuenta){
+    private static ResultSet referenciarIdentificadorCuenta (String pNumeroCuenta){
        Conexion nuevaConexion = new Conexion();
        Connection conectar = nuevaConexion.conectar();
        ResultSet resultado = null;
@@ -298,7 +300,7 @@ public class CuentaDao {
       return resultado;
     }
 
-    public String recorrerReferenciaNumeroCuenta(String pNumeroCuenta){
+    public static String recorrerReferenciaNumeroCuenta(String pNumeroCuenta){
      
       try{
          String datosCliente = "";
@@ -314,7 +316,7 @@ public class CuentaDao {
       }
     }  
       
-    private ResultSet consultarCorreoClientePorCuenta (String pNumeroCuenta){
+    private static ResultSet consultarCorreoClientePorCuenta (String pNumeroCuenta){
        Conexion nuevaConexion = new Conexion();
        Connection conectar = nuevaConexion.conectar();
        ResultSet resultado = null;
@@ -331,7 +333,7 @@ public class CuentaDao {
       return resultado;
     }
 
-    public String recorrerConsultarCorreoClientePorCuenta (String pNumeroCuenta){
+    public static String recorrerConsultarCorreoClientePorCuenta (String pNumeroCuenta){
      
       try{
          String datosCliente = "";

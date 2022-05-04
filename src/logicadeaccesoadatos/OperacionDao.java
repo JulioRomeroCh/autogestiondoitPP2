@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class OperacionDao {
 
- public boolean insertarOperacion(Date pFechaOperacion, String pTipo,
+ public static boolean insertarOperacion(Date pFechaOperacion, String pTipo,
       int pMonto, boolean pCargoComision, double pMontoComision){
       
     boolean salida = true;
@@ -24,6 +24,8 @@ public class OperacionDao {
         insertar.execute();
     }
     catch (Exception error){
+        System.out.println("Excepción de insertar operación: " + "\n");
+        error.printStackTrace();
       salida = false;
     }
      return salida; 

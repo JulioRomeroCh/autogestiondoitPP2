@@ -15,7 +15,7 @@ public class PersonaDao {
     
     
     
-  public boolean insertarPersona(String pIdentificacion, String pNombre, String pPrimerApellido,
+  public static boolean insertarPersona(String pIdentificacion, String pNombre, String pPrimerApellido,
           String pSegundoApellido, Date pFechaNacimiento, String pRol){
       
     boolean salida = true;
@@ -45,7 +45,7 @@ public class PersonaDao {
      return salida; 
   }
   
-    public boolean insertarClienteEsPersona(String pIdentificacion, String pCodigoCliente){
+    public static boolean insertarClienteEsPersona(String pIdentificacion, String pCodigoCliente){
       
     boolean salida = true;
     Conexion nuevaConexion = new Conexion();
@@ -64,9 +64,8 @@ public class PersonaDao {
      return salida; 
   }
     
-      public boolean insertarPersonaTieneCuenta(String pIdentificacion, String pNumeroCuenta){
-    CuentaDao accesoACuenta = new CuentaDao();
-    String identificadorCuenta = accesoACuenta.recorrerReferenciaNumeroCuenta(pNumeroCuenta);
+   public static boolean insertarPersonaTieneCuenta(String pIdentificacion, String pNumeroCuenta){
+    String identificadorCuenta = CuentaDao.recorrerReferenciaNumeroCuenta(pNumeroCuenta);
     boolean salida = true;
     Conexion nuevaConexion = new Conexion();
     Connection conectar = nuevaConexion.conectar();

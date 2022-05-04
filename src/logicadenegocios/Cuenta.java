@@ -41,9 +41,7 @@ public class Cuenta implements Comision, Comparable {
     
       Operacion nuevaOperacion = new Operacion(pTipo, pCargoComision, pMonto, pMontoComision);
       operaciones.add(nuevaOperacion); 
-      
-      CuentaDao nuevoDaoCuenta = new CuentaDao();
-      nuevoDaoCuenta.insertarCuentaTieneOperacion(getNumeroCuenta(), pMonto);
+      //CuentaDao.insertarCuentaTieneOperacion(getNumeroCuenta(),);
       
   }
   
@@ -57,8 +55,7 @@ public class Cuenta implements Comision, Comparable {
   
   public String bloquearCuenta(String pMotivo, String pCorreo) throws MessagingException{
     this.estatus = "inactiva";  
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
-    nuevoDaoCuenta.inactivarCuentaBaseDeDatos(getNumeroCuenta());
+    CuentaDao.inactivarCuentaBaseDeDatos(getNumeroCuenta());
     String mensaje = "Su cuenta ha sido inactivada por el siguiente motivo: " + pMotivo;
     CorreoElectronico.generarCorreoElectronico(pCorreo, pMotivo);
     return mensaje;
@@ -83,37 +80,36 @@ public class Cuenta implements Comision, Comparable {
   public String cambiarPin(String pNumeroCuenta, String pPinActual, String pNuevoPin){ 
       
       this.pin = pNuevoPin;
-      CuentaDao nuevoDaoCuenta = new CuentaDao();
       registrarOperacion(TipoOperacion.CAMBIO_PIN, false, 0, 0.0);
-      nuevoDaoCuenta.actualizarPin(pNumeroCuenta, pNuevoPin);
+      CuentaDao.actualizarPin(pNumeroCuenta, pNuevoPin);
      
       return "Estimado usuario, se ha cambiado satisfacotiramente el PIN de su cuenta " + pNumeroCuenta + "\n";
       
   }
 
   public String depositarColones(String pNumeroCuenta, int pMonto){
-    
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
+   
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
-    
+    double montoComision = 0.0;
     double totalOperacion=0.0;
     
     if(verificarCobroComision() == true){
         registrarOperacion(TipoOperacion.DEPOSITO, true, pMonto, pMonto*COMISION);
         totalOperacion = cobrarComision(pMonto);
+        montoComision = pMonto * COMISION;
         
     }
     else{
         registrarOperacion(TipoOperacion.DEPOSITO, false, pMonto, 0.0);
         totalOperacion = pMonto;
     }
-    
+    transaccionesRealizadas++;
     saldo = saldo + totalOperacion;
-    nuevoDaoCuenta.actualizarSaldo(pNumeroCuenta, saldo);
+    CuentaDao.actualizarSaldo(pNumeroCuenta, saldo);
     
     String mensaje = "Estimado usuario, se han depositado correctamente " + pMonto + ".00 colones" + "\n";
     mensaje+="[El monto real depositado a su cuenta " + pNumeroCuenta + " es de " + formatoDosDecimales.format(totalOperacion) + " colones]" + "\n";
-    mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(pMonto * COMISION) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
+    mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(montoComision) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
     
     
     return mensaje;    
@@ -123,25 +119,25 @@ public class Cuenta implements Comision, Comparable {
   
   public String depositarDolares(TipoCambio pCompra, String pNumeroCuenta, int pMonto){
       
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
    
     double montoEnColones = pMonto * pCompra.consultarCompraDolar();
     
     double totalOperacion = 0.0;
+    double montoComision = 0.0;
     
     if(verificarCobroComision() == true){
         registrarOperacion(TipoOperacion.DEPOSITO, true, (int) Math.round(montoEnColones), montoEnColones*COMISION);
         totalOperacion = cobrarComision((int) Math.round(montoEnColones));
-        
+        montoComision = montoEnColones * COMISION;
     }
     else{
         registrarOperacion(TipoOperacion.DEPOSITO, false, (int) Math.round(montoEnColones), 0.0);
         totalOperacion = montoEnColones;
     }
-    
+    transaccionesRealizadas++;
     saldo = saldo + totalOperacion;
-    nuevoDaoCuenta.actualizarSaldo(pNumeroCuenta, saldo);
+    CuentaDao.actualizarSaldo(pNumeroCuenta, saldo);
     
     SimpleDateFormat formatoFecha = new SimpleDateFormat("MM/dd/yyyy");
     String fechaActual = formatoFecha.format(new Date());
@@ -152,7 +148,7 @@ public class Cuenta implements Comision, Comparable {
     mensaje+="[Según el BCCR, el tipo de cambio de compra del dólar de " + fechaActual + " es: " + formatoDosDecimales.format(pCompra.consultarCompraDolar()) + "]" + "\n";
     mensaje+="[El monto equivalente en colones es " +  formatoDecimal.format(montoEnColones) + "]" + "\n";
     mensaje+="[El monto real depositado a su cuenta " + pNumeroCuenta + " es de " + formatoDosDecimales.format(totalOperacion) + " colones]" + "\n";
-    mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(montoEnColones * COMISION) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
+    mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(montoComision) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
     
     
     return mensaje;    
@@ -161,26 +157,25 @@ public class Cuenta implements Comision, Comparable {
   
   public String retirarColones(String pNumeroCuenta, String pPin, MensajeTexto pMensaje, int pMonto){
     
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
-    
+    double montoComision = 0.0;
     double totalOperacion = 0.0;
     
     if(verificarCobroComision() == true){
         registrarOperacion(TipoOperacion.RETIRO, true, pMonto, pMonto*COMISION);
         totalOperacion = cobrarComision(pMonto);
-        
+        montoComision = pMonto * COMISION;
     }
     else{
         registrarOperacion(TipoOperacion.RETIRO, false, pMonto, 0.0);
         totalOperacion = pMonto;
     }
-    
+    transaccionesRealizadas++;
     saldo = saldo - totalOperacion;
-    nuevoDaoCuenta.actualizarSaldo(pNumeroCuenta, saldo);
+    CuentaDao.actualizarSaldo(pNumeroCuenta, saldo);
     
     String mensaje = "Estimado usuario, el monto de este retiro es" + formatoDosDecimales.format(totalOperacion) + "colones." + "\n";
-    mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(pMonto * COMISION) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
+    mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(montoComision) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
     
     
     return mensaje; 
@@ -188,25 +183,25 @@ public class Cuenta implements Comision, Comparable {
   
   public String retirarDolares(TipoCambio pVenta, String pNumeroCuenta, String pPin, MensajeTexto pMensaje, int pMonto){
         
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
    
     double montoEnColones = pMonto * pVenta.consultarVentaDolar();
-    
+    double montoComision = 0.0;
     double totalOperacion = 0.0;
     
     if(verificarCobroComision() == true){
         registrarOperacion(TipoOperacion.RETIRO, true, (int) Math.round(montoEnColones), montoEnColones * COMISION);
         totalOperacion = cobrarComision((int) Math.round(montoEnColones));
+        montoComision = montoEnColones * COMISION;
         
     }
     else{
         registrarOperacion(TipoOperacion.RETIRO, false, (int) Math.round(montoEnColones), 0.0);
         totalOperacion = montoEnColones;
     }
-    
+    transaccionesRealizadas++;
     saldo = saldo - totalOperacion;
-    nuevoDaoCuenta.actualizarSaldo(pNumeroCuenta, saldo);
+    CuentaDao.actualizarSaldo(pNumeroCuenta, saldo);
     
 
     DecimalFormat formatoDecimal = new DecimalFormat("#.000");
@@ -215,7 +210,7 @@ public class Cuenta implements Comision, Comparable {
     String mensaje = "Estimado usuario, el monto de este retiro es" + formatoDosDecimales.format(pMonto) + "\n";
     mensaje+="[Según el BCCR, el tipo de cambio de venta del dólar de hoy es: " + formatoDosDecimales.format(pVenta.consultarVentaDolar())+ "]"  + "\n";
     mensaje+="[El monto equivalente de su retiro es " +  formatoDecimal.format(totalOperacion) + "]" + "\n";
-    mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(montoEnColones * COMISION) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
+    mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(montoComision) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
     
     return mensaje;    
     
@@ -223,29 +218,28 @@ public class Cuenta implements Comision, Comparable {
   
   public String transferirFondos (String pCuentaOrigen, String pPin, MensajeTexto pMensaje, int pMonto, Cuenta pCuentaDestino){
     
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
-    
+    double montoComision = 0.0;
     double totalOperacion = 0.0;
     
     if(verificarCobroComision() == true){
         registrarOperacion(TipoOperacion.TRANSFERENCIA, true, pMonto, pMonto * COMISION);
         totalOperacion = cobrarComision(pMonto);
-        
+        montoComision = pMonto * COMISION;
     }
     else{
         registrarOperacion(TipoOperacion.TRANSFERENCIA, false, pMonto, 0.0);
         totalOperacion = pMonto;
     }
-    
+    transaccionesRealizadas++;
     saldo = saldo - totalOperacion;
     pCuentaDestino.saldo+= pMonto;
-    nuevoDaoCuenta.actualizarSaldo(pCuentaOrigen, saldo);
-    nuevoDaoCuenta.actualizarSaldo(pCuentaDestino.getNumeroCuenta(), pCuentaDestino.saldo);
+    CuentaDao.actualizarSaldo(pCuentaOrigen, saldo);
+    CuentaDao.actualizarSaldo(pCuentaDestino.getNumeroCuenta(), pCuentaDestino.saldo);
     
     String mensaje = "Estimado usuario, la transferencia de fondo se ejecutó satisfactoriamente." + "\n";
     mensaje+= "El monto retirado de la cuenta origen y depositado en la cuenta destino es " + pMonto + ".00 colones." + "\n";
-    mensaje+= "[El monto cobrado por concepto de comisión a la cuenta origen fue de " + formatoDosDecimales.format(pMonto * COMISION) + "colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
+    mensaje+= "[El monto cobrado por concepto de comisión a la cuenta origen fue de " + formatoDosDecimales.format(montoComision) + "colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
     
     return mensaje;   
   }

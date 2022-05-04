@@ -8,8 +8,7 @@ public class ValidacionIntentos {
     
   public static boolean validarCantidadIntentosPin(String pPin, String pNumeroCuenta){
 
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
-      if (nuevoDaoCuenta.verificarCorrectitudPin(pNumeroCuenta, pPin) == false){
+      if (CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) == false){
         return false; 
       }
       else{

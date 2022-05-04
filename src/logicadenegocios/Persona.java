@@ -36,8 +36,8 @@ public class Persona implements Comparable{
   
   public String registrarPersona(){
        
-   PersonaDao nuevoDaoPersona = new PersonaDao();
-   nuevoDaoPersona.insertarPersona(this.identificacion, this.nombre, this.primerApellido, this.segundoApellido, this.fechaNacimiento, "Usuario");
+
+   PersonaDao.insertarPersona(this.identificacion, this.nombre, this.primerApellido, this.segundoApellido, this.fechaNacimiento, "Usuario");
     
    String mensaje = "Se ha creado un nuevo usuario en el sistema, los datos que fueron almacenados son: " + "\n";
    mensaje+= this.toString();
@@ -49,10 +49,8 @@ public class Persona implements Comparable{
   public String registrarCuenta(double pMonto, String pPin, String pIdentificacion){
     Cuenta nuevaCuenta = new Cuenta(pMonto, pPin);
     cuentas.add(nuevaCuenta);
-    CuentaDao nuevoDaoCuenta = new CuentaDao();
-    nuevoDaoCuenta.insertarCuenta(nuevaCuenta.getNumeroCuenta(), (java.sql.Date) new Date(), pMonto, pPin, "activa");
-    PersonaDao nuevoDaoPersona = new PersonaDao();
-    nuevoDaoPersona.insertarPersonaTieneCuenta(pIdentificacion, nuevaCuenta.getNumeroCuenta());
+    CuentaDao.insertarCuenta(nuevaCuenta.getNumeroCuenta(), (java.sql.Date) new Date(), pMonto, pPin, "activa");
+    PersonaDao.insertarPersonaTieneCuenta(pIdentificacion, nuevaCuenta.getNumeroCuenta());
     
     String mensaje = "";
     

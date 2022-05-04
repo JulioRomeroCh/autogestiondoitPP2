@@ -244,12 +244,24 @@ public class InterfazComandos {
       
         String opcion = entrada.nextLine();    
       if (opcion.equals("1")){
-        //Falta método depositar en colones
-       
+         String numeroCuenta;
+         String monto;
+          System.out.println("Ingrese el número de cuenta para depositar en colones: ");
+          numeroCuenta = entrada.nextLine();
+          System.out.println("Ingrese el monto en colones, a depositar: ");
+          monto = entrada.nextLine();
+          System.out.println(ControladorCuenta.llamarDepositarColones(numeroCuenta, monto));     
       }
       
       else if (opcion.equals("2")){
-        //Falta método para depositar en dolares
+         String numeroCuenta;
+         String monto;
+          System.out.println("Ingrese el número de cuenta para depositar en dólares: ");
+          numeroCuenta = entrada.nextLine();
+          System.out.println("Ingrese el monto en dólares, a depositar: ");
+          monto = entrada.nextLine();
+                  
+          System.out.println(ControladorCuenta.llamarDepositarDolares(numeroCuenta, monto)); 
       }
       
       else{
@@ -317,7 +329,6 @@ public class InterfazComandos {
       String pin;
       String montoInicialADepositar;
       String identificadorDueno;
-      CuentaDao nuevoDaoCuenta = new CuentaDao();
       if (opcion.equals("1")){
           
         System.out.println("Ingrese su identificación: ");
@@ -329,7 +340,7 @@ public class InterfazComandos {
         System.out.println("Ingrese el monto inicial a depositar: ");
         montoInicialADepositar = entrada.nextLine();  
         
-        System.out.println(ControladorCliente.llamarMetodoRegistrarCuentaPersonaCLI(Integer.parseInt(montoInicialADepositar), pin, identificadorDueno));
+        System.out.println(ControladorCliente.llamarMetodoRegistrarCuentaPersonaCLI(montoInicialADepositar, pin, identificadorDueno));
       
       }
       
