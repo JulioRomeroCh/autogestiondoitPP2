@@ -6,9 +6,11 @@ package logicadeaccesoadatos;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import webservice.TipoCambio;
 
 public class CuentaDao {
-     
+ 
+    
   public static boolean insertarCuenta(String pNumeroCuenta, Date pFechaCreacion, double pSaldo,
       String pPin, String pEstatus){
       
@@ -31,26 +33,6 @@ public class CuentaDao {
      return salida; 
   }
   
-   public static boolean insertarCuentaTieneOperacion (String pNumeroCuenta, int pIdentificadorOperacion){
-      
-    boolean salida = true;
-    Conexion nuevaConexion = new Conexion();
-    Connection conectar = nuevaConexion.conectar();
-    try{        
-        CallableStatement insertar = conectar.prepareCall("{CALL insertarCuentaTieneOperacion(?,?)}");
-        insertar.setInt(1, pIdentificadorOperacion);
-        insertar.setString(2, recorrerReferenciaNumeroCuenta(pNumeroCuenta));
-        insertar.execute();
-    }
-    catch (Exception error){
-      System.out.println("Excepción de insertar cuenta tiene operación: " + "\n");
-      error.printStackTrace();
-      salida = false;
-    }
-     
-     return salida; 
-  }
-   
   
    public static boolean actualizarPin (String pNumeroCuenta,String pPin){
       
@@ -316,38 +298,264 @@ public class CuentaDao {
       }
     }  
       
-    private static ResultSet consultarCorreoClientePorCuenta (String pNumeroCuenta){
+      private static ResultSet consultarDatosCuenta(String pNumeroCuenta){
        Conexion nuevaConexion = new Conexion();
        Connection conectar = nuevaConexion.conectar();
        ResultSet resultado = null;
        PreparedStatement consulta;
        
       try{
-        consulta = conectar.prepareCall("{CALL consultarCorreoCliente(?)}");
+        consulta = conectar.prepareCall("{CALL consultarDatosCuenta(?)}");
         consulta.setString(1, pNumeroCuenta);
         resultado = consulta.executeQuery();  
       }
       catch(Exception error){
-          System.out.println("Error al consultar el correo del cliente");
+          System.out.println("Error al referenciar la los datos de una cuenta");
       }
       return resultado;
     }
 
-    public static String recorrerConsultarCorreoClientePorCuenta (String pNumeroCuenta){
+    public static String recorrerConsultaDatosCuenta(String pNumeroCuenta){
      
       try{
          String datosCliente = "";
-         ResultSet resultado = consultarCorreoClientePorCuenta(pNumeroCuenta);
+         ResultSet resultado = consultarDatosCuenta(pNumeroCuenta);
        while (resultado.next()){
-          datosCliente += resultado.getObject(1).toString();
+          datosCliente += "\n" + "Número de cuenta (encriptado por seguridad): " +resultado.getObject(1).toString() + "\n";
+          datosCliente += "PIN (encriptado por seguridad)" + resultado.getObject(7).toString() + "\n";
+          datosCliente += "Estatus de la cuenta: " + resultado.getObject(2).toString() + "\n";
+          datosCliente += "Saldo: " + resultado.getObject(3).toString() + "\n";
+          datosCliente += "Nombre completo del dueño: " + resultado.getObject(4).toString() + " ";
+          datosCliente += resultado.getObject(5).toString() + " ";
+          datosCliente += resultado.getObject(6).toString() + "\n";
        }
        return datosCliente;
       }
       catch(Exception error){
-          System.out.println("Error al recorrer resultado de correo del cliente");
+          System.out.println("Error al recorrer la consulta de datos de una cuenta");
           return "0";
       }
     }  
+    
+        public static String recorrerConsultaDatosCuentaDolares(String pNumeroCuenta){
+     
+      try{
+          double compraDolar = new TipoCambio().consultarCompraDolar();
+         String datosCliente = "";
+         ResultSet resultado = consultarDatosCuenta(pNumeroCuenta);
+       while (resultado.next()){
+          datosCliente += "\n" + "Número de cuenta (encriptado por seguridad): " +resultado.getObject(1).toString() + "\n";
+          datosCliente += "PIN (encriptado por seguridad)" + resultado.getObject(7).toString() + "\n";
+          datosCliente += "Estatus de la cuenta: " + resultado.getObject(2).toString() + "\n";
+          datosCliente += "Saldo (en dólares): " + (Double.parseDouble(resultado.getObject(3).toString()) / compraDolar) + "\n";
+          datosCliente += "Nombre completo del dueño: " + resultado.getObject(4).toString() + " ";
+          datosCliente += resultado.getObject(5).toString() + " ";
+          datosCliente += resultado.getObject(6).toString() + "\n";
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta de datos de una cuenta");
+          return "0";
+      }
+    } 
+       //---------------------------- Comisiones Universo Cuentas ------------------------
+        
+       private static ResultSet consultarTotalComisionesDepositosUniversoCuentas(){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL consultarTotalComisionesDepositosUniversoCuentas()}");
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          System.out.println("Error al consultar el total de comisiones por depósitos del UC");
+      }
+      return resultado;
+    }
+    
+        public static String recorrerConsultaTotalComisionesDepositosUniversoCuentas(){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = consultarTotalComisionesDepositosUniversoCuentas();
+       while (resultado.next()){
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos para todo el universo de cuentas: " +resultado.getObject(1).toString() + "\n";
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta del total de comisiones por depósito de UC");
+          return "0";
+      }
+    } 
+      
+       private static ResultSet consultarTotalComisionesRetirosUniversoCuentas(){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL consultarTotalComisionesRetirosUniversoCuentas()}");
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          System.out.println("Error al consultar el total de comisiones por retiros del UC");
+      }
+      return resultado;
+    }
+    
+        public static String recorrerConsultaTotalComisionesRetirosUniversoCuentas(){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = consultarTotalComisionesRetirosUniversoCuentas();
+       while (resultado.next()){
+          datosCliente += "\n" + "Total de comisiones por concepto de retiros para todo el universo de cuentas: " +resultado.getObject(1).toString() + "\n";
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta del total de comisiones por retiros de UC");
+          return "0";
+      }
+    }
+        
+      private static ResultSet consultarTotalComisionesDepositosYRetirosUniversoCuentas(){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL consultarTotalComisionesDepositosYRetirosUniversoCuentas()}");
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          System.out.println("Error al consultar el total de comisiones por depósitos y retiros del UC");
+      }
+      return resultado;
+    }
+    
+      public static String recorrerConsultaTotalComisionesDepositosYRetirosUniversoCuentas(){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = consultarTotalComisionesDepositosYRetirosUniversoCuentas();
+       while (resultado.next()){
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos y retiros para todo el universo de cuentas: " +resultado.getObject(1).toString() + "\n";
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta del total de comisiones por depósitos y retiros de UC");
+          return "0";
+      }
+    }
    
-   
+    //-----------------------------------------Comisiones cuenta en particular---------------------
+
+           private static ResultSet consultarTotalComisionesDepositosCuentaUnica(String pNumeroCuenta){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL consultarTotalComisionesDepositosCuentaUnica(?)}");
+        consulta.setString(1, pNumeroCuenta);
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          System.out.println("Error al consultar el total de comisiones por depósitos de única cuenta");
+      }
+      return resultado;
+    }
+    
+      public static String recorrerConsultaTotalComisionesDepositosCuentaUnica(String pNumeroCuenta){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = consultarTotalComisionesDepositosCuentaUnica(pNumeroCuenta);
+       while (resultado.next()){
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos para la cuenta " + pNumeroCuenta + " es: "  +resultado.getObject(1).toString() + "\n";
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta del total de comisiones por depósito de una cuenta en particular");
+          return "0";
+      }
+    } 
+      
+       private static ResultSet consultarTotalComisionesRetirosCuentaUnica(String pNumeroCuenta){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL consultarTotalComisionesRetirosCuentaUnica(?)}");
+        consulta.setString(1, pNumeroCuenta);
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          System.out.println("Error al consultar el total de comisiones por retiros de cuenta única");
+      }
+      return resultado;
+    }
+    
+      public static String recorrerConsultaTotalComisionesRetirosUnicaCuenta(String pNumeroCuenta){
+      try{
+         String datosCliente = "";
+         ResultSet resultado = consultarTotalComisionesRetirosCuentaUnica(pNumeroCuenta);
+       while (resultado.next()){
+          datosCliente += "\n" + "Total de comisiones por concepto de retiros para la cuenta " + pNumeroCuenta + " es: " + resultado.getObject(1).toString() + "\n";
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta del total de comisiones por retiros para una única cuenta");
+          return "0";
+      }
+    }
+        
+      private static ResultSet consultarTotalComisionesDepositosYRetirosCuentaUnica(String pNumeroCuenta){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL consultarTotalComisionesDepositosYRetirosCuentaUnica(?)}");
+        consulta.setString(1, pNumeroCuenta);
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al consultar el total de comisiones por depósitos y retiros de única cuenta");
+      }
+      return resultado;
+    }
+    
+      public static String recorrerConsultaTotalComisionesDepositosYRetirosCuentaUnica(String pNumeroCuenta){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = consultarTotalComisionesDepositosYRetirosCuentaUnica(pNumeroCuenta);
+       while (resultado.next()){
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos y retiros para la cuenta " + pNumeroCuenta + " es: " +resultado.getObject(1).toString() + "\n";
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta del total de comisiones por depósitos y retiros de cuenta única");
+          return "0";
+      }
+    }
 }
+

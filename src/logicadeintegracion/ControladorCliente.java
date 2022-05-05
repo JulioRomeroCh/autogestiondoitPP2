@@ -8,6 +8,7 @@ import static logicadeintegracion.ControladorCuenta.cuentas;
 import static logicadeintegracion.ControladorPersona.buscarPersona;
 import logicadenegocios.*;
 import logicadevalidacion.*;
+import logicadeaccesoadatos.ClienteDao;
 
 
 public class ControladorCliente {
@@ -90,6 +91,10 @@ public class ControladorCliente {
        }
     }
     return "La identificación ingresada no coincide con ninguno de los clientes registrados en el sistema.";    
+  }
+  
+  public static String consultarNumeroClientePorCuenta(String pNumeroCuenta){
+    return ClienteDao.recorrerConsultarNumeroClientePorCuenta(pNumeroCuenta);
   }
   
 

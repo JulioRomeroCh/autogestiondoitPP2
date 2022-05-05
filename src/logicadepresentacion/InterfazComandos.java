@@ -1,24 +1,25 @@
 package logicadepresentacion;
 
 import java.text.ParseException;
-   import java.util.Scanner;
+import java.util.Scanner;
 import javax.mail.MessagingException;
 import logicadeaccesoadatos.CuentaDao;
-   import logicadeintegracion.*;
+import logicadeintegracion.*;
 import logicadevalidacion.*;
+import logicadeconexionexterna.MensajeTexto;
 
 public class InterfazComandos {
     
      Scanner entrada = new Scanner(System.in);
     
- public void ejecutarMenuPrincipal() throws ParseException, MessagingException{
+ public void ejecutarMenuPrincipal() throws ParseException, MessagingException, Exception{
    boolean mostrarMenu = true;
    while (mostrarMenu == true){
      mostrarMenu = menuPrincipal();
    }
  }
      
-  public boolean menuPrincipal() throws ParseException, MessagingException{
+  public boolean menuPrincipal() throws ParseException, MessagingException, Exception{
       
       System.out.println("\n" + "**********Bienvenido a Autogestión del grupo DoIT**********" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -165,7 +166,7 @@ public class InterfazComandos {
       }
   }
   
-  public void menuCuenta() throws ParseException, MessagingException{
+  public void menuCuenta() throws ParseException, MessagingException, Exception{
       
       System.out.println("\n" + "***Módulo de gestión de cuenta***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -187,7 +188,7 @@ public class InterfazComandos {
       }
   }
   
-    public void menuTransaccionesConDinero() throws ParseException{
+    public void menuTransaccionesConDinero() throws ParseException, MessagingException, Exception{
       
       System.out.println("\n" + "***Módulo de gestión de transacciones con dinero***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -201,7 +202,7 @@ public class InterfazComandos {
       }
       
       else if (opcion.equals("2")){
-        //Falta método para transferir fondos
+          System.out.println(menuTransferirFondos());
 
       }
       
@@ -211,7 +212,55 @@ public class InterfazComandos {
 
   }
     
-   public void menuDepositosYRetiros() throws ParseException{
+    //--------------------------------------------
+    public String menuTransferirFondos() throws ParseException, MessagingException, Exception{
+    String numeroCuentaOrigen;
+    String pin;
+    System.out.println("Indique el número de cuenta del que desea transferir fondos: ");
+    numeroCuentaOrigen = entrada.nextLine();
+    String numeroTelefonico = ControladorCliente.consultarNumeroClientePorCuenta(numeroCuentaOrigen);
+    int contadorPin = 0;
+    while (contadorPin < 2){
+         System.out.println("Indique el número PIN asociado a la cuenta: " + "\n" + "intentos restantes: " + (2 - contadorPin));
+         pin = entrada.nextLine();
+         if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuentaOrigen)){
+           return menuPalabraTransferencia(numeroCuentaOrigen, pin, numeroTelefonico);
+         }
+         else{
+           contadorPin++;
+         }
+      
+    }
+    
+    return ControladorCuenta.llamarBloquearCuenta("Dos intentos consecutivos fallidos de PIN", numeroCuentaOrigen);
+  }
+    
+    public String menuPalabraTransferencia(String pNumeroCuentaOrigen, String pPin, String pNumeroTelefonico) throws Exception{
+      String palabraSecreta;
+      String monto;
+      String numeroCuentaDestino;
+      int contadorPalabra = 0;
+      MensajeTexto mensaje = new MensajeTexto();
+      mensaje.enviarPalabraSecreta(pNumeroTelefonico);
+      while (contadorPalabra < 2){
+          System.out.println("Estimado usuario se ha enviado una palabra por mensaje de texto, por favor revise sus mensajes y proceda a digitar la palabra enviada. Tiene " + (2 - contadorPalabra) + " intentos restantes");
+          palabraSecreta = entrada.nextLine();
+          if (mensaje.corroborarPalabraSecreta(palabraSecreta, pNumeroTelefonico)){
+            System.out.println("Ingrese el monto a transferir: ");
+            monto = entrada.nextLine();
+            System.out.println("Indique el número de cuenta a la que desea transferir los fondos: ");
+            numeroCuentaDestino = entrada.nextLine();
+            return ControladorCuenta.llamarTransferirFondos(pNumeroCuentaOrigen, pPin, monto, numeroCuentaDestino);
+          }
+          else{
+              System.out.println("Palabra incorrecta " + "\n");
+              contadorPalabra++;
+          }
+      }
+      return ControladorCuenta.llamarBloquearCuenta("Dos palabras secretas ingresadas de manera errónea y de forma consecutiva", pNumeroCuentaOrigen);
+    }
+    
+   public void menuDepositosYRetiros() throws ParseException, MessagingException, Exception{
       
       System.out.println("\n" + "***Módulo de gestión de depósitos y retiros***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -269,7 +318,7 @@ public class InterfazComandos {
       }
   }
       
-     public void menuRetirosCuenta() throws ParseException{
+     public void menuRetirosCuenta() throws ParseException, MessagingException, Exception{
       
       System.out.println("\n" + "***Módulo de gestión de retiros***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -279,12 +328,12 @@ public class InterfazComandos {
       
         String opcion = entrada.nextLine();    
       if (opcion.equals("1")){
-       //Falta método para retirar en colones
+          System.out.println(menuRetirarColones());
        
       }
       
       else if (opcion.equals("2")){
-        //Falta método para retirar en dólares
+          System.out.println(menuRetirarDolares());
 
       }
       
@@ -293,6 +342,101 @@ public class InterfazComandos {
       }
 
   }
+     
+     
+     
+    public String menuRetirarColones() throws ParseException, MessagingException, Exception{
+    String numeroCuenta;
+    String pin;
+    System.out.println("Indique el número de cuenta al que desea retirar dinero en colones: ");
+    numeroCuenta = entrada.nextLine();
+    String numeroTelefonico = ControladorCliente.consultarNumeroClientePorCuenta(numeroCuenta);
+    int contadorPin = 0;
+    while (contadorPin < 2){
+         System.out.println("Indique el número PIN asociado a la cuenta: " + "\n" + "intentos restantes: " + (2 - contadorPin));
+         pin = entrada.nextLine();
+         if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuenta)){
+           return menuPalabraRetirarColones(numeroCuenta, pin, numeroTelefonico);
+         }
+         else{
+           contadorPin++;
+         }
+      
+    }
+    
+    return ControladorCuenta.llamarBloquearCuenta("Dos intentos consecutivos fallidos de PIN", numeroCuenta);
+  }
+    
+    public String menuPalabraRetirarColones(String pNumeroCuenta, String pPin, String pNumeroTelefonico) throws Exception{
+      String palabraSecreta;
+      String monto;
+      int contadorPalabra = 0;
+      MensajeTexto mensaje = new MensajeTexto();
+      mensaje.enviarPalabraSecreta(pNumeroTelefonico);
+      while (contadorPalabra < 2){
+          System.out.println("Estimado usuario se ha enviado una palabra por mensaje de texto, por favor revise sus mensajes y proceda a digitar la palabra enviada. Tiene " + (2 - contadorPalabra) + " intentos restantes");
+          palabraSecreta = entrada.nextLine();
+          if (mensaje.corroborarPalabraSecreta(palabraSecreta, pNumeroTelefonico)){
+            System.out.println("Ingrese el monto por retirar (en colones): ");
+            monto = entrada.nextLine();
+            return ControladorCuenta.llamarRetirarColones(pNumeroCuenta, pPin, monto);
+          }
+          else{
+              System.out.println("Palabra incorrecta " + "\n");
+              contadorPalabra++;
+          }
+      }
+      return ControladorCuenta.llamarBloquearCuenta("Dos palabras secretas ingresadas de manera errónea y de forma consecutiva",pNumeroCuenta);
+    }
+    
+    //--------------------------------------------------------------
+    
+    public String menuRetirarDolares() throws ParseException, MessagingException, Exception{
+    String numeroCuenta;
+    String pin;
+    System.out.println("Indique el número de cuenta del que desea retirar dinero en dólares: ");
+    numeroCuenta = entrada.nextLine();
+    String numeroTelefonico = ControladorCliente.consultarNumeroClientePorCuenta(numeroCuenta);
+    int contadorPin = 0;
+    while (contadorPin < 2){
+         System.out.println("Indique el número PIN asociado a la cuenta: " + "\n" + "intentos restantes: " + (2 - contadorPin));
+         pin = entrada.nextLine();
+         if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuenta)){
+           return menuPalabraRetirarDolares(numeroCuenta, pin, numeroTelefonico);
+         }
+         else{
+           contadorPin++;
+         }
+      
+    }
+    
+    return ControladorCuenta.llamarBloquearCuenta("Dos intentos consecutivos fallidos de PIN", numeroCuenta);
+  }
+    
+    public String menuPalabraRetirarDolares(String pNumeroCuenta, String pPin, String pNumeroTelefonico) throws Exception{
+      String palabraSecreta;
+      String monto;
+      int contadorPalabra = 0;
+      MensajeTexto mensaje = new MensajeTexto();
+      mensaje.enviarPalabraSecreta(pNumeroTelefonico);
+      while (contadorPalabra < 2){
+          System.out.println("Estimado usuario se ha enviado una palabra por mensaje de texto, por favor revise sus mensajes y proceda a digitar la palabra enviada. Tiene " + (2 - contadorPalabra) + " intentos restantes");
+          palabraSecreta = entrada.nextLine();
+          if (mensaje.corroborarPalabraSecreta(palabraSecreta, pNumeroTelefonico)){
+            System.out.println("Ingrese el monto por retirar (en dólares): ");
+            monto = entrada.nextLine();
+            return ControladorCuenta.llamarRetirarDolares(pNumeroCuenta, pPin, monto);
+          }
+          else{
+              System.out.println("Palabra incorrecta " + "\n");
+              contadorPalabra++;
+          }
+      }
+      return ControladorCuenta.llamarBloquearCuenta("Dos palabras secretas ingresadas de manera errónea y de forma consecutiva",pNumeroCuenta);
+    }
+    
+    
+    
            
      public void menuOtrasOperacionesCuenta() throws ParseException, MessagingException{
       
@@ -377,10 +521,10 @@ public class InterfazComandos {
       }
     
     }
-    return ControladorCuenta.llamarBloquearCuenta(numeroCuenta);
+    return ControladorCuenta.llamarBloquearCuenta("Dos intentos consecutivos fallidos de PIN", numeroCuenta);
   }
         
-  public void menuOperacionesTipoCambioOtrasConsultas() throws ParseException{
+  public void menuOperacionesTipoCambioOtrasConsultas() throws ParseException, MessagingException{
       
       System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -413,12 +557,12 @@ public class InterfazComandos {
       
         String opcion = entrada.nextLine();    
       if (opcion.equals("1")){
-        //Falta operacion para obtener compra dolar
+          System.out.println("El tipo de cambio de compra del dólar es: " + ControladorCuenta.consultarCompraDolar());
        
       }
       
       else if (opcion.equals("2")){
-        //Falta operacion para obtener venta dolar
+        System.out.println("El tipo de cambio de venta del dólar es: " + ControladorCuenta.consultarVentaDolar());
       }
       
       else{
@@ -427,7 +571,7 @@ public class InterfazComandos {
 
   }
     
-    public void menuOperacionesConsultaEstadoSaldoEstatusComision() throws ParseException{
+    public void menuOperacionesConsultaEstadoSaldoEstatusComision() throws ParseException, MessagingException{
       
       System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -450,7 +594,7 @@ public class InterfazComandos {
 
   }
     
-    public void menuOperacionesConsultaEstadoYListarCuentas() throws ParseException{
+    public void menuOperacionesConsultaEstadoYListarCuentas() throws ParseException, MessagingException{
       
       System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -474,7 +618,7 @@ public class InterfazComandos {
 
   }
   
-  public void menuEstadosDeCuenta() throws ParseException{
+  public void menuEstadosDeCuenta() throws ParseException, MessagingException{
       System.out.println("\n" + "***Módulo de gestión de estado de cuenta***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
       System.out.println("1. Consultar estado de cuenta en colones " + "\n");
@@ -483,18 +627,60 @@ public class InterfazComandos {
       
       String opcion = entrada.nextLine();    
       if (opcion.equals("1")){
-          //Falta método
+          System.out.println(menuEstadoCuentaColones());
       }
       
       else if (opcion.equals("2")){
-        //Falta método consultar 
+          System.out.println(menuEstadoCuentaDolares());
       }
       
       else{
         System.out.println("\n" + "Entrada erronea" + "\n");
       }    
   }
-    
+  
+  public String menuEstadoCuentaColones() throws MessagingException{
+      String numeroCuenta;
+      String pin;
+      System.out.println("Ingrese el número de cuenta del que desea consultar el estado en colones: ");
+      numeroCuenta = entrada.nextLine();
+      int contador = 0;
+      while (contador < 2){
+         System.out.println("Indique el número PIN actual: " + "\n" + "intentos restantes: " + (2 - contador));
+         pin = entrada.nextLine();
+        if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuenta) == true){
+        
+          return ControladorCuenta.llamarGenerarEstadoCuentaColones(numeroCuenta, pin);
+ 
+        }
+        else{
+           contador++;  
+        }
+  }
+      return ControladorCuenta.llamarBloquearCuenta("Dos intentos consecutivos fallidos de PIN", numeroCuenta);
+  }
+  
+    public String menuEstadoCuentaDolares() throws MessagingException{
+      String numeroCuenta;
+      String pin;
+      System.out.println("Ingrese el número de cuenta del que desea consultar el estado en colones: ");
+      numeroCuenta = entrada.nextLine();
+      int contador = 0;
+      while (contador < 2){
+         System.out.println("Indique el número PIN actual: " + "\n" + "intentos restantes: " + (2 - contador));
+         pin = entrada.nextLine();
+        if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuenta) == true){
+        
+          return ControladorCuenta.llamarGenerarEstadoCuentaDolares(numeroCuenta, pin);
+ 
+        }
+        else{
+           contador++;  
+        }
+  }
+      return ControladorCuenta.llamarBloquearCuenta("Dos intentos consecutivos fallidos de PIN", numeroCuenta);
+  }
+   
     
   public void menuListarYConsultarCuentas() throws ParseException{
       System.out.println("\n" + "***Módulo de gestión de cuentas***" + "\n");
@@ -520,7 +706,7 @@ public class InterfazComandos {
       }   
   }  
     
-  public void menuOperacionesConsultaSaldoEstatusComisiones() throws ParseException{
+  public void menuOperacionesConsultaSaldoEstatusComisiones() throws ParseException, MessagingException{
       
       System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -543,7 +729,7 @@ public class InterfazComandos {
       
   }
   
-    public void menuOperacionesConsultaSaldoEstatus() throws ParseException{
+    public void menuOperacionesConsultaSaldoEstatus() throws ParseException, MessagingException{
       
       System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -557,7 +743,10 @@ public class InterfazComandos {
       }
       
       else if (opcion.equals("2")){
-        //Falta metodo consultar estatus
+        String numeroCuenta;
+          System.out.println("Ingrese el número de cuenta del cual desea conocer el estatus: ");
+          numeroCuenta = entrada.nextLine();
+          System.out.println(ControladorCuenta.llamarConsultarEstatus(numeroCuenta));
       }
       
       else{
@@ -566,7 +755,7 @@ public class InterfazComandos {
 
   }
     
-  public void menuOperacionesConsultaSaldoColonesDolares() throws ParseException{
+  public void menuOperacionesConsultaSaldoColonesDolares() throws ParseException, MessagingException{
       
       System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
       System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
@@ -576,12 +765,12 @@ public class InterfazComandos {
       
         String opcion = entrada.nextLine();    
       if (opcion.equals("1")){
-        //Falta metodo para consultar saldo colones
+          System.out.println(menuConsultarSaldoColones());
        
       }
       
       else if (opcion.equals("2")){
-        //Falta metodo para consultar saldo dolares
+          System.out.println(menuConsultarSaldoDolares());
       }
       
       else{
@@ -590,6 +779,48 @@ public class InterfazComandos {
       
   }
   
+  public String menuConsultarSaldoColones() throws MessagingException{
+    String numeroCuenta;
+    String pin;
+    System.out.println("Ingrese el número de cuenta de la que desea consultar su saldo en colones: ");
+    numeroCuenta = entrada.nextLine();
+    int contador = 0;
+    while (contador < 2){
+         System.out.println("Indique el número PIN actual: " + "\n" + "intentos restantes: " + (2 - contador));
+         pin = entrada.nextLine();
+      if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuenta) == true){
+        return ControladorCuenta.llamarConsultarSaldoColones(numeroCuenta, pin);
+          
+      }
+      else{
+          contador++;
+      }
+    }
+    return ControladorCuenta.llamarBloquearCuenta("Dos intentos consecutivos fallidos de PIN", numeroCuenta);
+  }
+  
+  
+  //-------------------------------
+  
+  public String menuConsultarSaldoDolares() throws MessagingException{
+    String numeroCuenta;
+    String pin;
+    System.out.println("Ingrese el número de cuenta de la que desea consultar su saldo en dólares: ");
+    numeroCuenta = entrada.nextLine();
+    int contador = 0;
+    while (contador < 2){
+         System.out.println("Indique el número PIN actual: " + "\n" + "intentos restantes: " + (2 - contador));
+         pin = entrada.nextLine();
+      if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuenta) == true){
+        return ControladorCuenta.llamarConsultarSaldoDolares(numeroCuenta, pin);
+          
+      }
+      else{
+          contador++;
+      }
+    }
+    return ControladorCuenta.llamarBloquearCuenta("Dos intentos consecutivos fallidos de PIN", numeroCuenta);
+  }
   public void menuOperacionesComisionesUniversoUnica() throws ParseException{
       
       System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
@@ -629,7 +860,7 @@ public class InterfazComandos {
       }
       
       else if (opcion.equals("2")){
-        //Falta funbcionalidad para total comisiones de depositos Y retiros del UC
+          System.out.println(ControladorCuenta.llamarCalcularComisionesDepositosYRetirosUniversoCuentas());
       }
       
       else{
@@ -649,11 +880,11 @@ public class InterfazComandos {
       
         String opcion = entrada.nextLine();    
       if (opcion.equals("1")){
-        //Falta metodo total comisiones por depositos del UC      
+          System.out.println(ControladorCuenta.llamarCalcularComisionesDepositosUniversoCuentas());   
       }
       
       else if (opcion.equals("2")){
-        //Falta metodo total comisiones por retiros del UC
+          System.out.println(ControladorCuenta.llamarCalcularComisionesRetirosUniversoCuentas());
       }
       
       else{
@@ -677,7 +908,10 @@ public class InterfazComandos {
       }
       
       else if (opcion.equals("2")){
-        //Falta funcionalidad calcular comisiones totales por depositos Y retiros cuenta unica
+          String numeroCuenta;
+          System.out.println("Ingrese el número de cuenta de la cual desea consultar el total de comisiones por concepto de depósitos y retiros: ");
+          numeroCuenta = entrada.nextLine();
+          System.out.println(ControladorCuenta.llamarcalcularComisionesTotalesCuantaUnica(numeroCuenta));
       }
       
       else{
@@ -697,10 +931,17 @@ public class InterfazComandos {
       
         String opcion = entrada.nextLine();    
       if (opcion.equals("1")){
-        //Falta metodo calcular total comisiones por depositos de una cuenta
+          String numeroCuenta;
+          System.out.println("Ingrese el número de cuenta de la cual desea consultar el total de comisiones por concepto de depósitos: ");
+          numeroCuenta = entrada.nextLine();
+          System.out.println(ControladorCuenta.llamarCalcularComisionesDepositosCuentaUnica(numeroCuenta));
       }
       
       else if (opcion.equals("2")){
+          String numeroCuenta;
+          System.out.println("Ingrese el número de cuenta de la cual desea consultar el total de comisiones por concepto de retiros: ");
+          numeroCuenta = entrada.nextLine();
+          System.out.println(ControladorCuenta.llamarCalcularComisionesRetirosCuentaUnica(numeroCuenta));
         //Falta metodo calcular total comisiones por retiros de una cuenta
       }
       

@@ -18,11 +18,7 @@ public class Operacion {
     this.tipo = pTipo;
     this.cargoComision = pCargoComision;
     this.monto = pMonto;
-    this.montoComision = pMontoComision;
-    
-    java.sql.Date fechaSQL = new java.sql.Date((new Date()).getDate());
-    OperacionDao.insertarOperacion(fechaSQL, pTipo.name(), pMonto, pCargoComision, pMontoComision);
-      
+    this.montoComision = pMontoComision;      
   }
   
   public String toString(){

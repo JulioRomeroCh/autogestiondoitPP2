@@ -8,7 +8,9 @@ import logicadeintegracion.*;
 import logicadepresentacion.InterfazComandos;
 import logicadevalidacion.ExpresionRegular;
 import logicadevalidacion.ValidacionIntentos;
+import logicadeaccesoadatos.ClienteDao;
 import webservice.TipoCambio;
+import logicadeconexionexterna.MensajeTexto;
 
 public class ControladorCuenta {
   
@@ -43,9 +45,10 @@ public class ControladorCuenta {
    return "Error al cambiar PIN";
  }
  
- public static String llamarBloquearCuenta(String pNumeroCuenta) throws MessagingException{
+ public static String llamarBloquearCuenta(String pMotivo, String pNumeroCuenta) throws MessagingException{
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   return nuevaCuenta.bloquearCuenta("Dos intentos consecutivos fallidos de PIN", CuentaDao.recorrerConsultarCorreoClientePorCuenta(pNumeroCuenta));
+     System.out.println("Numero de cuenta que llega: " + pNumeroCuenta);
+   return nuevaCuenta.bloquearCuenta(pMotivo, ClienteDao.recorrerConsultarCorreoClientePorCuenta(pNumeroCuenta));
  
  }
  
@@ -79,6 +82,39 @@ public class ControladorCuenta {
    }
  }
  
+ public static String llamarRetirarColones(String pNumeroCuenta,String pPin, String pMonto){
+   Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto)){
+     return nuevaCuenta.retirarColones(pNumeroCuenta, pPin, Integer.parseInt(pMonto));
+   }
+   else{
+     return "Error al retirar dinero en colones";
+   }
+ }
+ 
+ public static String llamarRetirarDolares(String pNumeroCuenta,String pPin, String pMonto){
+   Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto)){
+     return nuevaCuenta.retirarDolares(new TipoCambio(), pNumeroCuenta, pPin, Integer.parseInt(pMonto));
+   }
+   else{
+     return "Error al retirar dinero en dólares";
+   }
+ }
+ 
+ public static String llamarTransferirFondos(String pNumeroCuentaOrigen,String pPin, String pMonto, String pNumeroCuentaDestino){
+   Cuenta cuentaOrigen = buscarCuenta(pNumeroCuentaOrigen);
+   Cuenta cuentaDestino = buscarCuenta(pNumeroCuentaDestino);
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuentaOrigen) && CuentaDao.verificarCorrectitudPin(pNumeroCuentaOrigen, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarExistenciaCuenta(pNumeroCuentaDestino)){
+         
+     return cuentaOrigen.transferirFondos(pNumeroCuentaOrigen, pPin, Integer.parseInt(pMonto), cuentaDestino);
+   }
+   else{
+     return "Error al transferir fondos";
+   }
+ }
+ 
+ 
   
  public static String listarCuentas(){
    String mensaje = "";
@@ -101,5 +137,102 @@ public class ControladorCuenta {
     }
     return arregloCuentas;
   }
+  
+  public static String consultarCompraDolar(){
+    TipoCambio compra = new TipoCambio();
+    return String.valueOf(compra.consultarCompraDolar());
+  }
+  
+  public static String consultarVentaDolar(){
+    TipoCambio venta = new TipoCambio();
+    return String.valueOf(venta.consultarVentaDolar());
+  }
+  
+  public static String llamarConsultarSaldoColones(String pNumeroCuenta, String pPin){
+    if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)){
+      Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+      return nuevaCuenta.consultarSaldoColones(pNumeroCuenta, pPin);
+    }
+    else{
+      return "Error en el número de cuenta y/o en el número de pin";
+    }
+  }
+  
+   public static String llamarConsultarSaldoDolares(String pNumeroCuenta, String pPin){
+    if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)){
+      Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+      return nuevaCuenta.consultarSaldoDolares(new TipoCambio(), pNumeroCuenta, pPin);
+    }
+    else{
+      return "Error en el número de cuenta y/o en el número de pin";
+    }
+  }
+   
+   public static String llamarGenerarEstadoCuentaColones (String pNumeroCuenta, String pPin){
+     
+       if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)){
+         Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+         return nuevaCuenta.generarEstadoCuentaColones(pNumeroCuenta, pPin);
+    }
+    else{
+      return "Error en el número de cuenta y/o en el número de pin";
+    }
+   }
     
+    public static String llamarGenerarEstadoCuentaDolares (String pNumeroCuenta, String pPin){
+     
+       if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)){
+         Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+         return nuevaCuenta.generarEstadoCuentaDolares(new TipoCambio(), pNumeroCuenta, pPin);
+    }
+    else{
+      return "Error en el número de cuenta y/o en el número de pin";
+    }
+   }
+    
+    public static String llamarConsultarEstatus(String pNumeroCuenta){
+      Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
+        return nuevaCuenta.consultarEstatus(pNumeroCuenta);
+      }
+      else{
+        return "La cuenta no está registrada en el sistema";
+      }
+    }
+    
+    public static String llamarCalcularComisionesDepositosCuentaUnica(String pNumeroCuenta){
+      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
+        Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+        return nuevaCuenta.calcularComisionesDepositosCuentaUnica(pNumeroCuenta);
+      }
+      return "La cuenta no está registrada en el sistema";
+    }
+    
+     public static String llamarCalcularComisionesRetirosCuentaUnica(String pNumeroCuenta){
+      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
+        Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+        return nuevaCuenta.calcularComisionesRetirosCuentaUnica(pNumeroCuenta);
+      }
+      return "La cuenta no está registrada en el sistema";
+    }
+     
+     public static String llamarcalcularComisionesTotalesCuantaUnica(String pNumeroCuenta){
+      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
+        Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+        return nuevaCuenta.calcularComisionesTotalesCuantaUnica(pNumeroCuenta);
+      }
+      return "La cuenta no está registrada en el sistema";
+    }
+     //------------------------------- Métoodos comisiones universo cuentas------------------
+      public static String llamarCalcularComisionesDepositosUniversoCuentas(){
+        return CuentaDao.recorrerConsultaTotalComisionesDepositosUniversoCuentas();
+    }
+      
+        public static String llamarCalcularComisionesRetirosUniversoCuentas(){
+        return CuentaDao.recorrerConsultaTotalComisionesRetirosUniversoCuentas();
+    }
+        
+       public static String llamarCalcularComisionesDepositosYRetirosUniversoCuentas(){
+        return CuentaDao.recorrerConsultaTotalComisionesDepositosYRetirosUniversoCuentas();
+    }
 }

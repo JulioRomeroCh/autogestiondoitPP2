@@ -1,6 +1,7 @@
 package logicadevalidacion;
 
 import logicadeaccesoadatos.CuentaDao;
+import logicadeconexionexterna.MensajeTexto;
 
 public class ValidacionIntentos {
    
@@ -16,6 +17,16 @@ public class ValidacionIntentos {
       }
     
     
-  }   
+  }
+  
+  public static boolean validarCantidadIntentosPalabraSecreta (String pPalabra, MensajeTexto pMensaje){
+   if (pMensaje.getPalabraSecreta().equals(pPalabra)){
+     return true;
+   }
+   else{
+     return false;
+  }
+  }
+  
     
 }

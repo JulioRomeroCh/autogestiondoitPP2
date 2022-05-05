@@ -9,7 +9,7 @@ import logicadeaccesoadatos.*;
 import logicadeconexionexterna.*;
 import webservice.TipoCambio;
 
-public class Cuenta implements Comision, Comparable {
+public class Cuenta implements Comparable {
  
   private String numeroCuenta;
   private Date fechaCreacion;
@@ -37,12 +37,12 @@ public class Cuenta implements Comision, Comparable {
       
   }
   
-  public void registrarOperacion(TipoOperacion pTipo, boolean pCargoComision, int pMonto, double pMontoComision){
+  public void registrarOperacion(TipoOperacion pTipo, String pNumeroCuenta, boolean pCargoComision, int pMonto, double pMontoComision){
     
       Operacion nuevaOperacion = new Operacion(pTipo, pCargoComision, pMonto, pMontoComision);
       operaciones.add(nuevaOperacion); 
-      //CuentaDao.insertarCuentaTieneOperacion(getNumeroCuenta(),);
-      
+      OperacionDao.insertarOperacion(pTipo.name(), pNumeroCuenta, pMonto, pCargoComision, pMontoComision);
+
   }
   
   public double getSaldo(){
@@ -80,7 +80,7 @@ public class Cuenta implements Comision, Comparable {
   public String cambiarPin(String pNumeroCuenta, String pPinActual, String pNuevoPin){ 
       
       this.pin = pNuevoPin;
-      registrarOperacion(TipoOperacion.CAMBIO_PIN, false, 0, 0.0);
+      registrarOperacion(TipoOperacion.CAMBIO_PIN, pNumeroCuenta, false, 0, 0.0);
       CuentaDao.actualizarPin(pNumeroCuenta, pNuevoPin);
      
       return "Estimado usuario, se ha cambiado satisfacotiramente el PIN de su cuenta " + pNumeroCuenta + "\n";
@@ -94,13 +94,13 @@ public class Cuenta implements Comision, Comparable {
     double totalOperacion=0.0;
     
     if(verificarCobroComision() == true){
-        registrarOperacion(TipoOperacion.DEPOSITO, true, pMonto, pMonto*COMISION);
+        registrarOperacion(TipoOperacion.DEPOSITO, pNumeroCuenta, true, pMonto, pMonto*COMISION);
         totalOperacion = cobrarComision(pMonto);
         montoComision = pMonto * COMISION;
         
     }
     else{
-        registrarOperacion(TipoOperacion.DEPOSITO, false, pMonto, 0.0);
+        registrarOperacion(TipoOperacion.DEPOSITO, pNumeroCuenta, false, pMonto, 0.0);
         totalOperacion = pMonto;
     }
     transaccionesRealizadas++;
@@ -127,12 +127,12 @@ public class Cuenta implements Comision, Comparable {
     double montoComision = 0.0;
     
     if(verificarCobroComision() == true){
-        registrarOperacion(TipoOperacion.DEPOSITO, true, (int) Math.round(montoEnColones), montoEnColones*COMISION);
+        registrarOperacion(TipoOperacion.DEPOSITO, pNumeroCuenta, true, (int) Math.round(montoEnColones), montoEnColones*COMISION);
         totalOperacion = cobrarComision((int) Math.round(montoEnColones));
         montoComision = montoEnColones * COMISION;
     }
     else{
-        registrarOperacion(TipoOperacion.DEPOSITO, false, (int) Math.round(montoEnColones), 0.0);
+        registrarOperacion(TipoOperacion.DEPOSITO, pNumeroCuenta, false, (int) Math.round(montoEnColones), 0.0);
         totalOperacion = montoEnColones;
     }
     transaccionesRealizadas++;
@@ -155,19 +155,19 @@ public class Cuenta implements Comision, Comparable {
   }
   
   
-  public String retirarColones(String pNumeroCuenta, String pPin, MensajeTexto pMensaje, int pMonto){
+  public String retirarColones(String pNumeroCuenta, String pPin, int pMonto){
     
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
     double montoComision = 0.0;
     double totalOperacion = 0.0;
     
     if(verificarCobroComision() == true){
-        registrarOperacion(TipoOperacion.RETIRO, true, pMonto, pMonto*COMISION);
+        registrarOperacion(TipoOperacion.RETIRO, pNumeroCuenta, true, pMonto, pMonto*COMISION);
         totalOperacion = cobrarComision(pMonto);
         montoComision = pMonto * COMISION;
     }
     else{
-        registrarOperacion(TipoOperacion.RETIRO, false, pMonto, 0.0);
+        registrarOperacion(TipoOperacion.RETIRO, pNumeroCuenta, false, pMonto, 0.0);
         totalOperacion = pMonto;
     }
     transaccionesRealizadas++;
@@ -181,7 +181,7 @@ public class Cuenta implements Comision, Comparable {
     return mensaje; 
   }
   
-  public String retirarDolares(TipoCambio pVenta, String pNumeroCuenta, String pPin, MensajeTexto pMensaje, int pMonto){
+  public String retirarDolares(TipoCambio pVenta, String pNumeroCuenta, String pPin, int pMonto){
         
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
    
@@ -190,13 +190,13 @@ public class Cuenta implements Comision, Comparable {
     double totalOperacion = 0.0;
     
     if(verificarCobroComision() == true){
-        registrarOperacion(TipoOperacion.RETIRO, true, (int) Math.round(montoEnColones), montoEnColones * COMISION);
+        registrarOperacion(TipoOperacion.RETIRO, pNumeroCuenta, true, (int) Math.round(montoEnColones), montoEnColones * COMISION);
         totalOperacion = cobrarComision((int) Math.round(montoEnColones));
         montoComision = montoEnColones * COMISION;
         
     }
     else{
-        registrarOperacion(TipoOperacion.RETIRO, false, (int) Math.round(montoEnColones), 0.0);
+        registrarOperacion(TipoOperacion.RETIRO, pNumeroCuenta, false, (int) Math.round(montoEnColones), 0.0);
         totalOperacion = montoEnColones;
     }
     transaccionesRealizadas++;
@@ -216,24 +216,25 @@ public class Cuenta implements Comision, Comparable {
     
   }
   
-  public String transferirFondos (String pCuentaOrigen, String pPin, MensajeTexto pMensaje, int pMonto, Cuenta pCuentaDestino){
+  public String transferirFondos (String pCuentaOrigen, String pPin, int pMonto, Cuenta pCuentaDestino){
     
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");
     double montoComision = 0.0;
     double totalOperacion = 0.0;
     
     if(verificarCobroComision() == true){
-        registrarOperacion(TipoOperacion.TRANSFERENCIA, true, pMonto, pMonto * COMISION);
+        registrarOperacion(TipoOperacion.TRANSFERENCIA, pCuentaOrigen, true, pMonto, pMonto * COMISION);
         totalOperacion = cobrarComision(pMonto);
         montoComision = pMonto * COMISION;
     }
     else{
-        registrarOperacion(TipoOperacion.TRANSFERENCIA, false, pMonto, 0.0);
+        registrarOperacion(TipoOperacion.TRANSFERENCIA, pCuentaOrigen, false, pMonto, 0.0);
         totalOperacion = pMonto;
     }
     transaccionesRealizadas++;
     saldo = saldo - totalOperacion;
     pCuentaDestino.saldo+= pMonto;
+    pCuentaDestino.registrarOperacion(TipoOperacion.TRANSFERENCIA, pCuentaDestino.getNumeroCuenta(), false, pMonto, 0);
     CuentaDao.actualizarSaldo(pCuentaOrigen, saldo);
     CuentaDao.actualizarSaldo(pCuentaDestino.getNumeroCuenta(), pCuentaDestino.saldo);
     
@@ -245,19 +246,19 @@ public class Cuenta implements Comision, Comparable {
   }
   
   
-  @Override
-  public double calcularComisionesDepositos(){
-    return 0.0;    
+  
+  public String calcularComisionesDepositosCuentaUnica(String pNumeroCuenta){
+    return CuentaDao.recorrerConsultaTotalComisionesDepositosCuentaUnica(pNumeroCuenta);
   }
   
-  @Override
-  public double calcularComisionesRetiros(){
-    return 0.0;    
+
+  public String calcularComisionesRetirosCuentaUnica(String pNumeroCuenta){
+    return CuentaDao.recorrerConsultaTotalComisionesRetirosUnicaCuenta(pNumeroCuenta);
   }
     
-  @Override
-  public double calcularComisionesTotales(){
-    return 0.0;    
+
+  public String calcularComisionesTotalesCuantaUnica(String pNumeroCuenta){
+    return CuentaDao.recorrerConsultaTotalComisionesDepositosYRetirosCuentaUnica(pNumeroCuenta);
   }
   
   
@@ -280,7 +281,7 @@ public class Cuenta implements Comision, Comparable {
   
   public String consultarSaldoColones(String pNumeroCuenta, String pPin){
       
-    registrarOperacion(TipoOperacion.CONSULTA, false, 0, 0.0);
+    registrarOperacion(TipoOperacion.CONSULTA, pNumeroCuenta, false, 0, 0.0);
     
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");  
       
@@ -292,7 +293,7 @@ public class Cuenta implements Comision, Comparable {
   
   public String consultarSaldoDolares(TipoCambio pCompra, String pNumeroCuenta, String pPin){
       
-    registrarOperacion(TipoOperacion.CONSULTA, false, 0, 0.0);  
+    registrarOperacion(TipoOperacion.CONSULTA, pNumeroCuenta, false,  0, 0.0);  
       
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");  
       
@@ -306,7 +307,7 @@ public class Cuenta implements Comision, Comparable {
   
   public String consultarEstatus(String pNumeroCuenta){
       
-    registrarOperacion(TipoOperacion.CONSULTA, false, 0, 0.0);
+    registrarOperacion(TipoOperacion.CONSULTA, pNumeroCuenta, false, 0, 0.0);
     
     String mensaje = "La cuenta número " + pNumeroCuenta + " tiene estatus de " + this.estatus + "\n";
     
@@ -317,19 +318,17 @@ public class Cuenta implements Comision, Comparable {
   
   public String generarEstadoCuentaColones(String pNumeroCuenta, String pPin){
 
-    
     String mensaje = "";
-    for (int contador = 0; contador!=operaciones.size(); contador++){
-      mensaje+= operaciones.get(contador).toString();
-    }
+      mensaje+= CuentaDao.recorrerConsultaDatosCuenta(pNumeroCuenta);
+      mensaje += OperacionDao.recorrerConsultaOperacionesCuenta(pNumeroCuenta);
+    
     return mensaje;
   }
   
   public String generarEstadoCuentaDolares(TipoCambio pCompra, String pNumeroCuenta, String pPin){
     String mensaje = "";
-    for (int contador = 0; contador!=operaciones.size(); contador++){
-      mensaje+= operaciones.get(contador).dolarizar(pCompra);
-    }
+      mensaje+= CuentaDao.recorrerConsultaDatosCuentaDolares(pNumeroCuenta);
+      mensaje += OperacionDao.recorrerConsultaOperacionesCuentaDolares(pNumeroCuenta);
     return mensaje;    
   }
   
