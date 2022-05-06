@@ -97,8 +97,7 @@ public class ControladorCliente {
     return ClienteDao.recorrerConsultarNumeroClientePorCuenta(pNumeroCuenta);
   }
   
-
-  
+ 
   
  
 }

@@ -10,7 +10,7 @@ import logicadeconexionexterna.MensajeTexto;
 
 public class InterfazComandos {
     
-     Scanner entrada = new Scanner(System.in);
+ Scanner entrada = new Scanner(System.in);
     
  public void ejecutarMenuPrincipal() throws ParseException, MessagingException, Exception{
    boolean mostrarMenu = true;
@@ -474,7 +474,7 @@ public class InterfazComandos {
       String montoInicialADepositar;
       String identificadorDueno;
       if (opcion.equals("1")){
-          
+            
         System.out.println("Ingrese su identificación: ");
         identificadorDueno = entrada.nextLine();   
         
@@ -485,7 +485,7 @@ public class InterfazComandos {
         montoInicialADepositar = entrada.nextLine();  
         
         System.out.println(ControladorCliente.llamarMetodoRegistrarCuentaPersonaCLI(montoInicialADepositar, pin, identificadorDueno));
-      
+        
       }
       
     
