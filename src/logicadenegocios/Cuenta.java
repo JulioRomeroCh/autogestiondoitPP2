@@ -20,7 +20,7 @@ public class Cuenta implements Comparable {
   private final double COMISION = 0.02;
   private int transaccionesRealizadas = 0;
   
-  private ArrayList<Operacion> operaciones;
+  public ArrayList<Operacion> operaciones;
   
   public Cuenta(double pMonto, String pPin){
       
@@ -32,6 +32,16 @@ public class Cuenta implements Comparable {
     this.numeroCuenta = "CR"   + generarNumeroCuenta();
     this.fechaCreacion = new Date();
   }  
+  
+  public Cuenta(String pNumeroCuenta, Date pFechaCreacion, double pSaldo, String pPin, String pEstatus){
+    operaciones = new ArrayList<Operacion>();
+    this.numeroCuenta = pNumeroCuenta;
+    this.fechaCreacion = pFechaCreacion;
+    this.saldo = pSaldo;
+    this.pin = pPin;
+    this.estatus = pEstatus;
+
+  }
   
   public Cuenta(){
       
@@ -72,7 +82,7 @@ public class Cuenta implements Comparable {
     mensaje+= "Moneda: " + this.MONEDA + "\n";
     mensaje+= "Pin: " + this.pin + "\n";
     mensaje+= "Comisión: " + this.COMISION + "\n";
-    mensaje+= "Número de depósitos y/o retiros: " + this.transaccionesRealizadas + "\n"; 
+    mensaje+= "Número de depósitos y/o retiros: " + this.getTransaccionesRealizadas() + "\n"; 
     
     return mensaje;
   }
@@ -135,7 +145,7 @@ public class Cuenta implements Comparable {
         registrarOperacion(TipoOperacion.DEPOSITO, pNumeroCuenta, false, (int) Math.round(montoEnColones), 0.0);
         totalOperacion = montoEnColones;
     }
-    transaccionesRealizadas++;
+     transaccionesRealizadas++;
     saldo = saldo + totalOperacion;
     CuentaDao.actualizarSaldo(pNumeroCuenta, saldo);
     
@@ -174,7 +184,7 @@ public class Cuenta implements Comparable {
     saldo = saldo - totalOperacion;
     CuentaDao.actualizarSaldo(pNumeroCuenta, saldo);
     
-    String mensaje = "Estimado usuario, el monto de este retiro es" + formatoDosDecimales.format(totalOperacion) + "colones." + "\n";
+    String mensaje = "Estimado usuario, el monto de este retiro es " + formatoDosDecimales.format(totalOperacion) + " colones." + "\n";
     mensaje+="[El monto cobrado por concepto de comisión fue de " + formatoDosDecimales.format(montoComision) + " colones, que fueron rebajados automáticamente de su saldo actual]" + "\n";
     
     
@@ -231,7 +241,7 @@ public class Cuenta implements Comparable {
         registrarOperacion(TipoOperacion.TRANSFERENCIA, pCuentaOrigen, false, pMonto, 0.0);
         totalOperacion = pMonto;
     }
-    transaccionesRealizadas++;
+    transaccionesRealizadas++;;
     saldo = saldo - totalOperacion;
     pCuentaDestino.saldo+= pMonto;
     pCuentaDestino.registrarOperacion(TipoOperacion.TRANSFERENCIA, pCuentaDestino.getNumeroCuenta(), false, pMonto, 0);
@@ -263,7 +273,7 @@ public class Cuenta implements Comparable {
   
   
   private boolean verificarCobroComision(){
-    if(this.transaccionesRealizadas>=3){  
+    if( this.getTransaccionesRealizadas()>=3){  
       return true;    
     }   
     else{
@@ -349,6 +359,15 @@ public class Cuenta implements Comparable {
 
   public String getNumeroCuenta() {
     return numeroCuenta;
+  }
+
+
+  public int getTransaccionesRealizadas() {
+    return transaccionesRealizadas;
+  }
+
+  public void modificarTransaccionesRealizadas(int pTransaccionesRealizadas) {
+    this.transaccionesRealizadas += pTransaccionesRealizadas;
   }
       
     

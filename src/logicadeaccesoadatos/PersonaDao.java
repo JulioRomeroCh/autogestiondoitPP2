@@ -10,6 +10,8 @@ import java.util.Date;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import logicadeaccesoadatos.CuentaDao;
+import logicadeintegracion.*;
+import logicadenegocios.Persona;
 
 public class PersonaDao {
     
@@ -82,4 +84,86 @@ public class PersonaDao {
      
      return salida; 
   }
+   
+   
+  //-----------CARGAR BASE DATOS
+   
+  private static ResultSet cargarPersona(){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL cargarPersona()}");
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al consultar la tabla persona");
+      }
+      return resultado;
+    }
+    
+      public static void recorrerCargarPersona(){
+     
+      try{
+      ResultSet resultado = cargarPersona();
+      while (resultado.next()){
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy"); 
+        
+      String pIdentificacion = String.valueOf(resultado.getObject(1));
+      String pNombre = String.valueOf(resultado.getObject(2));
+      String pPrimerApellido = String.valueOf(resultado.getObject(3));   
+      String pSegundoApellido = String.valueOf(resultado.getObject(4));
+      Date pFechaNacimiento = (Date) (formatoFecha.parse(String.valueOf(resultado.getObject(5))));  
+
+       
+      Persona nuevaPersona = new Persona(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, pFechaNacimiento);
+      ControladorPersona.personas.add(nuevaPersona);
+       }
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta de personas");
+      }
+    }
+   
+      
+    private static ResultSet cargarPersonaTieneCuenta(){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL cargarPersonaTieneCuenta()}");
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al consultar la tabla persona_tiene_cuenta");
+      }
+      return resultado;
+    }
+    
+      public static void recorrerCargarPersonaTieneCuenta(){
+     
+      try{
+      ResultSet resultado = cargarPersonaTieneCuenta();
+      while (resultado.next()){
+        
+      String pNumeroCuenta = String.valueOf(resultado.getObject(1));  
+      String pIdentificacionPersona = String.valueOf(resultado.getObject(2));
+  
+      Persona nuevaPersona = ControladorPersona.buscarPersona(pIdentificacionPersona);
+      nuevaPersona.cuentas.add(ControladorCuenta.buscarCuenta(pNumeroCuenta));
+
+       }
+      }
+      catch(Exception error){
+          System.out.println("Error al recorrer la consulta de persona_tiene_cuenta");
+      }
+    }  
+   
+   
 }

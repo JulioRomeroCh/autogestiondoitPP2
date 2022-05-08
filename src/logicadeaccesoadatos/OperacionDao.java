@@ -5,7 +5,13 @@
 package logicadeaccesoadatos;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import logicadeaccesoadatos.*;
+import logicadeintegracion.*;
+import logicadenegocios.Cuenta;
+import logicadenegocios.Operacion;
+import logicadenegocios.TipoOperacion;
+import logicadevalidacion.Validacion;
 import webservice.TipoCambio;
 
 public class OperacionDao {
@@ -91,4 +97,53 @@ public class OperacionDao {
           return "0";
       }
     }
+        
+        
+    //---------------------------CARGAR BASE DE DATOS    
+    private static ResultSet cargarOperacion(){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL cargarOperacion()}");
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al consultar la tabla operacion");
+      }
+      return resultado;
+    }
+    
+      public static void recorrerCargarOperacion(){
+     
+      try{
+      ResultSet resultado = cargarOperacion();
+      while (resultado.next()){
+
+      String pNumeroCuenta = String.valueOf(resultado.getObject(1));
+      String fechaEnString = String.valueOf(resultado.getObject(2));
+      java.util.Date pFechaOperacion = new SimpleDateFormat("yyyy-MM-dd").parse(fechaEnString);
+      TipoOperacion pTipoOperacion =  TipoOperacion.valueOf(String.valueOf(resultado.getObject(3)));
+      int pMontoOperacion = (Integer.parseInt(String.valueOf(resultado.getObject(4))));
+      boolean pCargoComision = Validacion.convertirNumeroABooleano((Integer.parseInt(String.valueOf(resultado.getObject(5)))));
+      double pMontoComision = Double.parseDouble(String.valueOf(resultado.getObject(6)));
+      
+      Operacion nuevaOperacion = new Operacion(pFechaOperacion, pTipoOperacion, pCargoComision, pMontoOperacion, pMontoComision);
+      Cuenta nuevaCuenta = ControladorCuenta.buscarCuenta(pNumeroCuenta);
+      nuevaCuenta.operaciones.add(nuevaOperacion);
+      Validacion.llamarEsTransaccionConDinero(pTipoOperacion, pNumeroCuenta);
+      
+ 
+      }
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al recorrer la consulta de operación");
+      }
+    }
+        
+        
 }

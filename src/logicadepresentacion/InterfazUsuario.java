@@ -87,34 +87,103 @@ public class InterfazUsuario extends javax.swing.JFrame {
         PanelListarConsultarCuentas = new javax.swing.JPanel();
         TítuloListarConsultarCuentas = new java.awt.Label();
         BotonRegresarListarConsultarCuentas = new javax.swing.JButton();
+        ComboListarConsultaCuentas = new javax.swing.JComboBox<>();
+        BotonListarConsultarCuentas = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaListarConsultarCuenta = new javax.swing.JTable();
         VentanaCambiarPIN = new javax.swing.JFrame();
         PanelCambiarPIN = new javax.swing.JPanel();
         TítuloCambiarPIN = new java.awt.Label();
         BotonRegresarCambiarPIN = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        CambioPINIntentos = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        CambiarPINNumeroCuenta = new javax.swing.JTextField();
+        CambiarPINActual = new javax.swing.JTextField();
+        CambiarPINNuevo = new javax.swing.JTextField();
+        BotonCambiarPINCambiar = new javax.swing.JButton();
+        BotonCambiarPINValidar = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
         VentanaDeposito = new javax.swing.JFrame();
         PanelDeposito = new javax.swing.JPanel();
         TítuloDeposito = new java.awt.Label();
         BotonRegresarDeposito = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        RadioBotonColonesDeposito = new javax.swing.JRadioButton();
+        RadioBotonDolaresDeposito = new javax.swing.JRadioButton();
+        DepositoNumeroCuenta = new javax.swing.JTextField();
+        DepositoMonto = new javax.swing.JTextField();
+        BotonDepositar = new javax.swing.JButton();
         VentanaRetiro = new javax.swing.JFrame();
         PanelRetiro = new javax.swing.JPanel();
         TítuloRetiro = new java.awt.Label();
         BotonRegresarRetiro = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        RetiroColones = new javax.swing.JRadioButton();
+        RetiroDolares = new javax.swing.JRadioButton();
+        RetiroNumeroCuenta = new javax.swing.JTextField();
+        RetiroPIN = new javax.swing.JTextField();
+        RetiroPalabra = new javax.swing.JTextField();
+        RetiroMonto = new javax.swing.JTextField();
+        BotonRetiroValidarPIN = new javax.swing.JButton();
+        BotonRetiroValidarPalabra = new javax.swing.JButton();
+        BotonRetiro = new javax.swing.JButton();
+        RetiroIntentosPIN = new javax.swing.JLabel();
+        RetiroIntentosPalabra = new javax.swing.JLabel();
         VentanaTransferencia = new javax.swing.JFrame();
         PanelTransferencia = new javax.swing.JPanel();
         TítuloTransferencia = new java.awt.Label();
         BotonRegresarTransferencia = new javax.swing.JButton();
+        jLabel34 = new javax.swing.JLabel();
+        TransferenciaIntentosPIN = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        TransferenciaCuentaOrigen = new javax.swing.JTextField();
+        TransferenciaPIN = new javax.swing.JTextField();
+        TransferenciaPalabra = new javax.swing.JTextField();
+        TransferenciaMonto = new javax.swing.JTextField();
+        TransferenciaCuentaDestino = new javax.swing.JTextField();
+        BotonTransferenciaValidarPIN = new javax.swing.JButton();
+        BotonTransferenciaValidarPalabra = new javax.swing.JButton();
+        jLabel39 = new javax.swing.JLabel();
+        TransferenciaintentosPalabra = new javax.swing.JLabel();
+        BotonTransferencia = new javax.swing.JButton();
         VentanaConsultarSaldo = new javax.swing.JFrame();
         PanelConsultarSaldo = new javax.swing.JPanel();
         TítuloConsultarSaldo = new java.awt.Label();
         BotonRegresarConsultarSaldo = new javax.swing.JButton();
+        RadioBotonColonesConsultarSaldo = new javax.swing.JRadioButton();
+        RadioBotonDolaresConsultarSaldo = new javax.swing.JRadioButton();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        ConsultarSaldoNumeroCuenta = new javax.swing.JTextField();
+        ConsultarSaldoPIN = new javax.swing.JTextField();
+        BotonValidarPinConsultarSaldo = new javax.swing.JButton();
+        LabelConsultarSaldoIntentos = new javax.swing.JLabel();
         VentanaEstadoCuenta = new javax.swing.JFrame();
         PanelEstadoCuenta = new javax.swing.JPanel();
         TítuloEstadoCuenta = new java.awt.Label();
         BotonRegresarEstadoCuenta = new javax.swing.JButton();
+        EstadoCuentaColones = new javax.swing.JRadioButton();
+        EstadoCuentaDolares = new javax.swing.JRadioButton();
+        jLabel27 = new javax.swing.JLabel();
+        EstadoCuentaNumeroCuenta = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        EstadoCuentaPIN = new javax.swing.JTextField();
+        BotonValidarEstadoCuenta = new javax.swing.JButton();
+        EstadoCuentaIntentos = new javax.swing.JLabel();
         VentanaConsultarEstatus = new javax.swing.JFrame();
         PanelConsultarEstatus = new javax.swing.JPanel();
         TítuloConsultarEstatus = new java.awt.Label();
         BotonRegresarConsultarEstatus = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        ConsultarEstatusNumeroCuenta = new javax.swing.JTextField();
+        BotonConsultarEstatus = new javax.swing.JButton();
         VentanaTipoCambio = new javax.swing.JFrame();
         PanelTipoCambio = new javax.swing.JPanel();
         TítuloTipoCambio = new java.awt.Label();
@@ -122,11 +191,18 @@ public class InterfazUsuario extends javax.swing.JFrame {
         RadioBotonCompra = new javax.swing.JRadioButton();
         RadioBotonVenta = new javax.swing.JRadioButton();
         BotonConsultarTipoCambio = new javax.swing.JButton();
-        TextoResultadoTipoCambio = new javax.swing.JTextField();
+        TipoCambioResultado = new javax.swing.JTextField();
         VentanaComisiones = new javax.swing.JFrame();
         PanelComisiones = new javax.swing.JPanel();
         TítuloComisiones = new java.awt.Label();
         BotonRegresarComisiones = new javax.swing.JButton();
+        GananciasCuentaEspecifico = new javax.swing.JRadioButton();
+        jLabel25 = new javax.swing.JLabel();
+        GananciasNumeroCuenta = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        GananciasTipo = new javax.swing.JComboBox<>();
+        BotonGanancias = new javax.swing.JButton();
+        GananciasUniversoCuentas = new javax.swing.JRadioButton();
         PanelPrincipal = new javax.swing.JPanel();
         LogoAutogestion = new javax.swing.JLabel();
         MenuPanelPrincipal = new javax.swing.JMenuBar();
@@ -619,15 +695,41 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        BotonListarConsultarCuentas.setText("Consultar cuenta");
+
+        TablaListarConsultarCuenta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Número de cuenta", "Estatus", "Saldo", "Identificación", "Nombre", "Primer apellido", "Segundo apellido"
+            }
+        ));
+        jScrollPane2.setViewportView(TablaListarConsultarCuenta);
+
         javax.swing.GroupLayout PanelListarConsultarCuentasLayout = new javax.swing.GroupLayout(PanelListarConsultarCuentas);
         PanelListarConsultarCuentas.setLayout(PanelListarConsultarCuentasLayout);
         PanelListarConsultarCuentasLayout.setHorizontalGroup(
             PanelListarConsultarCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelListarConsultarCuentasLayout.createSequentialGroup()
-                .addComponent(BotonRegresarListarConsultarCuentas)
-                .addGap(205, 205, 205)
-                .addComponent(TítuloListarConsultarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(257, Short.MAX_VALUE))
+            .addGroup(PanelListarConsultarCuentasLayout.createSequentialGroup()
+                .addGroup(PanelListarConsultarCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelListarConsultarCuentasLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarListarConsultarCuentas)
+                        .addGap(205, 205, 205)
+                        .addComponent(TítuloListarConsultarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelListarConsultarCuentasLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
+            .addGroup(PanelListarConsultarCuentasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ComboListarConsultaCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119)
+                .addComponent(BotonListarConsultarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(227, 227, 227))
         );
         PanelListarConsultarCuentasLayout.setVerticalGroup(
             PanelListarConsultarCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -635,7 +737,13 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGroup(PanelListarConsultarCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BotonRegresarListarConsultarCuentas)
                     .addComponent(TítuloListarConsultarCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(75, 75, 75)
+                .addGroup(PanelListarConsultarCuentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ComboListarConsultaCuentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonListarConsultarCuentas))
+                .addGap(52, 52, 52)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout VentanaListarConsultarCuentasLayout = new javax.swing.GroupLayout(VentanaListarConsultarCuentas.getContentPane());
@@ -668,15 +776,59 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel16.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setText("Número de cuenta");
+
+        CambioPINIntentos.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        CambioPINIntentos.setForeground(new java.awt.Color(0, 0, 0));
+        CambioPINIntentos.setText("Intentos restantes: 2");
+
+        jLabel18.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setText("PIN nuevo");
+
+        BotonCambiarPINCambiar.setText("Cambiar PIN");
+
+        BotonCambiarPINValidar.setText("Validar");
+
+        jLabel29.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel29.setText("PIN actual");
+
         javax.swing.GroupLayout PanelCambiarPINLayout = new javax.swing.GroupLayout(PanelCambiarPIN);
         PanelCambiarPIN.setLayout(PanelCambiarPINLayout);
         PanelCambiarPINLayout.setHorizontalGroup(
             PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCambiarPINLayout.createSequentialGroup()
-                .addComponent(BotonRegresarCambiarPIN)
-                .addGap(287, 287, 287)
-                .addComponent(TítuloCambiarPIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(366, Short.MAX_VALUE))
+            .addGroup(PanelCambiarPINLayout.createSequentialGroup()
+                .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelCambiarPINLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarCambiarPIN)
+                        .addGap(287, 287, 287)
+                        .addComponent(TítuloCambiarPIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelCambiarPINLayout.createSequentialGroup()
+                        .addGap(342, 342, 342)
+                        .addComponent(BotonCambiarPINCambiar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelCambiarPINLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel18))
+                        .addGap(63, 63, 63)
+                        .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CambiarPINNumeroCuenta)
+                            .addComponent(CambiarPINActual)
+                            .addComponent(CambiarPINNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CambioPINIntentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BotonCambiarPINValidar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(241, Short.MAX_VALUE))
+            .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelCambiarPINLayout.createSequentialGroup()
+                    .addGap(156, 156, 156)
+                    .addComponent(jLabel29)
+                    .addContainerGap(707, Short.MAX_VALUE)))
         );
         PanelCambiarPINLayout.setVerticalGroup(
             PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -684,7 +836,28 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BotonRegresarCambiarPIN)
                     .addComponent(TítuloCambiarPIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(57, 57, 57)
+                .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(CambiarPINNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76)
+                .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CambiarPINActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonCambiarPINValidar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CambioPINIntentos)
+                .addGap(62, 62, 62)
+                .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(CambiarPINNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
+                .addComponent(BotonCambiarPINCambiar)
+                .addGap(0, 98, Short.MAX_VALUE))
+            .addGroup(PanelCambiarPINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelCambiarPINLayout.createSequentialGroup()
+                    .addGap(212, 212, 212)
+                    .addComponent(jLabel29)
+                    .addContainerGap(300, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout VentanaCambiarPINLayout = new javax.swing.GroupLayout(VentanaCambiarPIN.getContentPane());
@@ -717,15 +890,54 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel20.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel20.setText("Número de cuenta");
+
+        jLabel21.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setText("Monto");
+
+        RadioBotonColonesDeposito.setText("Colones");
+
+        RadioBotonDolaresDeposito.setText("Dólares");
+
+        BotonDepositar.setText("Depositar");
+        BotonDepositar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonDepositarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelDepositoLayout = new javax.swing.GroupLayout(PanelDeposito);
         PanelDeposito.setLayout(PanelDepositoLayout);
         PanelDepositoLayout.setHorizontalGroup(
             PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelDepositoLayout.createSequentialGroup()
+                .addGroup(PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelDepositoLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarDeposito)
+                        .addGap(353, 353, 353)
+                        .addComponent(TítuloDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelDepositoLayout.createSequentialGroup()
+                        .addGap(199, 199, 199)
+                        .addGroup(PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel21))
+                        .addGap(70, 70, 70)
+                        .addGroup(PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(DepositoNumeroCuenta)
+                            .addComponent(DepositoMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)))
+                    .addGroup(PanelDepositoLayout.createSequentialGroup()
+                        .addGap(373, 373, 373)
+                        .addComponent(BotonDepositar, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelDepositoLayout.createSequentialGroup()
-                .addComponent(BotonRegresarDeposito)
-                .addGap(353, 353, 353)
-                .addComponent(TítuloDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addGap(0, 269, Short.MAX_VALUE)
+                .addComponent(RadioBotonColonesDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(190, 190, 190)
+                .addComponent(RadioBotonDolaresDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(263, 263, 263))
         );
         PanelDepositoLayout.setVerticalGroup(
             PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -733,7 +945,21 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGroup(PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BotonRegresarDeposito)
                     .addComponent(TítuloDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RadioBotonColonesDeposito)
+                    .addComponent(RadioBotonDolaresDeposito))
+                .addGap(66, 66, 66)
+                .addGroup(PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(DepositoNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
+                .addGroup(PanelDepositoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(DepositoMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78)
+                .addComponent(BotonDepositar)
+                .addGap(0, 133, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout VentanaDepositoLayout = new javax.swing.GroupLayout(VentanaDeposito.getContentPane());
@@ -766,15 +992,85 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel30.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel30.setText("Número de cuenta");
+
+        jLabel31.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel31.setText("PIN");
+
+        jLabel32.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel32.setText("Palabra secreta");
+
+        jLabel33.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel33.setText("Monto");
+
+        RetiroColones.setText("Colones");
+
+        RetiroDolares.setText("Dólares");
+
+        BotonRetiroValidarPIN.setText("Validar");
+
+        BotonRetiroValidarPalabra.setText("Validar");
+
+        BotonRetiro.setText("Retirar");
+        BotonRetiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonRetiroActionPerformed(evt);
+            }
+        });
+
+        RetiroIntentosPIN.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        RetiroIntentosPIN.setForeground(new java.awt.Color(0, 0, 0));
+        RetiroIntentosPIN.setText("Intentos restantes: 2");
+
+        RetiroIntentosPalabra.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        RetiroIntentosPalabra.setForeground(new java.awt.Color(0, 0, 0));
+        RetiroIntentosPalabra.setText("Intentos restantes: 2");
+
         javax.swing.GroupLayout PanelRetiroLayout = new javax.swing.GroupLayout(PanelRetiro);
         PanelRetiro.setLayout(PanelRetiroLayout);
         PanelRetiroLayout.setHorizontalGroup(
             PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelRetiroLayout.createSequentialGroup()
-                .addComponent(BotonRegresarRetiro)
-                .addGap(353, 353, 353)
-                .addComponent(TítuloRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(432, Short.MAX_VALUE))
+            .addGroup(PanelRetiroLayout.createSequentialGroup()
+                .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelRetiroLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarRetiro)
+                        .addGap(353, 353, 353)
+                        .addComponent(TítuloRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelRetiroLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel31)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel33))
+                        .addGap(74, 74, 74)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(RetiroPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RetiroNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RetiroPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RetiroMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BotonRetiroValidarPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BotonRetiroValidarPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RetiroIntentosPIN)
+                            .addComponent(RetiroIntentosPalabra)))
+                    .addGroup(PanelRetiroLayout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(RetiroColones)
+                        .addGap(227, 227, 227)
+                        .addComponent(RetiroDolares))
+                    .addGroup(PanelRetiroLayout.createSequentialGroup()
+                        .addGap(382, 382, 382)
+                        .addComponent(BotonRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         PanelRetiroLayout.setVerticalGroup(
             PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -782,7 +1078,38 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BotonRegresarRetiro)
                     .addComponent(TítuloRetiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelRetiroLayout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RetiroPIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BotonRetiroValidarPIN)
+                            .addComponent(RetiroIntentosPIN))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PanelRetiroLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RetiroColones)
+                            .addComponent(RetiroDolares))
+                        .addGap(46, 46, 46)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel30)
+                            .addComponent(RetiroNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addComponent(jLabel31)
+                        .addGap(29, 29, 29)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel32)
+                            .addComponent(RetiroPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BotonRetiroValidarPalabra)
+                            .addComponent(RetiroIntentosPalabra))
+                        .addGap(63, 63, 63)
+                        .addGroup(PanelRetiroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel33)
+                            .addComponent(RetiroMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)))
+                .addComponent(BotonRetiro)
+                .addGap(80, 80, 80))
         );
 
         javax.swing.GroupLayout VentanaRetiroLayout = new javax.swing.GroupLayout(VentanaRetiro.getContentPane());
@@ -815,15 +1142,78 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel34.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel34.setText("Número de cuenta origen");
+
+        TransferenciaIntentosPIN.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        TransferenciaIntentosPIN.setForeground(new java.awt.Color(0, 0, 0));
+        TransferenciaIntentosPIN.setText("Intentos restantes: 2");
+
+        jLabel36.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel36.setText("Palabra secreta");
+
+        jLabel37.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel37.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel37.setText("Monto");
+
+        jLabel38.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel38.setText("Número de cuenta destino");
+
+        BotonTransferenciaValidarPIN.setText("Validar");
+
+        BotonTransferenciaValidarPalabra.setText("Valiidar");
+
+        jLabel39.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel39.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel39.setText("PIN");
+
+        TransferenciaintentosPalabra.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        TransferenciaintentosPalabra.setForeground(new java.awt.Color(0, 0, 0));
+        TransferenciaintentosPalabra.setText("Intentos restantes: 2");
+
+        BotonTransferencia.setText("Tranferir");
+
         javax.swing.GroupLayout PanelTransferenciaLayout = new javax.swing.GroupLayout(PanelTransferencia);
         PanelTransferencia.setLayout(PanelTransferenciaLayout);
         PanelTransferenciaLayout.setHorizontalGroup(
             PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelTransferenciaLayout.createSequentialGroup()
+                .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelTransferenciaLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarTransferencia)
+                        .addGap(307, 307, 307)
+                        .addComponent(TítuloTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelTransferenciaLayout.createSequentialGroup()
+                        .addGap(195, 195, 195)
+                        .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel34)
+                            .addComponent(jLabel36)
+                            .addComponent(jLabel37)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel39))
+                        .addGap(87, 87, 87)
+                        .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TransferenciaCuentaOrigen)
+                            .addComponent(TransferenciaPIN)
+                            .addComponent(TransferenciaPalabra)
+                            .addComponent(TransferenciaMonto)
+                            .addComponent(TransferenciaCuentaDestino, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
+                        .addGap(39, 39, 39)
+                        .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BotonTransferenciaValidarPIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BotonTransferenciaValidarPalabra, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TransferenciaIntentosPIN)
+                            .addComponent(TransferenciaintentosPalabra))))
+                .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelTransferenciaLayout.createSequentialGroup()
-                .addComponent(BotonRegresarTransferencia)
-                .addGap(307, 307, 307)
-                .addComponent(TítuloTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(349, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BotonTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(385, 385, 385))
         );
         PanelTransferenciaLayout.setVerticalGroup(
             PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -831,7 +1221,33 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BotonRegresarTransferencia)
                     .addComponent(TítuloTransferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel34)
+                    .addComponent(TransferenciaCuentaOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TransferenciaIntentosPIN)
+                    .addComponent(TransferenciaPIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonTransferenciaValidarPIN)
+                    .addComponent(jLabel39))
+                .addGap(62, 62, 62)
+                .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(TransferenciaPalabra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonTransferenciaValidarPalabra)
+                    .addComponent(TransferenciaintentosPalabra))
+                .addGap(61, 61, 61)
+                .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel37)
+                    .addComponent(TransferenciaMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68)
+                .addGroup(PanelTransferenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel38)
+                    .addComponent(TransferenciaCuentaDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(BotonTransferencia)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout VentanaTransferenciaLayout = new javax.swing.GroupLayout(VentanaTransferencia.getContentPane());
@@ -864,23 +1280,81 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        RadioBotonColonesConsultarSaldo.setText("Colones");
+
+        RadioBotonDolaresConsultarSaldo.setText("Dólares");
+
+        jLabel22.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel22.setText("Número de cuenta");
+
+        jLabel23.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel23.setText("PIN");
+
+        BotonValidarPinConsultarSaldo.setText("Validar");
+        BotonValidarPinConsultarSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonValidarPinConsultarSaldoActionPerformed(evt);
+            }
+        });
+
+        LabelConsultarSaldoIntentos.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        LabelConsultarSaldoIntentos.setForeground(new java.awt.Color(0, 0, 0));
+        LabelConsultarSaldoIntentos.setText("Intentos restantes: 2");
+
         javax.swing.GroupLayout PanelConsultarSaldoLayout = new javax.swing.GroupLayout(PanelConsultarSaldo);
         PanelConsultarSaldo.setLayout(PanelConsultarSaldoLayout);
         PanelConsultarSaldoLayout.setHorizontalGroup(
             PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultarSaldoLayout.createSequentialGroup()
-                .addComponent(BotonRegresarConsultarSaldo)
-                .addGap(307, 307, 307)
-                .addComponent(TítuloConsultarSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(322, Short.MAX_VALUE))
+            .addGroup(PanelConsultarSaldoLayout.createSequentialGroup()
+                .addGroup(PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelConsultarSaldoLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarConsultarSaldo)
+                        .addGap(307, 307, 307)
+                        .addComponent(TítuloConsultarSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelConsultarSaldoLayout.createSequentialGroup()
+                        .addGap(298, 298, 298)
+                        .addComponent(RadioBotonColonesConsultarSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(193, 193, 193)
+                        .addComponent(RadioBotonDolaresConsultarSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelConsultarSaldoLayout.createSequentialGroup()
+                        .addGap(258, 258, 258)
+                        .addGroup(PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23))
+                        .addGap(88, 88, 88)
+                        .addGroup(PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelConsultarSaldoLayout.createSequentialGroup()
+                                .addComponent(ConsultarSaldoPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(BotonValidarPinConsultarSaldo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LabelConsultarSaldoIntentos))
+                            .addComponent(ConsultarSaldoNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         PanelConsultarSaldoLayout.setVerticalGroup(
             PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(PanelConsultarSaldoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultarSaldoLayout.createSequentialGroup()
                 .addGroup(PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BotonRegresarConsultarSaldo)
                     .addComponent(TítuloConsultarSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addGroup(PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RadioBotonColonesConsultarSaldo)
+                    .addComponent(RadioBotonDolaresConsultarSaldo))
+                .addGap(97, 97, 97)
+                .addGroup(PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(ConsultarSaldoNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72)
+                .addGroup(PanelConsultarSaldoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(ConsultarSaldoPIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BotonValidarPinConsultarSaldo)
+                    .addComponent(LabelConsultarSaldoIntentos))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout VentanaConsultarSaldoLayout = new javax.swing.GroupLayout(VentanaConsultarSaldo.getContentPane());
@@ -913,15 +1387,61 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        EstadoCuentaColones.setText("Colones");
+
+        EstadoCuentaDolares.setText("Dólares");
+
+        jLabel27.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel27.setText("Número de cuenta");
+
+        jLabel28.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel28.setText("PIN");
+
+        BotonValidarEstadoCuenta.setText("Validar");
+        BotonValidarEstadoCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonValidarEstadoCuentaActionPerformed(evt);
+            }
+        });
+
+        EstadoCuentaIntentos.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        EstadoCuentaIntentos.setForeground(new java.awt.Color(0, 0, 0));
+        EstadoCuentaIntentos.setText("Intentos restantes: 2");
+
         javax.swing.GroupLayout PanelEstadoCuentaLayout = new javax.swing.GroupLayout(PanelEstadoCuenta);
         PanelEstadoCuenta.setLayout(PanelEstadoCuentaLayout);
         PanelEstadoCuentaLayout.setHorizontalGroup(
             PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEstadoCuentaLayout.createSequentialGroup()
-                .addComponent(BotonRegresarEstadoCuenta)
-                .addGap(307, 307, 307)
-                .addComponent(TítuloEstadoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(301, Short.MAX_VALUE))
+            .addGroup(PanelEstadoCuentaLayout.createSequentialGroup()
+                .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelEstadoCuentaLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarEstadoCuenta)
+                        .addGap(307, 307, 307)
+                        .addComponent(TítuloEstadoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelEstadoCuentaLayout.createSequentialGroup()
+                        .addGap(233, 233, 233)
+                        .addComponent(EstadoCuentaColones, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(213, 213, 213)
+                        .addComponent(EstadoCuentaDolares, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelEstadoCuentaLayout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28))
+                        .addGap(62, 62, 62)
+                        .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EstadoCuentaPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EstadoCuentaNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(276, Short.MAX_VALUE))
+            .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelEstadoCuentaLayout.createSequentialGroup()
+                    .addGap(583, 583, 583)
+                    .addComponent(BotonValidarEstadoCuenta)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(EstadoCuentaIntentos)
+                    .addContainerGap(170, Short.MAX_VALUE)))
         );
         PanelEstadoCuentaLayout.setVerticalGroup(
             PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -929,7 +1449,26 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BotonRegresarEstadoCuenta)
                     .addComponent(TítuloEstadoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EstadoCuentaColones)
+                    .addComponent(EstadoCuentaDolares))
+                .addGap(88, 88, 88)
+                .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel27)
+                    .addComponent(EstadoCuentaNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(121, 121, 121)
+                .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel28)
+                    .addComponent(EstadoCuentaPIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 150, Short.MAX_VALUE))
+            .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelEstadoCuentaLayout.createSequentialGroup()
+                    .addGap(358, 358, 358)
+                    .addGroup(PanelEstadoCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BotonValidarEstadoCuenta)
+                        .addComponent(EstadoCuentaIntentos))
+                    .addContainerGap(147, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout VentanaEstadoCuentaLayout = new javax.swing.GroupLayout(VentanaEstadoCuenta.getContentPane());
@@ -962,15 +1501,32 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        jLabel24.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel24.setText("Número de cuenta");
+
+        BotonConsultarEstatus.setText("Consultar");
+
         javax.swing.GroupLayout PanelConsultarEstatusLayout = new javax.swing.GroupLayout(PanelConsultarEstatus);
         PanelConsultarEstatus.setLayout(PanelConsultarEstatusLayout);
         PanelConsultarEstatusLayout.setHorizontalGroup(
             PanelConsultarEstatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultarEstatusLayout.createSequentialGroup()
-                .addComponent(BotonRegresarConsultarEstatus)
-                .addGap(307, 307, 307)
-                .addComponent(TítuloConsultarEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(PanelConsultarEstatusLayout.createSequentialGroup()
+                .addGroup(PanelConsultarEstatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelConsultarEstatusLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarConsultarEstatus)
+                        .addGap(307, 307, 307)
+                        .addComponent(TítuloConsultarEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelConsultarEstatusLayout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(jLabel24)
+                        .addGap(98, 98, 98)
+                        .addComponent(ConsultarEstatusNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(292, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelConsultarEstatusLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BotonConsultarEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(397, 397, 397))
         );
         PanelConsultarEstatusLayout.setVerticalGroup(
             PanelConsultarEstatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -978,7 +1534,13 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGroup(PanelConsultarEstatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(BotonRegresarConsultarEstatus)
                     .addComponent(TítuloConsultarEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(145, 145, 145)
+                .addGroup(PanelConsultarEstatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(ConsultarEstatusNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addComponent(BotonConsultarEstatus)
+                .addGap(0, 223, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout VentanaConsultarEstatusLayout = new javax.swing.GroupLayout(VentanaConsultarEstatus.getContentPane());
@@ -1022,7 +1584,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
-        TextoResultadoTipoCambio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TipoCambioResultado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout PanelTipoCambioLayout = new javax.swing.GroupLayout(PanelTipoCambio);
         PanelTipoCambio.setLayout(PanelTipoCambioLayout);
@@ -1045,7 +1607,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
                         .addComponent(BotonConsultarTipoCambio))
                     .addGroup(PanelTipoCambioLayout.createSequentialGroup()
                         .addGap(331, 331, 331)
-                        .addComponent(TextoResultadoTipoCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TipoCambioResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelTipoCambioLayout.setVerticalGroup(
@@ -1061,7 +1623,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addComponent(BotonConsultarTipoCambio)
                 .addGap(66, 66, 66)
-                .addComponent(TextoResultadoTipoCambio, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TipoCambioResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 223, Short.MAX_VALUE))
         );
 
@@ -1095,14 +1657,56 @@ public class InterfazUsuario extends javax.swing.JFrame {
             }
         });
 
+        GananciasCuentaEspecifico.setText("Cuenta en epecífico");
+
+        jLabel25.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel25.setText("Número de cuenta");
+
+        jLabel26.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel26.setText("Tipo de consulta");
+
+        GananciasTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Depósitos", "Retiros", "Depósitos y retiros" }));
+
+        BotonGanancias.setText("Consultar");
+        BotonGanancias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonGananciasActionPerformed(evt);
+            }
+        });
+
+        GananciasUniversoCuentas.setText("Universo de cuentas");
+
         javax.swing.GroupLayout PanelComisionesLayout = new javax.swing.GroupLayout(PanelComisiones);
         PanelComisiones.setLayout(PanelComisionesLayout);
         PanelComisionesLayout.setHorizontalGroup(
             PanelComisionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelComisionesLayout.createSequentialGroup()
-                .addComponent(BotonRegresarComisiones)
-                .addGap(157, 157, 157)
-                .addComponent(TítuloComisiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(GananciasNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(250, 250, 250))
+            .addGroup(PanelComisionesLayout.createSequentialGroup()
+                .addGroup(PanelComisionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelComisionesLayout.createSequentialGroup()
+                        .addComponent(BotonRegresarComisiones)
+                        .addGap(157, 157, 157)
+                        .addComponent(TítuloComisiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelComisionesLayout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(GananciasUniversoCuentas)
+                        .addGap(261, 261, 261)
+                        .addComponent(GananciasCuentaEspecifico))
+                    .addGroup(PanelComisionesLayout.createSequentialGroup()
+                        .addGap(228, 228, 228)
+                        .addComponent(jLabel26)
+                        .addGap(36, 36, 36)
+                        .addComponent(GananciasTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelComisionesLayout.createSequentialGroup()
+                        .addGap(381, 381, 381)
+                        .addComponent(BotonGanancias, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
         PanelComisionesLayout.setVerticalGroup(
@@ -1111,7 +1715,21 @@ public class InterfazUsuario extends javax.swing.JFrame {
                 .addGroup(PanelComisionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BotonRegresarComisiones)
                     .addComponent(TítuloComisiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addGroup(PanelComisionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(GananciasCuentaEspecifico)
+                    .addComponent(GananciasUniversoCuentas))
+                .addGap(18, 18, 18)
+                .addGroup(PanelComisionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(GananciasNumeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(100, 100, 100)
+                .addGroup(PanelComisionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(GananciasTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(BotonGanancias)
+                .addGap(0, 180, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout VentanaComisionesLayout = new javax.swing.GroupLayout(VentanaComisiones.getContentPane());
@@ -1472,6 +2090,10 @@ public class InterfazUsuario extends javax.swing.JFrame {
       VentanaRetiro.pack();
       VentanaRetiro.setLocationRelativeTo(null);
       VentanaRetiro.setSize(960,530);
+      RetiroPalabra.setEnabled(false);
+      BotonRetiroValidarPalabra.setEnabled(false);
+      RetiroMonto.setEnabled(false);
+      BotonRetiro.setEnabled(false);
     }//GEN-LAST:event_MenuRetiroActionPerformed
 
     private void MenuTransferenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuTransferenciaActionPerformed
@@ -1479,7 +2101,12 @@ public class InterfazUsuario extends javax.swing.JFrame {
       VentanaTransferencia.setVisible(true);
       VentanaTransferencia.pack();
       VentanaTransferencia.setLocationRelativeTo(null);
-      VentanaTransferencia.setSize(960,530);
+      VentanaTransferencia.setSize(960,580);
+      BotonTransferenciaValidarPalabra.setEnabled(false);
+      BotonTransferencia.setEnabled(false);
+      TransferenciaPalabra.setEnabled(false);
+      TransferenciaMonto.setEnabled(false);
+      TransferenciaCuentaDestino.setEnabled(false);
     }//GEN-LAST:event_MenuTransferenciaActionPerformed
 
     private void MenuConsultarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuConsultarSaldoActionPerformed
@@ -1488,6 +2115,8 @@ public class InterfazUsuario extends javax.swing.JFrame {
       VentanaConsultarSaldo.pack();
       VentanaConsultarSaldo.setLocationRelativeTo(null);
       VentanaConsultarSaldo.setSize(960,530);
+      LabelConsultarSaldoIntentos.setText("Intentos restantes: 2");
+
     }//GEN-LAST:event_MenuConsultarSaldoActionPerformed
 
     private void MenuEstadoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuEstadoCuentaActionPerformed
@@ -1512,6 +2141,8 @@ public class InterfazUsuario extends javax.swing.JFrame {
       VentanaCambiarPIN.pack();
       VentanaCambiarPIN.setLocationRelativeTo(null);
       VentanaCambiarPIN.setSize(960,530);
+      CambiarPINNuevo.setEnabled(false);
+      BotonCambiarPINCambiar.setEnabled(false);
     }//GEN-LAST:event_MenuCambiarPINActionPerformed
 
     private void MenuListarConsultarCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuListarConsultarCuentasActionPerformed
@@ -1539,25 +2170,42 @@ public class InterfazUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuComisionesActionPerformed
 
     private void BotonConsultarTipoCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultarTipoCambioActionPerformed
-      String resultado = "";
-      if(RadioBotonCompra.isSelected() == true && RadioBotonVenta.isSelected() == false){
-        resultado = ControladorCuenta.consultarCompraDolar();
-        TextoResultadoTipoCambio.setText(resultado);
-      }
-      else if (RadioBotonCompra.isSelected() == false && RadioBotonVenta.isSelected() == true){
-        resultado = ControladorCuenta.consultarVentaDolar(); 
-        TextoResultadoTipoCambio.setText(resultado);
-      }
-      else{
-        TextoResultadoTipoCambio.setText("");
-        JOptionPane.showMessageDialog(null, "Por favor, seleccione únicamente una opción", "Advertencia", JOptionPane.WARNING_MESSAGE);
-        
-      }
+
     }//GEN-LAST:event_BotonConsultarTipoCambioActionPerformed
 
     private void BotonListarConsultarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonListarConsultarClientesActionPerformed
 
     }//GEN-LAST:event_BotonListarConsultarClientesActionPerformed
+
+    private void BotonDepositarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonDepositarActionPerformed
+       if(RadioBotonColonesDeposito.isSelected() == true && RadioBotonDolaresDeposito.isSelected() == true){
+        JOptionPane.showMessageDialog(null, "Por favor, seleccione únicamente una opción", "Advertencia", JOptionPane.WARNING_MESSAGE);       
+      } 
+    }//GEN-LAST:event_BotonDepositarActionPerformed
+
+    private void BotonValidarPinConsultarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonValidarPinConsultarSaldoActionPerformed
+       if(RadioBotonColonesConsultarSaldo.isSelected() == true && RadioBotonDolaresConsultarSaldo.isSelected() == true){
+        JOptionPane.showMessageDialog(null, "Por favor, seleccione únicamente una opción", "Advertencia", JOptionPane.WARNING_MESSAGE);       
+      } 
+    }//GEN-LAST:event_BotonValidarPinConsultarSaldoActionPerformed
+
+    private void BotonGananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonGananciasActionPerformed
+       if(GananciasUniversoCuentas.isSelected() == true && GananciasCuentaEspecifico.isSelected() == true){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione únicamente una opción", "Advertencia", JOptionPane.WARNING_MESSAGE);         
+       }
+    }//GEN-LAST:event_BotonGananciasActionPerformed
+
+    private void BotonValidarEstadoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonValidarEstadoCuentaActionPerformed
+        if(EstadoCuentaColones.isSelected() == true && EstadoCuentaDolares.isSelected() == true){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione únicamente una opción", "Advertencia", JOptionPane.WARNING_MESSAGE);         
+       }
+    }//GEN-LAST:event_BotonValidarEstadoCuentaActionPerformed
+
+    private void BotonRetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRetiroActionPerformed
+        if(RetiroColones.isSelected() == true && RetiroDolares.isSelected() == true){
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione únicamente una opción", "Advertencia", JOptionPane.WARNING_MESSAGE);         
+       }
+    }//GEN-LAST:event_BotonRetiroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1595,8 +2243,14 @@ public class InterfazUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonConsultarTipoCambio;
+    public javax.swing.JButton BotonCambiarPINCambiar;
+    public javax.swing.JButton BotonCambiarPINValidar;
+    public javax.swing.JButton BotonConsultarEstatus;
+    public javax.swing.JButton BotonConsultarTipoCambio;
+    public javax.swing.JButton BotonDepositar;
+    public javax.swing.JButton BotonGanancias;
     public javax.swing.JButton BotonListarConsultarClientes;
+    public javax.swing.JButton BotonListarConsultarCuentas;
     public javax.swing.JButton BotonRegistrarCliente;
     public javax.swing.JButton BotonRegistrarCuenta;
     public javax.swing.JButton BotonRegistrarUsuario;
@@ -1614,9 +2268,37 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private javax.swing.JButton BotonRegresarRetiro;
     private javax.swing.JButton BotonRegresarTipoCambio;
     private javax.swing.JButton BotonRegresarTransferencia;
+    public javax.swing.JButton BotonRetiro;
+    public javax.swing.JButton BotonRetiroValidarPIN;
+    public javax.swing.JButton BotonRetiroValidarPalabra;
+    public javax.swing.JButton BotonTransferencia;
+    public javax.swing.JButton BotonTransferenciaValidarPIN;
+    public javax.swing.JButton BotonTransferenciaValidarPalabra;
+    public javax.swing.JButton BotonValidarEstadoCuenta;
+    public javax.swing.JButton BotonValidarPinConsultarSaldo;
+    public javax.swing.JTextField CambiarPINActual;
+    public javax.swing.JTextField CambiarPINNuevo;
+    public javax.swing.JTextField CambiarPINNumeroCuenta;
+    public javax.swing.JLabel CambioPINIntentos;
     public javax.swing.JComboBox<String> ComboIdentificacionRegistrarCuenta;
+    public javax.swing.JComboBox<String> ComboListarConsultaCuentas;
     public javax.swing.JComboBox<String> ComboListarConsultarClientes;
     private javax.swing.JMenu ConsultarClientes;
+    public javax.swing.JTextField ConsultarEstatusNumeroCuenta;
+    public javax.swing.JTextField ConsultarSaldoNumeroCuenta;
+    public javax.swing.JTextField ConsultarSaldoPIN;
+    public javax.swing.JTextField DepositoMonto;
+    public javax.swing.JTextField DepositoNumeroCuenta;
+    public javax.swing.JRadioButton EstadoCuentaColones;
+    public javax.swing.JRadioButton EstadoCuentaDolares;
+    public javax.swing.JLabel EstadoCuentaIntentos;
+    public javax.swing.JTextField EstadoCuentaNumeroCuenta;
+    public javax.swing.JTextField EstadoCuentaPIN;
+    public javax.swing.JRadioButton GananciasCuentaEspecifico;
+    public javax.swing.JTextField GananciasNumeroCuenta;
+    public javax.swing.JComboBox<String> GananciasTipo;
+    public javax.swing.JRadioButton GananciasUniversoCuentas;
+    public javax.swing.JLabel LabelConsultarSaldoIntentos;
     public javax.swing.JMenuItem ListarConsultarCliente;
     private javax.swing.JLabel LogoAutogestion;
     public javax.swing.JMenuItem MenuCambiarPIN;
@@ -1650,8 +2332,12 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel PanelRetiro;
     private javax.swing.JPanel PanelTipoCambio;
     private javax.swing.JPanel PanelTransferencia;
-    private javax.swing.JRadioButton RadioBotonCompra;
-    private javax.swing.JRadioButton RadioBotonVenta;
+    public javax.swing.JRadioButton RadioBotonColonesConsultarSaldo;
+    public javax.swing.JRadioButton RadioBotonColonesDeposito;
+    public javax.swing.JRadioButton RadioBotonCompra;
+    public javax.swing.JRadioButton RadioBotonDolaresConsultarSaldo;
+    public javax.swing.JRadioButton RadioBotonDolaresDeposito;
+    public javax.swing.JRadioButton RadioBotonVenta;
     public javax.swing.JTextField RegistrarClienteCorreo;
     public com.toedter.calendar.JDateChooser RegistrarClienteFechaNacimiento;
     public javax.swing.JTextField RegistrarClienteIdentificacion;
@@ -1667,8 +2353,24 @@ public class InterfazUsuario extends javax.swing.JFrame {
     public javax.swing.JTextField RegistrarUsuarioNombre;
     public javax.swing.JTextField RegistrarUsuarioPrimerApellido;
     public javax.swing.JTextField RegistrarUsuarioSegundoApellido;
+    public javax.swing.JRadioButton RetiroColones;
+    public javax.swing.JRadioButton RetiroDolares;
+    public javax.swing.JLabel RetiroIntentosPIN;
+    public javax.swing.JLabel RetiroIntentosPalabra;
+    public javax.swing.JTextField RetiroMonto;
+    public javax.swing.JTextField RetiroNumeroCuenta;
+    public javax.swing.JTextField RetiroPIN;
+    public javax.swing.JTextField RetiroPalabra;
     public javax.swing.JTable TablaListarConsultarCliente;
-    private javax.swing.JTextField TextoResultadoTipoCambio;
+    public javax.swing.JTable TablaListarConsultarCuenta;
+    public javax.swing.JTextField TipoCambioResultado;
+    public javax.swing.JTextField TransferenciaCuentaDestino;
+    public javax.swing.JTextField TransferenciaCuentaOrigen;
+    public javax.swing.JLabel TransferenciaIntentosPIN;
+    public javax.swing.JTextField TransferenciaMonto;
+    public javax.swing.JTextField TransferenciaPIN;
+    public javax.swing.JTextField TransferenciaPalabra;
+    public javax.swing.JLabel TransferenciaintentosPalabra;
     private java.awt.Label TítuloCambiarPIN;
     private java.awt.Label TítuloComisiones;
     private java.awt.Label TítuloConsultarEstatus;
@@ -1704,8 +2406,29 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1715,5 +2438,6 @@ public class InterfazUsuario extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

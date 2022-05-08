@@ -5,9 +5,13 @@
 package logicadeaccesoadatos;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import logicadeintegracion.*;
+import logicadenegocios.Cliente;
 /**
  *
  * @author Jose Blanco
@@ -101,6 +105,52 @@ public class ClienteDao {
       }
     }  
     
+    private static ResultSet consultarExistenciaCliente (String pIdentificacion){ 
+       Conexion nuevaConexion = new Conexion(); 
+       Connection conectar = nuevaConexion.conectar(); 
+       ResultSet resultado = null; 
+       PreparedStatement consulta; 
+        
+      try{ 
+        consulta = conectar.prepareCall("{CALL consultarExistenciaCliente(?)}"); 
+        consulta.setString(1, pIdentificacion); 
+        resultado = consulta.executeQuery();   
+      } 
+      catch(Exception error){ 
+          System.out.println("Error al consultar existencia del cliente"); 
+      } 
+      return resultado; 
+    } 
+     
+    private static String recorrerResultadoExistenciaCliente(String pIdentificacion){ 
+      
+      try{ 
+         String valorVerdad = ""; 
+         ResultSet resultado = consultarExistenciaCliente(pIdentificacion); 
+       while (resultado.next()){ 
+          valorVerdad = resultado.getObject(1).toString(); 
+       } 
+       return valorVerdad; 
+      } 
+      catch(Exception error){ 
+          System.out.println("Error al recorrer resultado de la existencia del cliente"); 
+          return "0"; 
+      } 
+    } 
+     
+    public static boolean verificarExistenciaCliente(String pIdentificacion){ 
+       
+        String valorVerdad = recorrerResultadoExistenciaCliente(pIdentificacion); 
+         
+        if (valorVerdad.equals("1")){ 
+          return true; 
+        } 
+        else{ 
+            return false; 
+        } 
+      
+    }
+    
     
     
     //--------------------MÉTODOS GUI
@@ -164,6 +214,54 @@ public class ClienteDao {
       }
       
   }
+  
+  //---------------------------------CARGARBASEDATOS----------------
+  
+  private static ResultSet cargarCliente(){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL cargarCliente()}");
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al consultar la tabla cliente");
+      }
+      return resultado;
+    }
+    
+      public static void recorrerCargarCliente(){
+     
+      try{
+      ResultSet resultado = cargarCliente();
+      while (resultado.next()){
+   
+      String pIdentificacion = String.valueOf(resultado.getObject(1));
+      String pNombre = String.valueOf(resultado.getObject(2));
+      String pPrimerApellido = String.valueOf(resultado.getObject(3));   
+      String pSegundoApellido = String.valueOf(resultado.getObject(4));
+      String fechaEnString = String.valueOf(resultado.getObject(5));
+      java.util.Date pFechaNacimiento = new SimpleDateFormat("yyyy-MM-dd").parse(fechaEnString);
+      String pCodigo = String.valueOf(resultado.getObject(6));
+      String pNumero = String.valueOf(resultado.getObject(7));
+      String pCorreo = String.valueOf(resultado.getObject(8));
+        
+      Cliente nuevoCliente = new Cliente(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, pFechaNacimiento, pCodigo, pNumero, pCorreo);
+      ControladorCliente.clientes.add(nuevoCliente);
+      ControladorPersona.personas.add(nuevoCliente);
+       }
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al recorrer la consulta de clientes");
+      }
+    }
+      
+
   
    
 }

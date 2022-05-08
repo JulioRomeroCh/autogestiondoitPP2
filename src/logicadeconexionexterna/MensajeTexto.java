@@ -22,9 +22,6 @@ public class MensajeTexto {
     return palabraSecreta;
   }
   
-  public boolean verificarCorrectitudPalabra(String pPalabra){
-    return true;    
-  }
     
   public String generarPalabraSecreta(){
     int tamano = (int)(Math.random()*4+2);
@@ -85,7 +82,7 @@ public class MensajeTexto {
       InputStream respuesta = solicitud.getInputStream();
       BufferedReader lector = new BufferedReader(new InputStreamReader(respuesta));  
       lector.close();
-      System.out.println("Mensaje enviado con éxito");
+      //System.out.println("Mensaje enviado con éxito");
     }      
     
     catch(IOException error){

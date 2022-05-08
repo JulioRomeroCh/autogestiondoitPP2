@@ -13,7 +13,7 @@ import logicadeaccesoadatos.ClienteDao;
 
 public class ControladorCliente {
   
-  private static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+  public static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
      
   public void iniciar(){
       

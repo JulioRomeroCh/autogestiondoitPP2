@@ -10,7 +10,7 @@ public class Cliente extends Persona{
    
     
   private String codigo;
-  private static int cantidadClientes = 0;
+  public static int cantidadClientes = 0;
   public String numeroTelefonico;
   public String correoElectronico;
   
@@ -24,8 +24,20 @@ public class Cliente extends Persona{
     this.correoElectronico = pCorreoElectronico;
   }
   
+  
+  
   public Cliente (){
       
+  }
+  
+    public Cliente(String pIdentificacion, String pNombre,  String pPrimerApellido, String pSegundoApellido,
+      Date pFechaNacimiento, String pCodigo, String pNumeroTelefonico, String pCorreoElectronico){
+  
+    super(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, pFechaNacimiento);
+    this.cantidadClientes += 1;
+    this.codigo = pCodigo;        
+    this.numeroTelefonico = pNumeroTelefonico;
+    this.correoElectronico = pCorreoElectronico;
   }
   
   

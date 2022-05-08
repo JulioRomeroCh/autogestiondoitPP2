@@ -5,7 +5,13 @@
 package logicadeaccesoadatos;
 
 import java.sql.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import logicadeintegracion.ControladorCuenta;
+import logicadenegocios.Cuenta;
 import webservice.TipoCambio;
 
 public class CuentaDao {
@@ -228,6 +234,7 @@ public class CuentaDao {
         resultado = consulta.executeQuery();  
       }
       catch(Exception error){
+          error.printStackTrace();
           System.out.println("Error al consultar saldo");
       }
       return resultado;
@@ -239,7 +246,7 @@ public class CuentaDao {
          double saldo = 0.0;
          ResultSet resultado = consultarSaldo(pNumeroCuenta);
        while (resultado.next()){
-          saldo = Integer.parseInt(resultado.getObject(1).toString());
+          saldo = Double.parseDouble(resultado.getObject(1).toString());
        }
        return saldo;
       }
@@ -250,7 +257,6 @@ public class CuentaDao {
     }
     
       public static boolean verificarSuficienciaDeFondos(String pNumeroCuenta, double pMonto){
-      
         double saldo = recorrerResultadoSaldo(pNumeroCuenta);
         
         if (saldo >= pMonto){
@@ -372,7 +378,7 @@ public class CuentaDao {
         resultado = consulta.executeQuery();  
       }
       catch(Exception error){
-          System.out.println("Error al consultar el total de comisiones por depósitos del UC");
+          //System.out.println("Error al consultar el total de comisiones por depósitos del UC");
       }
       return resultado;
     }
@@ -388,7 +394,7 @@ public class CuentaDao {
        return datosCliente;
       }
       catch(Exception error){
-          System.out.println("Error al recorrer la consulta del total de comisiones por depósito de UC");
+          //System.out.println("Error al recorrer la consulta del total de comisiones por depósito de UC");
           return "0";
       }
     } 
@@ -404,7 +410,7 @@ public class CuentaDao {
         resultado = consulta.executeQuery();  
       }
       catch(Exception error){
-          System.out.println("Error al consultar el total de comisiones por retiros del UC");
+          //System.out.println("Error al consultar el total de comisiones por retiros del UC");
       }
       return resultado;
     }
@@ -420,7 +426,7 @@ public class CuentaDao {
        return datosCliente;
       }
       catch(Exception error){
-          System.out.println("Error al recorrer la consulta del total de comisiones por retiros de UC");
+          //System.out.println("Error al recorrer la consulta del total de comisiones por retiros de UC");
           return "0";
       }
     }
@@ -436,7 +442,7 @@ public class CuentaDao {
         resultado = consulta.executeQuery();  
       }
       catch(Exception error){
-          System.out.println("Error al consultar el total de comisiones por depósitos y retiros del UC");
+          //System.out.println("Error al consultar el total de comisiones por depósitos y retiros del UC");
       }
       return resultado;
     }
@@ -452,7 +458,7 @@ public class CuentaDao {
        return datosCliente;
       }
       catch(Exception error){
-          System.out.println("Error al recorrer la consulta del total de comisiones por depósitos y retiros de UC");
+          //System.out.println("Error al recorrer la consulta del total de comisiones por depósitos y retiros de UC");
           return "0";
       }
     }
@@ -471,7 +477,7 @@ public class CuentaDao {
         resultado = consulta.executeQuery();  
       }
       catch(Exception error){
-          System.out.println("Error al consultar el total de comisiones por depósitos de única cuenta");
+          //System.out.println("Error al consultar el total de comisiones por depósitos de única cuenta");
       }
       return resultado;
     }
@@ -487,7 +493,7 @@ public class CuentaDao {
        return datosCliente;
       }
       catch(Exception error){
-          System.out.println("Error al recorrer la consulta del total de comisiones por depósito de una cuenta en particular");
+          //System.out.println("Error al recorrer la consulta del total de comisiones por depósito de una cuenta en particular");
           return "0";
       }
     } 
@@ -504,7 +510,7 @@ public class CuentaDao {
         resultado = consulta.executeQuery();  
       }
       catch(Exception error){
-          System.out.println("Error al consultar el total de comisiones por retiros de cuenta única");
+          //System.out.println("Error al consultar el total de comisiones por retiros de cuenta única");
       }
       return resultado;
     }
@@ -519,7 +525,7 @@ public class CuentaDao {
        return datosCliente;
       }
       catch(Exception error){
-          System.out.println("Error al recorrer la consulta del total de comisiones por retiros para una única cuenta");
+          //System.out.println("Error al recorrer la consulta del total de comisiones por retiros para una única cuenta");
           return "0";
       }
     }
@@ -537,7 +543,7 @@ public class CuentaDao {
       }
       catch(Exception error){
           error.printStackTrace();
-          System.out.println("Error al consultar el total de comisiones por depósitos y retiros de única cuenta");
+          //System.out.println("Error al consultar el total de comisiones por depósitos y retiros de única cuenta");
       }
       return resultado;
     }
@@ -553,9 +559,121 @@ public class CuentaDao {
        return datosCliente;
       }
       catch(Exception error){
-          System.out.println("Error al recorrer la consulta del total de comisiones por depósitos y retiros de cuenta única");
+          //System.out.println("Error al recorrer la consulta del total de comisiones por depósitos y retiros de cuenta única");
           return "0";
       }
     }
+      
+      
+   //------------------------Métodos GUI
+    public static void ConsultaListarCuentas(JComboBox pComboBox){
+    ResultSet resultado;
+    PreparedStatement consulta;
+    Conexion nuevaConexion = new Conexion();
+    Connection conectar = nuevaConexion.conectar();
+    pComboBox.removeAllItems();
+    
+    try{
+    
+      consulta = conectar.prepareStatement("SELECT CAST(aes_decrypt(cuenta.numeroCuenta, 'pass45') AS char(100)), persona.nombre, persona.apellido1 FROM cuenta JOIN persona_tiene_cuenta ON cuenta.identificadorCuenta = persona_tiene_cuenta.identificadorCuenta JOIN persona ON persona_tiene_cuenta.identificacionPersona = persona.identificacionPersona");
+      resultado = consulta.executeQuery();
+      
+      while(resultado.next()){
+        String mensaje = String.valueOf(resultado.getObject(1)) + " - " + String.valueOf(resultado.getObject(2)) + " " +String.valueOf(resultado.getObject(3));
+        pComboBox.addItem(mensaje);
+      }
+      
+    }
+    catch(Exception error){
+      error.printStackTrace();    
+    }
+
+    
+  }
+  
+  
+  
+  public static void ConsultaListarCuentasTabla(JTable pTabla){
+      DefaultTableModel modelo = (DefaultTableModel) pTabla.getModel();
+      modelo.setRowCount(0);
+      PreparedStatement consulta;
+      ResultSet resultado;
+      ResultSetMetaData datosResultado;
+      int cantidadColumnas = 0;
+      
+      try{
+      
+        Conexion nuevaConexion = new Conexion();
+        Connection conectar = nuevaConexion.conectar();   
+        consulta = conectar.prepareStatement("SELECT CAST(aes_decrypt(cuenta.numeroCuenta, 'pass45') AS char(100)), cuenta.estatus, CAST(aes_decrypt(cuenta.saldo, 'pass45') AS char(100)), persona.identificacionPersona, persona.nombre, persona.apellido1, persona.apellido2 FROM cuenta JOIN persona_tiene_cuenta ON cuenta.identificadorCuenta = persona_tiene_cuenta.identificadorCuenta JOIN persona ON persona_tiene_cuenta.identificacionPersona = persona.identificacionPersona");      
+        resultado = consulta.executeQuery();
+        datosResultado = resultado.getMetaData();
+        cantidadColumnas = datosResultado.getColumnCount();
+        
+        while(resultado.next()){
+          Object [] fila = new Object[cantidadColumnas];
+          for(int indice = 0; indice<cantidadColumnas; indice++){
+            fila[indice] = resultado.getObject(indice + 1);
+          }
+          modelo.addRow(fila);
+        }
+  
+          
+      }
+      catch(Exception error){
+        error.printStackTrace();    
+      }
+      
+  }
+  
+  
+   //----------------------MÉTODOS CARGAR BASE 
+  
+  private static ResultSet cargarCuenta(){
+       Conexion nuevaConexion = new Conexion();
+       Connection conectar = nuevaConexion.conectar();
+       ResultSet resultado = null;
+       PreparedStatement consulta;
+       
+      try{
+        consulta = conectar.prepareCall("{CALL cargarCuenta()}");
+        resultado = consulta.executeQuery();  
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al consultar la tabla cuenta");
+      }
+      return resultado;
+    }
+    
+      public static void recorrerCargarCuenta(){
+     
+      try{
+      ResultSet resultado = cargarCuenta();
+      while (resultado.next()){
+      
+      String pNumeroCuenta = String.valueOf(resultado.getObject(1));
+      String fechaEnString = String.valueOf(resultado.getObject(2));
+      java.util.Date pFechaCreacion = new SimpleDateFormat("yyyy-MM-dd").parse(fechaEnString);
+      double pSaldo =  (Double.parseDouble(String.valueOf(resultado.getObject(3))));
+      String pPin = String.valueOf(resultado.getObject(4));
+      String pEstatus = String.valueOf(resultado.getObject(5));
+        
+      Cuenta nuevaCuenta = new Cuenta(pNumeroCuenta, pFechaCreacion, pSaldo, pPin, pEstatus);
+      ControladorCuenta.cuentas.add(nuevaCuenta);
+       }
+      }
+      catch(Exception error){
+          error.printStackTrace();
+          System.out.println("Error al recorrer la consulta de cuentas");
+      }
+    }
+  
+
+  
+  
+  
+  
+  
 }
 

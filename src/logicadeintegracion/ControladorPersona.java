@@ -11,7 +11,7 @@ import logicadepresentacion.InterfazComandos;
 
 public class ControladorPersona {
   
-  private static ArrayList<Persona> personas = new ArrayList<Persona>();   
+  public static ArrayList<Persona> personas = new ArrayList<Persona>();   
   
   public void iniciar(){
       
@@ -33,8 +33,7 @@ public class ControladorPersona {
   public static String llamarMetodoRegistrarUsuarioCLI(String pIdentificacion, String pNombre, String pPrimerApellido, String pSegundoApellido, String pFechaNacimiento) throws ParseException{
     if (ExpresionRegular.validarFormatoFecha(pFechaNacimiento) == true){  
       Usuario nuevoUsuario = new Usuario(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, convertirTextoAFecha(pFechaNacimiento));
-      personas.add(nuevoUsuario);
-      
+      ControladorPersona.personas.add(nuevoUsuario);   
       return nuevoUsuario.registrarPersona(); 
   }
     else{

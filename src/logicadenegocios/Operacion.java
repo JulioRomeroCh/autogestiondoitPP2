@@ -21,6 +21,15 @@ public class Operacion {
     this.montoComision = pMontoComision;      
   }
   
+   public Operacion(Date pFecha, TipoOperacion pTipo, boolean pCargoComision, int pMonto, double pMontoComision){
+   
+    this.fechaOperacion = pFecha;
+    this.tipo = pTipo;
+    this.cargoComision = pCargoComision;
+    this.monto = pMonto;
+    this.montoComision = pMontoComision;      
+  }
+  
   public String toString(){
    
     String mensaje = "";

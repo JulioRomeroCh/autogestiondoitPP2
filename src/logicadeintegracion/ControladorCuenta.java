@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import javax.mail.MessagingException;
 import logicadeaccesoadatos.CuentaDao;
 import logicadenegocios.*;
-import logicadeintegracion.*;
-import logicadepresentacion.InterfazComandos;
 import logicadevalidacion.ExpresionRegular;
-import logicadevalidacion.ValidacionIntentos;
 import logicadeaccesoadatos.ClienteDao;
 import webservice.TipoCambio;
-import logicadeconexionexterna.MensajeTexto;
 
 public class ControladorCuenta {
   
@@ -46,23 +42,27 @@ public class ControladorCuenta {
  }
  
  public static String llamarBloquearCuenta(String pMotivo, String pNumeroCuenta) throws MessagingException{
-   Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-     System.out.println("Numero de cuenta que llega: " + pNumeroCuenta);
-   return nuevaCuenta.bloquearCuenta(pMotivo, ClienteDao.recorrerConsultarCorreoClientePorCuenta(pNumeroCuenta));
- 
+   if(CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
+     Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
+     return nuevaCuenta.bloquearCuenta(pMotivo, ClienteDao.recorrerConsultarCorreoClientePorCuenta(pNumeroCuenta));
+   }
+   else{
+     return "La cuenta indicada no está registrada en el sistema";    
+   }
  }
  
  public static String llamarConsultarCuentaParticular(String pNumeroCuenta){
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   String mensaje = nuevaCuenta.getNumeroCuenta()+ "\n";
-   mensaje += nuevaCuenta.getEstatus() + "\n";
-   mensaje += nuevaCuenta.getSaldo() + "\n";
+   String mensaje = "Número de cuenta: " + nuevaCuenta.getNumeroCuenta()+ "\n";
+   mensaje += "Estatus: " + nuevaCuenta.getEstatus() + "\n";
+   mensaje += "Saldo: " + nuevaCuenta.getSaldo() + "\n";
    mensaje += CuentaDao.recorrerconsultarClienteCuenta(pNumeroCuenta) + "\n";
    
    return mensaje;
  }
  
  public static String llamarDepositarColones(String pNumeroCuenta, String pMonto){
+     System.out.println("Monto: " +  pMonto);
    if (ExpresionRegular.validarNumerosEnterosPositivos(pMonto) == true && CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) == true){
      Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
      return nuevaCuenta.depositarColones(pNumeroCuenta, Integer.parseInt(pMonto));
@@ -84,7 +84,7 @@ public class ControladorCuenta {
  
  public static String llamarRetirarColones(String pNumeroCuenta,String pPin, String pMonto){
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto)){
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarSuficienciaDeFondos(pNumeroCuenta, Double.parseDouble(pMonto))){
      return nuevaCuenta.retirarColones(pNumeroCuenta, pPin, Integer.parseInt(pMonto));
    }
    else{
@@ -94,7 +94,7 @@ public class ControladorCuenta {
  
  public static String llamarRetirarDolares(String pNumeroCuenta,String pPin, String pMonto){
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto)){
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarSuficienciaDeFondos(pNumeroCuenta, Double.parseDouble(pMonto))){
      return nuevaCuenta.retirarDolares(new TipoCambio(), pNumeroCuenta, pPin, Integer.parseInt(pMonto));
    }
    else{
@@ -105,7 +105,7 @@ public class ControladorCuenta {
  public static String llamarTransferirFondos(String pNumeroCuentaOrigen,String pPin, String pMonto, String pNumeroCuentaDestino){
    Cuenta cuentaOrigen = buscarCuenta(pNumeroCuentaOrigen);
    Cuenta cuentaDestino = buscarCuenta(pNumeroCuentaDestino);
-   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuentaOrigen) && CuentaDao.verificarCorrectitudPin(pNumeroCuentaOrigen, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarExistenciaCuenta(pNumeroCuentaDestino)){
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuentaOrigen) && CuentaDao.verificarCorrectitudPin(pNumeroCuentaOrigen, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarExistenciaCuenta(pNumeroCuentaDestino)&& CuentaDao.verificarSuficienciaDeFondos(pNumeroCuentaOrigen, Double.parseDouble(pMonto))){
          
      return cuentaOrigen.transferirFondos(pNumeroCuentaOrigen, pPin, Integer.parseInt(pMonto), cuentaDestino);
    }
