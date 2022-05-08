@@ -831,87 +831,14 @@ public class InterfazComandos {
       
         String opcion = entrada.nextLine();    
       if (opcion.equals("1")){
-        menuOperacionesComisionesUniversoCuentas();
-      }
-      
-      else if (opcion.equals("2")){
-        menuOperacionesComisionesCuentaUnica();
-      }
-      
-      else{
-        System.out.println("\n" + "Entrada erronea" + "\n");
-      }
-
-      
-  }
-  
-    
-  public void menuOperacionesComisionesUniversoCuentas() throws ParseException{
-      
-      System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
-      System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
-      System.out.println("1. Total comisiones para depósitos o retiros para todo el universo de cuentas" + "\n");
-      System.out.println("2. Total comisiones para depósitos y retiros para todo el universo de cuentas" + "\n");
-      System.out.println("Presione cualquier otra tecla para volver al menú principal" + "\n");
-      
-      String opcion = entrada.nextLine();    
-      if (opcion.equals("1")){
-        menuOperacionesTotalRetirosDepositosUniverso();
-      }
-      
-      else if (opcion.equals("2")){
-          System.out.println(ControladorCuenta.llamarCalcularComisionesDepositosYRetirosUniversoCuentas());
-      }
-      
-      else{
-        System.out.println("\n" + "Entrada erronea" + "\n");
-      }
-
-      
-  }
-  
-  public void menuOperacionesTotalRetirosDepositosUniverso() throws ParseException{
-      
-      System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
-      System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
-      System.out.println("1. Total depósitos del universo de cuentas" + "\n");
-      System.out.println("2. Total retiros del universo de cuentas" + "\n");
-      System.out.println("Presione cualquier otra tecla para volver al menú principal" + "\n"); 
-      
-        String opcion = entrada.nextLine();    
-      if (opcion.equals("1")){
-          System.out.println(ControladorCuenta.llamarCalcularComisionesDepositosUniversoCuentas());   
-      }
-      
-      else if (opcion.equals("2")){
-          System.out.println(ControladorCuenta.llamarCalcularComisionesRetirosUniversoCuentas());
-      }
-      
-      else{
-        System.out.println("\n" + "Entrada erronea" + "\n");
-      }
-
-      
-  }
-  
-    public void menuOperacionesComisionesCuentaUnica() throws ParseException{
-      
-      System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
-      System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
-      System.out.println("1. Total comisiones para depósitos o retiros para una cuenta" + "\n");
-      System.out.println("2. Total comisiones para depósitos y retiros para una cuenta" + "\n");
-      System.out.println("Presione cualquier otra tecla para volver al menú principal" + "\n");   
-      
-        String opcion = entrada.nextLine();    
-      if (opcion.equals("1")){
-        menuOperacionesTotalRetirosDepositosCuentaUnica();
+          System.out.println(ControladorCuenta.calcularTodasLasComisionesUniversoCuentas());
       }
       
       else if (opcion.equals("2")){
           String numeroCuenta;
-          System.out.println("Ingrese el número de cuenta de la cual desea consultar el total de comisiones por concepto de depósitos y retiros: ");
+          System.out.println("Ingrese el número de cuenta de la cual desea consultar el total de comisiones: ");
           numeroCuenta = entrada.nextLine();
-          System.out.println(ControladorCuenta.llamarcalcularComisionesTotalesCuantaUnica(numeroCuenta));
+          System.out.println(ControladorCuenta.calcularTodasLasComisionesCuentaUnica(numeroCuenta));
       }
       
       else{
@@ -920,41 +847,5 @@ public class InterfazComandos {
 
       
   }
-  
-  public void menuOperacionesTotalRetirosDepositosCuentaUnica() throws ParseException{
-      
-      System.out.println("\n" + "***Módulo de gestión de consultas***" + "\n");
-      System.out.println("Por favor, seleccione una de las siguientes opciones: " + "\n");
-      System.out.println("1. Total depósitos de una cuenta" + "\n");
-      System.out.println("2. Total retiros de una cuenta" + "\n");
-      System.out.println("Presione cualquier otra tecla para volver al menú principal" + "\n"); 
-      
-        String opcion = entrada.nextLine();    
-      if (opcion.equals("1")){
-          String numeroCuenta;
-          System.out.println("Ingrese el número de cuenta de la cual desea consultar el total de comisiones por concepto de depósitos: ");
-          numeroCuenta = entrada.nextLine();
-          System.out.println(ControladorCuenta.llamarCalcularComisionesDepositosCuentaUnica(numeroCuenta));
-      }
-      
-      else if (opcion.equals("2")){
-          String numeroCuenta;
-          System.out.println("Ingrese el número de cuenta de la cual desea consultar el total de comisiones por concepto de retiros: ");
-          numeroCuenta = entrada.nextLine();
-          System.out.println(ControladorCuenta.llamarCalcularComisionesRetirosCuentaUnica(numeroCuenta));
-        //Falta metodo calcular total comisiones por retiros de una cuenta
-      }
-      
-      else{
-        System.out.println("\n" + "Entrada erronea" + "\n");
-      }
-
-      
-  }
-  
-  
-  
-    
-    
     
 }

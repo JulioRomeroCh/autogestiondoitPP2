@@ -223,6 +223,19 @@ public class ControladorCuenta {
       }
       return "La cuenta no está registrada en el sistema";
     }
+     
+    public static String calcularTodasLasComisionesCuentaUnica(String pNumeroCuenta){
+      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
+        String comisiones = "";
+        comisiones += llamarCalcularComisionesDepositosCuentaUnica(pNumeroCuenta)+ "\n";
+        comisiones += llamarCalcularComisionesRetirosCuentaUnica(pNumeroCuenta) + "\n";
+        comisiones += llamarcalcularComisionesTotalesCuantaUnica(pNumeroCuenta) + "\n";
+        return comisiones;
+      }
+      else{
+        return "La cuenta indicada no está registrada en el sistema";
+      }
+    }
      //------------------------------- Métoodos comisiones universo cuentas------------------
       public static String llamarCalcularComisionesDepositosUniversoCuentas(){
         return CuentaDao.recorrerConsultaTotalComisionesDepositosUniversoCuentas();
@@ -235,4 +248,12 @@ public class ControladorCuenta {
        public static String llamarCalcularComisionesDepositosYRetirosUniversoCuentas(){
         return CuentaDao.recorrerConsultaTotalComisionesDepositosYRetirosUniversoCuentas();
     }
+       
+       public static String calcularTodasLasComisionesUniversoCuentas(){
+         String comisiones = "";
+         comisiones += llamarCalcularComisionesDepositosUniversoCuentas() + "\n";
+         comisiones += llamarCalcularComisionesRetirosUniversoCuentas() + "\n";
+         comisiones += llamarCalcularComisionesDepositosYRetirosUniversoCuentas() + "\n";
+         return comisiones;
+       }
 }

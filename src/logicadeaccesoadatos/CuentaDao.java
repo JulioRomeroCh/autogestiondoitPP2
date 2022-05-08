@@ -389,13 +389,13 @@ public class CuentaDao {
          String datosCliente = "";
          ResultSet resultado = consultarTotalComisionesDepositosUniversoCuentas();
        while (resultado.next()){
-          datosCliente += "\n" + "Total de comisiones por concepto de depósitos para todo el universo de cuentas: " +resultado.getObject(1).toString() + "\n";
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos para todo el universo de cuentas: " +resultado.getObject(1).toString() + " colones" + "\n";
        }
        return datosCliente;
       }
       catch(Exception error){
           //System.out.println("Error al recorrer la consulta del total de comisiones por depósito de UC");
-          return "0";
+          return "Total de comisiones por concepto de depósitos para todo el universo de cuentas: 0 colones";
       }
     } 
       
@@ -421,13 +421,13 @@ public class CuentaDao {
          String datosCliente = "";
          ResultSet resultado = consultarTotalComisionesRetirosUniversoCuentas();
        while (resultado.next()){
-          datosCliente += "\n" + "Total de comisiones por concepto de retiros para todo el universo de cuentas: " +resultado.getObject(1).toString() + "\n";
+          datosCliente += "\n" + "Total de comisiones por concepto de retiros para todo el universo de cuentas: " +resultado.getObject(1).toString() + " colones" + "\n";
        }
        return datosCliente;
       }
       catch(Exception error){
           //System.out.println("Error al recorrer la consulta del total de comisiones por retiros de UC");
-          return "0";
+          return "Total de comisiones por concepto de retiros para todo el universo de cuentas: 0 colones";
       }
     }
         
@@ -453,13 +453,13 @@ public class CuentaDao {
          String datosCliente = "";
          ResultSet resultado = consultarTotalComisionesDepositosYRetirosUniversoCuentas();
        while (resultado.next()){
-          datosCliente += "\n" + "Total de comisiones por concepto de depósitos y retiros para todo el universo de cuentas: " +resultado.getObject(1).toString() + "\n";
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos y retiros para todo el universo de cuentas: " +resultado.getObject(1).toString() + " colones" + "\n";
        }
        return datosCliente;
       }
       catch(Exception error){
           //System.out.println("Error al recorrer la consulta del total de comisiones por depósitos y retiros de UC");
-          return "0";
+         return "Total de comisiones por concepto de depósitos y retiros para todo el universo de cuentas: 0 colones";
       }
     }
    
@@ -488,13 +488,13 @@ public class CuentaDao {
          String datosCliente = "";
          ResultSet resultado = consultarTotalComisionesDepositosCuentaUnica(pNumeroCuenta);
        while (resultado.next()){
-          datosCliente += "\n" + "Total de comisiones por concepto de depósitos para la cuenta " + pNumeroCuenta + " es: "  +resultado.getObject(1).toString() + "\n";
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos para la cuenta " + pNumeroCuenta + " es: "  +resultado.getObject(1).toString() +  " colones" + "\n";
        }
        return datosCliente;
       }
       catch(Exception error){
           //System.out.println("Error al recorrer la consulta del total de comisiones por depósito de una cuenta en particular");
-          return "0";
+          return "Total de comisiones por concepto de depósitos para la cuenta indicada es de: 0 colones ";
       }
     } 
       
@@ -520,13 +520,13 @@ public class CuentaDao {
          String datosCliente = "";
          ResultSet resultado = consultarTotalComisionesRetirosCuentaUnica(pNumeroCuenta);
        while (resultado.next()){
-          datosCliente += "\n" + "Total de comisiones por concepto de retiros para la cuenta " + pNumeroCuenta + " es: " + resultado.getObject(1).toString() + "\n";
+          datosCliente += "\n" + "Total de comisiones por concepto de retiros para la cuenta " + pNumeroCuenta + " es: " + resultado.getObject(1).toString() + " colones" + "\n";
        }
        return datosCliente;
       }
       catch(Exception error){
           //System.out.println("Error al recorrer la consulta del total de comisiones por retiros para una única cuenta");
-          return "0";
+          return "Total de comisiones por concepto de retiros para la cuenta indicada es de: 0 colones ";
       }
     }
         
@@ -554,13 +554,13 @@ public class CuentaDao {
          String datosCliente = "";
          ResultSet resultado = consultarTotalComisionesDepositosYRetirosCuentaUnica(pNumeroCuenta);
        while (resultado.next()){
-          datosCliente += "\n" + "Total de comisiones por concepto de depósitos y retiros para la cuenta " + pNumeroCuenta + " es: " +resultado.getObject(1).toString() + "\n";
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos y retiros para la cuenta " + pNumeroCuenta + " es: " +resultado.getObject(1).toString()  + " colones" + "\n";
        }
        return datosCliente;
       }
       catch(Exception error){
           //System.out.println("Error al recorrer la consulta del total de comisiones por depósitos y retiros de cuenta única");
-          return "0";
+          return "Total de comisiones por concepto de depósitos y retiros para la cuenta indicada es de: 0 colones";
       }
     }
       

@@ -5,11 +5,13 @@ import logicadeaccesoadatos.*;
 import webservice.TipoCambio;
 
 public class Operacion {
+
+  
  
   private Date fechaOperacion;
   private TipoOperacion tipo;
   private boolean cargoComision;
-  private int monto;
+  private double monto;
   private double montoComision;
   
   public Operacion(TipoOperacion pTipo, boolean pCargoComision, int pMonto, double pMontoComision){
@@ -34,11 +36,11 @@ public class Operacion {
    
     String mensaje = "";
 
-    mensaje = "Fecha operación: " + this.fechaOperacion + "\n";
-    mensaje+= "Tipo: " + this.tipo + "\n";
+    mensaje = "Fecha operación: " + this.getFechaOperacion() + "\n";
+    mensaje+= "Tipo: " + this.getTipo() + "\n";
     mensaje+= "Cargo comisión: " + this.cargoComision + "\n";
-    mensaje+= "Monto operación: " + this.monto + "\n";
-    mensaje+= "Monto comisión: " + this.montoComision + "\n"+"\n"+"\n";
+    mensaje+= "Monto operación: " + this.getMonto() + "\n";
+    mensaje+= "Monto comisión: " + this.getMontoComision() + "\n"+"\n"+"\n";
     
     return mensaje; 
       
@@ -48,15 +50,55 @@ public class Operacion {
    
     String mensaje = "";
 
-    mensaje = "Fecha operación: " + this.fechaOperacion + "\n";
-    mensaje+= "Tipo: " + this.tipo + "\n";
+    mensaje = "Fecha operación: " + this.getFechaOperacion() + "\n";
+    mensaje+= "Tipo: " + this.getTipo() + "\n";
     mensaje+= "Cargo comisión: " + this.cargoComision + "\n";
-    mensaje+= "Monto operación: " + (this.monto / pCompra.consultarCompraDolar()) + "\n";
-    mensaje+= "Monto comisión: " + (this.montoComision / pCompra.consultarCompraDolar()) + "\n"+"\n"+"\n";
+    mensaje+= "Monto operación: " + (this.getMonto() / pCompra.consultarCompraDolar()) + "\n";
+    mensaje+= "Monto comisión: " + (this.getMontoComision() / pCompra.consultarCompraDolar()) + "\n"+"\n"+"\n";
     
     return mensaje; 
       
-  } 
+  }
+  
+  
+    public Date getFechaOperacion() {
+        return fechaOperacion;
+    }
+
+   
+    public void setFechaOperacion(Date pFechaOperacion) {
+        this.fechaOperacion = pFechaOperacion;
+    }
+
+   
+    public TipoOperacion getTipo() {
+        return tipo;
+    }
+
+  
+    public void setTipo(TipoOperacion pTipo) {
+        this.tipo = pTipo;
+    }
+
+
+    public double getMonto() {
+        return monto;
+    }
+
+ 
+    public void setMonto(double pMonto) {
+        this.monto = pMonto;
+    }
+
+  
+    public double getMontoComision() {
+        return montoComision;
+    }
+
+ 
+    public void setMontoComision(double pMontoComision) {
+        this.montoComision = pMontoComision;
+    }
     
     
 }

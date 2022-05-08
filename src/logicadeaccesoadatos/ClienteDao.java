@@ -215,6 +215,39 @@ public class ClienteDao {
       
   }
   
+  private static ResultSet consultarIdentificacionClientePorCuenta (String pNumeroCuenta){ 
+       Conexion nuevaConexion = new Conexion(); 
+       Connection conectar = nuevaConexion.conectar(); 
+       ResultSet resultado = null; 
+       PreparedStatement consulta; 
+        
+      try{ 
+        consulta = conectar.prepareCall("{CALL consultarIdentificacionCliente(?)}"); 
+        consulta.setString(1, pNumeroCuenta); 
+        resultado = consulta.executeQuery();   
+      } 
+      catch(Exception error){ 
+          System.out.println("Error al consultar la identificacion del cliente por cuenta"); 
+      } 
+      return resultado; 
+    } 
+ 
+    public static String recorrerConsultarIdentificacionClientePorCuenta (String pNumeroCuenta){ 
+      
+      try{ 
+         String datosCliente = ""; 
+         ResultSet resultado = consultarIdentificacionClientePorCuenta(pNumeroCuenta); 
+       while (resultado.next()){ 
+          datosCliente += resultado.getObject(1).toString(); 
+       } 
+       return datosCliente; 
+      } 
+      catch(Exception error){ 
+          System.out.println("Error al recorrer resultado de identificación del cliente"); 
+          return "0"; 
+      } 
+    }
+  
   //---------------------------------CARGARBASEDATOS----------------
   
   private static ResultSet cargarCliente(){
