@@ -34,11 +34,11 @@ public class ControladorCuenta {
  
  public static String llamarCambiarPinCLI(String pNumeroCuenta, String pPinActual, String pNuevoPin){
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   if(CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPinActual) == true){
+   if(CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPinActual) && CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
     return nuevaCuenta.cambiarPin(pNumeroCuenta, pPinActual, pNuevoPin);
 
    }
-   return "Error al cambiar PIN";
+   return "Error al cambiar PIN y/o la cuenta está inactiva";
  }
  
  public static String llamarBloquearCuenta(String pMotivo, String pNumeroCuenta) throws MessagingException{
@@ -62,55 +62,57 @@ public class ControladorCuenta {
  }
  
  public static String llamarDepositarColones(String pNumeroCuenta, String pMonto){
-     System.out.println("Monto: " +  pMonto);
-   if (ExpresionRegular.validarNumerosEnterosPositivos(pMonto) == true && CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) == true){
+   if (ExpresionRegular.validarNumerosEnterosPositivos(pMonto) == true && CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) == true && CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
      Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
      return nuevaCuenta.depositarColones(pNumeroCuenta, Integer.parseInt(pMonto));
    }
    else{
-     return "El monto no es un número entero y/o la cuenta no existe";
+     return "El monto no es un número entero y/o la cuenta no existe y/o la cuenta está inactiva";
    }
  }
  
  public static String llamarDepositarDolares(String pNumeroCuenta, String pMonto){
-   if (ExpresionRegular.validarNumerosEnterosPositivos(pMonto) == true && CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) == true){
+   if (ExpresionRegular.validarNumerosEnterosPositivos(pMonto) == true && CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) == true && CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
      Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
      return nuevaCuenta.depositarDolares(new TipoCambio(), pNumeroCuenta, Integer.parseInt(pMonto));
    }
    else{
-     return "El monto no es un número entero y/o la cuenta no existe";
+     return "El monto no es un número entero y/o la cuenta no existe y/o la cuenta está inactiva";
    }
  }
  
  public static String llamarRetirarColones(String pNumeroCuenta,String pPin, String pMonto){
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarSuficienciaDeFondos(pNumeroCuenta, Double.parseDouble(pMonto))){
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarSuficienciaDeFondos(pNumeroCuenta, Double.parseDouble(pMonto)) && CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
      return nuevaCuenta.retirarColones(pNumeroCuenta, pPin, Integer.parseInt(pMonto));
    }
    else{
-     return "Error al retirar dinero en colones";
+     return "Error al retirar dinero en colones y/o la cuenta está inactiva";
    }
  }
  
+
+ 
  public static String llamarRetirarDolares(String pNumeroCuenta,String pPin, String pMonto){
+   TipoCambio venta = new TipoCambio();
    Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarSuficienciaDeFondos(pNumeroCuenta, Double.parseDouble(pMonto))){
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarSuficienciaDeFondos(pNumeroCuenta, Double.parseDouble(pMonto)*venta.consultarVentaDolar())&& CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
      return nuevaCuenta.retirarDolares(new TipoCambio(), pNumeroCuenta, pPin, Integer.parseInt(pMonto));
    }
    else{
-     return "Error al retirar dinero en dólares";
+     return "Error al retirar dinero en dólares y/o la cuenta está inactiva";
    }
  }
  
  public static String llamarTransferirFondos(String pNumeroCuentaOrigen,String pPin, String pMonto, String pNumeroCuentaDestino){
    Cuenta cuentaOrigen = buscarCuenta(pNumeroCuentaOrigen);
    Cuenta cuentaDestino = buscarCuenta(pNumeroCuentaDestino);
-   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuentaOrigen) && CuentaDao.verificarCorrectitudPin(pNumeroCuentaOrigen, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarExistenciaCuenta(pNumeroCuentaDestino)&& CuentaDao.verificarSuficienciaDeFondos(pNumeroCuentaOrigen, Double.parseDouble(pMonto))){
+   if (CuentaDao.verificarExistenciaCuenta(pNumeroCuentaOrigen) && CuentaDao.verificarCorrectitudPin(pNumeroCuentaOrigen, pPin) && ExpresionRegular.validarNumerosEnterosPositivos(pMonto) && CuentaDao.verificarExistenciaCuenta(pNumeroCuentaDestino)&& CuentaDao.verificarSuficienciaDeFondos(pNumeroCuentaOrigen, Double.parseDouble(pMonto))&& CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuentaOrigen).equalsIgnoreCase("Activa")){
          
      return cuentaOrigen.transferirFondos(pNumeroCuentaOrigen, pPin, Integer.parseInt(pMonto), cuentaDestino);
    }
    else{
-     return "Error al transferir fondos";
+     return "Error al transferir fondos y/o la cuenta está inactiva";
    }
  }
  
@@ -149,44 +151,44 @@ public class ControladorCuenta {
   }
   
   public static String llamarConsultarSaldoColones(String pNumeroCuenta, String pPin){
-    if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)){
+    if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin) && CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
       Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
       return nuevaCuenta.consultarSaldoColones(pNumeroCuenta, pPin);
     }
     else{
-      return "Error en el número de cuenta y/o en el número de pin";
+      return "Error en el número de cuenta y/o en el número de pin y/o la cuenta está inactiva";
     }
   }
   
    public static String llamarConsultarSaldoDolares(String pNumeroCuenta, String pPin){
-    if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)){
+    if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)&& CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
       Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
       return nuevaCuenta.consultarSaldoDolares(new TipoCambio(), pNumeroCuenta, pPin);
     }
     else{
-      return "Error en el número de cuenta y/o en el número de pin";
+      return "Error en el número de cuenta y/o en el número de pin y/o la cuenta está inactiva";
     }
   }
    
    public static String llamarGenerarEstadoCuentaColones (String pNumeroCuenta, String pPin){
      
-       if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)){
+       if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)&& CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
          Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
          return nuevaCuenta.generarEstadoCuentaColones(pNumeroCuenta, pPin);
     }
     else{
-      return "Error en el número de cuenta y/o en el número de pin";
+      return "Error en el número de cuenta y/o en el número de pin y/o la cuenta está inactiva";
     }
    }
     
     public static String llamarGenerarEstadoCuentaDolares (String pNumeroCuenta, String pPin){
      
-       if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)){
+       if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.verificarCorrectitudPin(pNumeroCuenta, pPin)&& CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
          Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
          return nuevaCuenta.generarEstadoCuentaDolares(new TipoCambio(), pNumeroCuenta, pPin);
     }
     else{
-      return "Error en el número de cuenta y/o en el número de pin";
+      return "Error en el número de cuenta y/o en el número de pin y/o la cuenta está inactiva";
     }
    }
     
@@ -201,7 +203,7 @@ public class ControladorCuenta {
     }
     
     public static String llamarCalcularComisionesDepositosCuentaUnica(String pNumeroCuenta){
-      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
+      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) ){
         Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
         return nuevaCuenta.calcularComisionesDepositosCuentaUnica(pNumeroCuenta);
       }
@@ -225,7 +227,7 @@ public class ControladorCuenta {
     }
      
     public static String calcularTodasLasComisionesCuentaUnica(String pNumeroCuenta){
-      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
+      if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta) && CuentaDao.recorrerConsultaEstatusCuenta(pNumeroCuenta).equalsIgnoreCase("Activa")){
         String comisiones = "";
         comisiones += llamarCalcularComisionesDepositosCuentaUnica(pNumeroCuenta)+ "\n";
         comisiones += llamarCalcularComisionesRetirosCuentaUnica(pNumeroCuenta) + "\n";
@@ -233,7 +235,7 @@ public class ControladorCuenta {
         return comisiones;
       }
       else{
-        return "La cuenta indicada no está registrada en el sistema";
+        return "La cuenta indicada no está registrada en el sistema y/o la cuenta está inactiva";
       }
     }
      //------------------------------- Métoodos comisiones universo cuentas------------------

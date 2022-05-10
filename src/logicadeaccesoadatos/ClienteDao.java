@@ -155,65 +155,44 @@ public class ClienteDao {
     
     //--------------------MÉTODOS GUI
     
-  public static void ConsultaListarClientes(JComboBox pComboBox){
-    ResultSet resultado;
+   public static ResultSet ConsultaListarClientes(){
+    ResultSet resultado = null;
     PreparedStatement consulta;
     Conexion nuevaConexion = new Conexion();
-    Connection conectar = nuevaConexion.conectar();
-    pComboBox.removeAllItems();
+    Connection conectar = nuevaConexion.conectar();   
     
-    try{
-    
-      consulta = conectar.prepareStatement("SELECT identificacionPersona, nombre, apellido1 FROM Persona WHERE rol = 'Cliente'");
-      resultado = consulta.executeQuery();
-      
-      while(resultado.next()){
-        String mensaje = String.valueOf(resultado.getObject(1)) + " - " + String.valueOf(resultado.getObject(2)) + " " +String.valueOf(resultado.getObject(3));
-        pComboBox.addItem(mensaje);
-      }
-      
+    try{ 
+      consulta = conectar.prepareStatement("SELECT DISTINCT identificacionPersona, nombre, apellido1 FROM Persona WHERE rol = 'Cliente' ORDER BY apellido1 ASC");
+      resultado = consulta.executeQuery();    
     }
     catch(Exception error){
       error.printStackTrace();    
     }
-
+    return resultado;
+   }  
     
-  }
-  
-  
+    
+     public static ResultSet ConsultaListarClientesTabla(){
       
-  public static void ConsultaListarClientesTabla(JTable pTabla){
-      DefaultTableModel modelo = (DefaultTableModel) pTabla.getModel();
-      modelo.setRowCount(0);
+      
       PreparedStatement consulta;
-      ResultSet resultado;
-      ResultSetMetaData datosResultado;
-      int cantidadColumnas = 0;
-      
+      ResultSet resultado = null;
+          
       try{
       
         Conexion nuevaConexion = new Conexion();
         Connection conectar = nuevaConexion.conectar();   
-        consulta = conectar.prepareStatement("SELECT apellido1, apellido2, nombre, identificacionPersona FROM Persona WHERE rol = 'Cliente'");      
-        resultado = consulta.executeQuery();
-        datosResultado = resultado.getMetaData();
-        cantidadColumnas = datosResultado.getColumnCount();
-        
-        while(resultado.next()){
-          Object [] fila = new Object[cantidadColumnas];
-          for(int indice = 0; indice<cantidadColumnas; indice++){
-            fila[indice] = resultado.getObject(indice + 1);
-          }
-          modelo.addRow(fila);
-        }
-  
+        consulta = conectar.prepareStatement("SELECT DISTINCT apellido1, apellido2, nombre, identificacionPersona FROM Persona WHERE rol = 'Cliente' ORDER BY apellido1 ASC");      
+        resultado = consulta.executeQuery();       
           
       }
       catch(Exception error){
         error.printStackTrace();    
       }
-      
+      return resultado;
   }
+  
+
   
   private static ResultSet consultarIdentificacionClientePorCuenta (String pNumeroCuenta){ 
        Conexion nuevaConexion = new Conexion(); 

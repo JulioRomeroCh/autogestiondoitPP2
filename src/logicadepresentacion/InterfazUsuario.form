@@ -10,7 +10,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="PanelRegistrarCliente" alignment="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="PanelRegistrarCliente" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -31,62 +34,63 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BotonRegresarRegistrarCliente" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
-                                  <Component id="TítuloRegistrarCliente" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="RegistrarClientePrimerApellido" max="32767" attributes="0"/>
-                                      <Component id="RegistrarClienteSegundoApellido" pref="157" max="32767" attributes="0"/>
-                                      <Component id="RegistrarClienteNombre" max="32767" attributes="0"/>
-                                      <Component id="RegistrarClienteIdentificacion" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="RegistrarClienteFechaNacimiento" pref="138" max="32767" attributes="0"/>
-                                              <Component id="RegistrarClienteNumero" max="32767" attributes="0"/>
-                                              <Component id="RegistrarClienteCorreo" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="BotonRegistrarCliente" min="-2" pref="136" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="BotonRegresarRegistrarCliente" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="674" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="107" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="RegistrarClientePrimerApellido" pref="168" max="32767" attributes="0"/>
+                                  <Component id="RegistrarClienteSegundoApellido" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="RegistrarClienteNombre" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="RegistrarClienteIdentificacion" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="BotonRegistrarCliente" min="-2" pref="136" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="RegistrarClienteCorreo" max="32767" attributes="0"/>
+                                          <Component id="RegistrarClienteNumero" max="32767" attributes="0"/>
+                                          <Component id="RegistrarClienteFechaNacimiento" alignment="0" pref="119" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+                              <Component id="TítuloRegistrarCliente" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="86" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="771" max="32767" attributes="0"/>
+                          <EmptySpace pref="788" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -95,12 +99,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="BotonRegresarRegistrarCliente" min="-2" max="-2" attributes="0"/>
                           <Component id="TítuloRegistrarCliente" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="RegistrarClientePrimerApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -127,7 +131,7 @@
                           <Component id="RegistrarClienteIdentificacion" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BotonRegistrarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="130" max="32767" attributes="0"/>
+                      <EmptySpace pref="120" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -164,6 +168,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarRegistrarClienteActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
@@ -252,11 +259,6 @@
                 <Property name="text" type="java.lang.String" value="Correo electr&#xf3;nico"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="RegistrarClienteFechaNacimiento">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JTextField" name="RegistrarClienteNumero">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -281,6 +283,11 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar cliente"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="RegistrarClienteFechaNacimiento">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -317,23 +324,6 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="BotonRegresarRegistrarUsuario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
-                              <Component id="TítuloRegistrarUsuario" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="83" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="RegistrarUsuarioIdentificacion" max="32767" attributes="0"/>
-                          <Component id="RegistrarUsuarioFechaNacimiento" pref="146" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -343,20 +333,41 @@
                       </Group>
                       <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="RegistrarUsuarioPrimerApellido" max="32767" attributes="0"/>
-                          <Component id="RegistrarUsuarioSegundoApellido" pref="166" max="32767" attributes="0"/>
+                          <Component id="RegistrarUsuarioSegundoApellido" pref="153" max="32767" attributes="0"/>
                           <Component id="RegistrarUsuarioNombre" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="BotonRegistrarUsuario" min="-2" pref="150" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
+                                      <Component id="RegistrarUsuarioPrimerApellido" min="-2" pref="153" max="-2" attributes="0"/>
+                                      <EmptySpace pref="170" max="32767" attributes="0"/>
+                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="510" max="-2" attributes="0"/>
+                                      <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace pref="83" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="RegistrarUsuarioIdentificacion" max="32767" attributes="0"/>
+                                  <Component id="RegistrarUsuarioFechaNacimiento" pref="135" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="BotonRegistrarUsuario" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Component id="BotonRegresarRegistrarUsuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="264" max="-2" attributes="0"/>
+                              <Component id="TítuloRegistrarUsuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -366,13 +377,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="RegistrarUsuarioFechaNacimiento" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="BotonRegresarRegistrarUsuario" min="-2" max="-2" attributes="0"/>
+                          <Component id="TítuloRegistrarUsuario" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="BotonRegresarRegistrarUsuario" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TítuloRegistrarUsuario" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -381,27 +391,27 @@
                                   <Component id="RegistrarUsuarioIdentificacion" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RegistrarUsuarioSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="RegistrarUsuarioFechaNacimiento" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="RegistrarUsuarioSegundoApellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="RegistrarUsuarioNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace pref="162" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="BotonRegistrarUsuario" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="162" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -431,6 +441,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarRegistrarUsuarioActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
@@ -507,15 +520,15 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="RegistrarUsuarioFechaNacimiento">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JButton" name="BotonRegistrarUsuario">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Registrar usuario"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="RegistrarUsuarioFechaNacimiento">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -783,6 +796,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarRegistrarCuentaActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
@@ -878,6 +894,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="ComboListarConsultaCuentas" min="-2" pref="231" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                      <Component id="BotonListarConsultarCuentas" min="-2" pref="161" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -886,18 +909,11 @@
                               <Component id="TítuloListarConsultarCuentas" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="836" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="83" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="ComboListarConsultaCuentas" min="-2" pref="231" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
-                      <Component id="BotonListarConsultarCuentas" min="-2" pref="161" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
+                      <EmptySpace pref="75" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -913,9 +929,9 @@
                           <Component id="ComboListarConsultaCuentas" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BotonListarConsultarCuentas" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="231" max="-2" attributes="0"/>
-                      <EmptySpace pref="100" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="294" max="-2" attributes="0"/>
+                      <EmptySpace pref="71" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1128,6 +1144,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarCambiarPINActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel16">
               <Properties>
@@ -1328,6 +1347,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarDepositoActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
@@ -1544,6 +1566,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarRetiroActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel30">
               <Properties>
@@ -1825,6 +1850,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarTransferenciaActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel34">
               <Properties>
@@ -2080,6 +2108,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarConsultarSaldoActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JRadioButton" name="RadioBotonColonesConsultarSaldo">
               <Properties>
@@ -2287,6 +2318,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarEstadoCuentaActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JRadioButton" name="EstadoCuentaColones">
               <Properties>
@@ -2460,6 +2494,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarConsultarEstatusActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel24">
               <Properties>
@@ -2536,8 +2573,8 @@
                               <Component id="BotonConsultarTipoCambio" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="331" max="-2" attributes="0"/>
-                              <Component id="TipoCambioResultado" min="-2" pref="311" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="382" max="-2" attributes="0"/>
+                              <Component id="TipoCambioResultado" min="-2" pref="195" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -2558,9 +2595,9 @@
                       </Group>
                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                       <Component id="BotonConsultarTipoCambio" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       <Component id="TipoCambioResultado" min="-2" pref="37" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="223" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="239" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2590,6 +2627,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarTipoCambioActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JRadioButton" name="RadioBotonCompra">
               <Properties>
@@ -2679,14 +2719,8 @@
                               <Component id="GananciasCuentaEspecifico" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
-                              <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="GananciasTipo" min="-2" pref="268" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="381" max="-2" attributes="0"/>
-                              <Component id="BotonGanancias" min="-2" pref="157" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
+                              <Component id="BotonGanancias" min="-2" pref="207" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="156" max="32767" attributes="0"/>
@@ -2710,14 +2744,9 @@
                           <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="GananciasNumeroCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="GananciasTipo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       <Component id="BotonGanancias" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="180" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="279" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2747,6 +2776,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonRegresarComisionesActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JRadioButton" name="GananciasCuentaEspecifico">
               <Properties>
@@ -2769,32 +2801,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="GananciasNumeroCuenta">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel26">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Cambria" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Tipo de consulta"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="GananciasTipo">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Dep&#xf3;sitos"/>
-                    <StringItem index="1" value="Retiros"/>
-                    <StringItem index="2" value="Dep&#xf3;sitos y retiros"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>

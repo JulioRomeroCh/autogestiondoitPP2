@@ -488,7 +488,7 @@ public class CuentaDao {
          String datosCliente = "";
          ResultSet resultado = consultarTotalComisionesDepositosCuentaUnica(pNumeroCuenta);
        while (resultado.next()){
-          datosCliente += "\n" + "Total de comisiones por concepto de depósitos para la cuenta " + pNumeroCuenta + " es: "  +resultado.getObject(1).toString() +  " colones" + "\n";
+          datosCliente += "\n" + "Total de comisiones por concepto de depósitos para la cuenta " + pNumeroCuenta + " es: "  + resultado.getObject(1).toString() +  " colones" + "\n";
        }
        return datosCliente;
       }
@@ -564,68 +564,80 @@ public class CuentaDao {
       }
     }
       
-      
-   //------------------------Métodos GUI
-    public static void ConsultaListarCuentas(JComboBox pComboBox){
-    ResultSet resultado;
+   public static ResultSet ConsultaEstatusCuenta(String pNumeroCuenta){
+    ResultSet resultado = null;
     PreparedStatement consulta;
     Conexion nuevaConexion = new Conexion();
-    Connection conectar = nuevaConexion.conectar();
-    pComboBox.removeAllItems();
+    Connection conectar = nuevaConexion.conectar();   
     
-    try{
-    
-      consulta = conectar.prepareStatement("SELECT CAST(aes_decrypt(cuenta.numeroCuenta, 'pass45') AS char(100)), persona.nombre, persona.apellido1 FROM cuenta JOIN persona_tiene_cuenta ON cuenta.identificadorCuenta = persona_tiene_cuenta.identificadorCuenta JOIN persona ON persona_tiene_cuenta.identificacionPersona = persona.identificacionPersona");
-      resultado = consulta.executeQuery();
-      
-      while(resultado.next()){
-        String mensaje = String.valueOf(resultado.getObject(1)) + " - " + String.valueOf(resultado.getObject(2)) + " " +String.valueOf(resultado.getObject(3));
-        pComboBox.addItem(mensaje);
-      }
-      
+    try{ 
+      consulta = conectar.prepareStatement("{CALL consultarEstatus(?)}");
+      consulta.setString(1, pNumeroCuenta);
+      resultado = consulta.executeQuery();    
     }
     catch(Exception error){
       error.printStackTrace();    
     }
-
-    
-  }
-  
-  
-  
-  public static void ConsultaListarCuentasTabla(JTable pTabla){
-      DefaultTableModel modelo = (DefaultTableModel) pTabla.getModel();
-      modelo.setRowCount(0);
-      PreparedStatement consulta;
-      ResultSet resultado;
-      ResultSetMetaData datosResultado;
-      int cantidadColumnas = 0;
+    return resultado;
+   }
+   
+   public static String recorrerConsultaEstatusCuenta(String pNumeroCuenta){
+     
+      try{
+         String datosCliente = "";
+         ResultSet resultado = ConsultaEstatusCuenta(pNumeroCuenta);
+       while (resultado.next()){
+          datosCliente += resultado.getObject(1).toString();
+       }
+       return datosCliente;
+      }
+      catch(Exception error){
+        error.printStackTrace();
+        return "";
+      }
+    }
       
+      
+   //------------------------Métodos GUI
+
+      
+   public static ResultSet ConsultaListarCuentas(){
+    ResultSet resultado = null;
+    PreparedStatement consulta;
+    Conexion nuevaConexion = new Conexion();
+    Connection conectar = nuevaConexion.conectar();   
+    
+    try{ 
+      consulta = conectar.prepareStatement("SELECT DISTINCT CAST(aes_decrypt(cuenta.numeroCuenta, 'pass45') AS char(100)), persona.nombre, persona.apellido1 FROM cuenta JOIN persona_tiene_cuenta ON cuenta.identificadorCuenta = persona_tiene_cuenta.identificadorCuenta JOIN persona ON persona_tiene_cuenta.identificacionPersona = persona.identificacionPersona ORDER BY aes_decrypt(cuenta.saldo, 'pass45') + 0 DESC");
+      resultado = consulta.executeQuery();    
+    }
+    catch(Exception error){
+      error.printStackTrace();    
+    }
+    return resultado;
+   }
+   
+     public static ResultSet ConsultaListarCuentasTabla(){
+      
+      
+      PreparedStatement consulta;
+      ResultSet resultado = null;
+          
       try{
       
         Conexion nuevaConexion = new Conexion();
         Connection conectar = nuevaConexion.conectar();   
-        consulta = conectar.prepareStatement("SELECT CAST(aes_decrypt(cuenta.numeroCuenta, 'pass45') AS char(100)), cuenta.estatus, CAST(aes_decrypt(cuenta.saldo, 'pass45') AS char(100)), persona.identificacionPersona, persona.nombre, persona.apellido1, persona.apellido2 FROM cuenta JOIN persona_tiene_cuenta ON cuenta.identificadorCuenta = persona_tiene_cuenta.identificadorCuenta JOIN persona ON persona_tiene_cuenta.identificacionPersona = persona.identificacionPersona");      
-        resultado = consulta.executeQuery();
-        datosResultado = resultado.getMetaData();
-        cantidadColumnas = datosResultado.getColumnCount();
-        
-        while(resultado.next()){
-          Object [] fila = new Object[cantidadColumnas];
-          for(int indice = 0; indice<cantidadColumnas; indice++){
-            fila[indice] = resultado.getObject(indice + 1);
-          }
-          modelo.addRow(fila);
-        }
-  
+        consulta = conectar.prepareStatement("SELECT DISTINCT CAST(aes_decrypt(cuenta.numeroCuenta, 'pass45') AS char(100)), cuenta.estatus, CAST(aes_decrypt(cuenta.saldo, 'pass45') AS char(100)), persona.identificacionPersona, persona.nombre, persona.apellido1, persona.apellido2 FROM cuenta JOIN persona_tiene_cuenta ON cuenta.identificadorCuenta = persona_tiene_cuenta.identificadorCuenta JOIN persona ON persona_tiene_cuenta.identificacionPersona = persona.identificacionPersona ORDER BY aes_decrypt(cuenta.saldo, 'pass45') + 0 DESC");      
+        resultado = consulta.executeQuery();       
           
       }
       catch(Exception error){
         error.printStackTrace();    
       }
-      
+      return resultado;
   }
-  
+   
+
   
    //----------------------MÉTODOS CARGAR BASE 
   
