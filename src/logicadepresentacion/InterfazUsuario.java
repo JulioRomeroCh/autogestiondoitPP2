@@ -1887,7 +1887,7 @@ public class InterfazUsuario extends javax.swing.JFrame {
 
         MenuConsultarGananciasComisiones.setText("Consultar comisiones");
 
-        MenuComisiones.setText("Gananciar produco de comisiones");
+        MenuComisiones.setText("Gananciar producto de comisiones");
         MenuComisiones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuComisionesActionPerformed(evt);

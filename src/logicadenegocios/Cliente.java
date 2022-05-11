@@ -44,8 +44,8 @@ public class Cliente extends Persona{
     public String registrarCuenta(double pMonto, String pPin, String pIdentificacion){
     logicadenegocios.Cuenta nuevaCuenta = new logicadenegocios.Cuenta(pMonto, pPin);
     super.cuentas.add(nuevaCuenta);
-    java.sql.Date fechaSQL = new java.sql.Date((new Date()).getDate());
-    CuentaDao.insertarCuenta(nuevaCuenta.getNumeroCuenta(), fechaSQL, pMonto, pPin, "activa");
+    java.util.Date fechaActual = new Date();
+    CuentaDao.insertarCuenta(nuevaCuenta.getNumeroCuenta(), fechaActual, pMonto, pPin, "activa");
     PersonaDao.insertarPersonaTieneCuenta(pIdentificacion, nuevaCuenta.getNumeroCuenta());
     
     DecimalFormat formatoDosDecimales = new DecimalFormat("#.00");

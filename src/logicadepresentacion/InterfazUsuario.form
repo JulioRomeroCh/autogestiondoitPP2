@@ -3013,7 +3013,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MenuComisiones">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gananciar produco de comisiones"/>
+                <Property name="text" type="java.lang.String" value="Gananciar producto de comisiones"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MenuComisionesActionPerformed"/>

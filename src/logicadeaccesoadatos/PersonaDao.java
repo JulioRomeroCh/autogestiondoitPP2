@@ -30,17 +30,12 @@ public class PersonaDao {
         insertar.setString(3, pPrimerApellido);
         insertar.setString(4, pSegundoApellido);
         
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-        String fechaTexto = formatoFecha.format(pFechaNacimiento);
-        Date fechaDate = formatoFecha.parse(fechaTexto);
-        java.sql.Date fechaSQL = new java.sql.Date(fechaDate.getDate());
-        
-        insertar.setDate(5, fechaSQL);
+        insertar.setDate(5, new java.sql.Date(pFechaNacimiento.getTime()));
         insertar.setString(6, pRol);
         insertar.execute();
     }
     catch (Exception error){
-        error.printStackTrace();
+        //error.printStackTrace();
         salida = false;
     }
      
@@ -116,10 +111,13 @@ public class PersonaDao {
       String pNombre = String.valueOf(resultado.getObject(2));
       String pPrimerApellido = String.valueOf(resultado.getObject(3));   
       String pSegundoApellido = String.valueOf(resultado.getObject(4));
-      Date pFechaNacimiento = (Date) (formatoFecha.parse(String.valueOf(resultado.getObject(5))));  
+      String pFechaNacimiento =  String.valueOf(resultado.getObject(5));
+      
+      Date fechaConvertida = new SimpleDateFormat("yyyy-MM-dd").parse(pFechaNacimiento);
+      
 
        
-      Persona nuevaPersona = new Persona(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, pFechaNacimiento);
+      Persona nuevaPersona = new Persona(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, fechaConvertida);
       ControladorPersona.personas.add(nuevaPersona);
        }
       }

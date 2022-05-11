@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import logicadenegocios.*;
 import logicadeaccesoadatos.*;
 import logicadeconexionexterna.MensajeTexto;
+import static logicadeintegracion.ControladorPersona.convertirTextoAFecha;
 import logicadevalidacion.*;
 
 public class ControladorInterfazUsuario implements ActionListener {
@@ -70,14 +71,14 @@ public class ControladorInterfazUsuario implements ActionListener {
   
   //-------------------------LLAMADO DE MÉTODOS-------------------------
   public String llamarMetodoRegistrarCliente(String pIdentificacion, String pNombre,  String pPrimerApellido, String pSegundoApellido,
-    String pFechaNacimiento, String pNumeroTelefonico, String pCorreoElectronico) throws ParseException{
-    if (ExpresionRegular.validarFormatoFecha(pFechaNacimiento) == true && ExpresionRegular.validarFormatoCorreoElectronico(pCorreoElectronico) == true && ExpresionRegular.validarFormatoNumeroTelefonico(pNumeroTelefonico) == true){
-      Cliente nuevoCliente = new Cliente(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, logicadeintegracion.ControladorCliente.convertirTextoAFecha(pFechaNacimiento), pNumeroTelefonico, pCorreoElectronico);
+    java.util.Date pFechaNacimiento, String pNumeroTelefonico, String pCorreoElectronico) throws ParseException{
+    if (ExpresionRegular.validarFormatoCorreoElectronico(pCorreoElectronico) == true && ExpresionRegular.validarFormatoNumeroTelefonico(pNumeroTelefonico) == true){
+      Cliente nuevoCliente = new Cliente(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, pFechaNacimiento, pNumeroTelefonico, pCorreoElectronico);
       ControladorCliente.clientes.add(nuevoCliente);
       return nuevoCliente.registrarPersona();   
     }
     else{
-      return "Error en el formato del correo y/o fecha";
+      return "Error en el formato del correo y/o número telefónico";
     }
   }
   
@@ -106,6 +107,13 @@ public class ControladorInterfazUsuario implements ActionListener {
        error.printStackTrace();
      }
    }
+   
+       public static String llamarMetodoRegistrarUsuarioGUI(String pIdentificacion, String pNombre, String pPrimerApellido, String pSegundoApellido, java.util.Date pFechaNacimiento) throws ParseException{
+      Usuario nuevoUsuario = new Usuario(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, pFechaNacimiento);
+      ControladorPersona.personas.add(nuevoUsuario);   
+      return nuevoUsuario.registrarPersona(); 
+
+    }
    
       public static void recorrerResultadoConsultaListarClientes(JComboBox pComboBox){
      pComboBox.removeAllItems();
@@ -185,8 +193,8 @@ public class ControladorInterfazUsuario implements ActionListener {
       
        try {
         if(ExpresionRegular.validarFormatoNumeroTelefonico(vistaGUI.RegistrarClienteNumero.getText()) == true){
-          String fecha = String.valueOf(vistaGUI.RegistrarClienteFechaNacimiento.getDate().getDate()) + "/0" + String.valueOf(vistaGUI.RegistrarClienteFechaNacimiento.getDate().getDay()+1) + "/" + String.valueOf(vistaGUI.RegistrarClienteFechaNacimiento.getDate().getYear()+1900); 
-          JOptionPane.showMessageDialog(null,llamarMetodoRegistrarCliente(vistaGUI.RegistrarClienteIdentificacion.getText(), vistaGUI.RegistrarClienteNombre.getText(), vistaGUI.RegistrarClientePrimerApellido.getText(), vistaGUI.RegistrarClienteSegundoApellido.getText(), fecha, vistaGUI.RegistrarClienteNumero.getText(), vistaGUI.RegistrarClienteCorreo.getText()));
+         
+          JOptionPane.showMessageDialog(null,llamarMetodoRegistrarCliente(vistaGUI.RegistrarClienteIdentificacion.getText(), vistaGUI.RegistrarClienteNombre.getText(), vistaGUI.RegistrarClientePrimerApellido.getText(), vistaGUI.RegistrarClienteSegundoApellido.getText(), vistaGUI.RegistrarClienteFechaNacimiento.getDate(), vistaGUI.RegistrarClienteNumero.getText(), vistaGUI.RegistrarClienteCorreo.getText()));
           vistaGUI.RegistrarClienteIdentificacion.setText(""); vistaGUI.RegistrarClienteNombre.setText(""); vistaGUI.RegistrarClientePrimerApellido.setText(""); vistaGUI.RegistrarClienteSegundoApellido.setText(""); vistaGUI.RegistrarClienteCorreo.setText(""); vistaGUI.RegistrarClienteNumero.setText(""); vistaGUI.RegistrarClienteFechaNacimiento.setCalendar(null);
         }
         else{
@@ -208,8 +216,8 @@ public class ControladorInterfazUsuario implements ActionListener {
       }
       else{
         try {
-        String fecha = String.valueOf(vistaGUI.RegistrarUsuarioFechaNacimiento.getDate().getDate()) + "/0" + String.valueOf(vistaGUI.RegistrarUsuarioFechaNacimiento.getDate().getDay()+1) + "/" + String.valueOf(vistaGUI.RegistrarUsuarioFechaNacimiento.getDate().getYear()+1900); 
-        JOptionPane.showMessageDialog(null, ControladorPersona.llamarMetodoRegistrarUsuarioCLI(vistaGUI.RegistrarUsuarioIdentificacion.getText(), vistaGUI.RegistrarUsuarioNombre.getText(), vistaGUI.RegistrarUsuarioPrimerApellido.getText(), vistaGUI.RegistrarUsuarioSegundoApellido.getText(), fecha));
+        
+        JOptionPane.showMessageDialog(null, llamarMetodoRegistrarUsuarioGUI(vistaGUI.RegistrarUsuarioIdentificacion.getText(), vistaGUI.RegistrarUsuarioNombre.getText(), vistaGUI.RegistrarUsuarioPrimerApellido.getText(), vistaGUI.RegistrarUsuarioSegundoApellido.getText(), vistaGUI.RegistrarUsuarioFechaNacimiento.getDate()));
         vistaGUI.RegistrarUsuarioIdentificacion.setText(""); vistaGUI.RegistrarUsuarioNombre.setText(""); vistaGUI.RegistrarUsuarioPrimerApellido.setText(""); vistaGUI.RegistrarUsuarioSegundoApellido.setText(""); vistaGUI.RegistrarUsuarioFechaNacimiento.setCalendar(null);
       } 
       catch (ParseException ex) {

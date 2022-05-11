@@ -22,12 +22,12 @@ public class OperacionDao {
     boolean salida = true;
     Conexion nuevaConexion = new Conexion();
     Connection conectar = nuevaConexion.conectar();
-    java.sql.Date fechaSQL = new java.sql.Date((new java.util.Date()).getDate());
+    java.util.Date fechaActual = new java.util.Date();
     try{    
         CallableStatement insertar = conectar.prepareCall("{CALL insertarOperacion(?,?,?,?,?,?)}");
         
         insertar.setInt(1, Integer.parseInt(CuentaDao.recorrerReferenciaNumeroCuenta(pNumeroCuenta)));
-        insertar.setDate(2, fechaSQL);
+        insertar.setDate(2, new java.sql.Date(fechaActual.getTime()));
         insertar.setString(3,  pTipo);
         insertar.setInt(4, pMonto);
         insertar.setBoolean(5, pCargoComision);

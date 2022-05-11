@@ -17,7 +17,7 @@ import webservice.TipoCambio;
 public class CuentaDao {
  
     
-  public static boolean insertarCuenta(String pNumeroCuenta, Date pFechaCreacion, double pSaldo,
+  public static boolean insertarCuenta(String pNumeroCuenta, java.util.Date pFechaCreacion, double pSaldo,
       String pPin, String pEstatus){
       
     boolean salida = true;
@@ -26,7 +26,7 @@ public class CuentaDao {
     try{        
         CallableStatement insertar = conectar.prepareCall("{CALL insertarCuenta(?,?,?,?,?)}");
         insertar.setString(1, pNumeroCuenta);
-        insertar.setDate(2, pFechaCreacion);
+        insertar.setDate(2, new java.sql.Date(pFechaCreacion.getTime()));
         insertar.setDouble(3, pSaldo);
         insertar.setString(4, pPin);
         insertar.setString(5, pEstatus);

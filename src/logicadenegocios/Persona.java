@@ -49,7 +49,7 @@ public class Persona implements Comparable{
   public String registrarCuenta(double pMonto, String pPin, String pIdentificacion){
     Cuenta nuevaCuenta = new Cuenta(pMonto, pPin);
     cuentas.add(nuevaCuenta);
-    CuentaDao.insertarCuenta(nuevaCuenta.getNumeroCuenta(), (java.sql.Date) new Date(), pMonto, pPin, "activa");
+    CuentaDao.insertarCuenta(nuevaCuenta.getNumeroCuenta(),new java.util.Date(), pMonto, pPin, "activa");
     PersonaDao.insertarPersonaTieneCuenta(pIdentificacion, nuevaCuenta.getNumeroCuenta());
     
     String mensaje = "";

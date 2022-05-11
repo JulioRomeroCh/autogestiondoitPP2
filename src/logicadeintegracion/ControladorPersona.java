@@ -41,6 +41,8 @@ public class ControladorPersona {
     }
     }
   
+
+  
     public static Date convertirTextoAFecha(String pFechaEnTexto) throws ParseException{
       SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
       return formatoFecha.parse(pFechaEnTexto);
