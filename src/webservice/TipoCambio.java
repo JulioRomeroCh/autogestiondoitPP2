@@ -3,7 +3,8 @@ package webservice;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TipoCambio {
+
+public class TipoCambio implements ITipoCambio{
 
   private int indicador = 0;
   private String fechaInicio;
@@ -22,24 +23,27 @@ public class TipoCambio {
     this.fechaFinal = fechaInicio;
   }
 
+  
+  @Override
   public double consultarCompraDolar(){
     this.indicador = 317;
     double valor = Double.parseDouble(obtenerValores());
     return valor;
   }
   
+  @Override
   public double consultarVentaDolar(){
     this.indicador = 318;   
     double valor = Double.parseDouble(obtenerValores());
     return valor;
   }
   
-  private String obtenerValores(){
+  @Override
+  public String obtenerValores(){
     try{
-      establecerDireccionWeb(); 
-      
+      establecerDireccionWeb();    
       String data = Solicitud.obtenerHTML(enlace);
-      ConversorXML xml = new ConversorXML(data);
+      ConversorXML xml = establecerXml(data);
 
       return xml.obtenerValor(VALOR_ETIQUETA);
     } 
@@ -48,9 +52,18 @@ public class TipoCambio {
     }
   }
   
-  private void establecerDireccionWeb(){
+  @Override
+  public void establecerDireccionWeb(){
     String parametros = "Indicador=" + indicador + "&FechaInicio=" + fechaInicio + "&FechaFinal=" + fechaFinal + "&Nombre=" + NOMBRE + "&SubNiveles=" + SUBNIVELES + "&CorreoElectronico=KevRjs172@gmail.com&Token=VR50MO22J4";
     this.enlace = HOST + "?" + parametros;
+  }
+  
+  @Override
+  public ConversorXML establecerXml(String pDatos) throws Exception{
+      establecerDireccionWeb();     
+      pDatos = Solicitud.obtenerHTML(enlace);
+      ConversorXML xml = new ConversorXML(pDatos);   
+      return xml;
   }
   
 }

@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logicadeaccesoadatos;
 
 import java.sql.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import logicadeintegracion.ControladorCuenta;
 import logicadenegocios.Cuenta;
 import webservice.TipoCambio;
@@ -157,7 +149,7 @@ public class CuentaDao {
       return resultado;
     }
 
-    public static String recorrerconsultarClienteCuenta(String pNumeroCuenta){
+    public static String recorrerConsultarClienteCuenta(String pNumeroCuenta){
      
       try{
          String datosCliente = "";

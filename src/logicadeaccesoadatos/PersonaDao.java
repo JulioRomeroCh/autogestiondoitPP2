@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package logicadeaccesoadatos;
 
 
@@ -15,8 +11,7 @@ import logicadenegocios.Persona;
 
 public class PersonaDao {
     
-    
-    
+       
   public static boolean insertarPersona(String pIdentificacion, String pNombre, String pPrimerApellido,
           String pSegundoApellido, Date pFechaNacimiento, String pRol){
       

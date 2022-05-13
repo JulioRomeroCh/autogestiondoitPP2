@@ -14,7 +14,7 @@ public class Cliente extends Persona{
   public String numeroTelefonico;
   public String correoElectronico;
   
-  public Cliente(String pIdentificacion, String pNombre,  String pPrimerApellido, String pSegundoApellido,
+  public Cliente(String pIdentificacion, String pNombre, String pPrimerApellido, String pSegundoApellido,
       Date pFechaNacimiento, String pNumeroTelefonico, String pCorreoElectronico){
   
     super(pIdentificacion, pNombre, pPrimerApellido, pSegundoApellido, pFechaNacimiento);
@@ -41,7 +41,7 @@ public class Cliente extends Persona{
   }
   
   
-    public String registrarCuenta(double pMonto, String pPin, String pIdentificacion){
+  public String registrarCuenta(double pMonto, String pPin, String pIdentificacion){
     logicadenegocios.Cuenta nuevaCuenta = new logicadenegocios.Cuenta(pMonto, pPin);
     super.cuentas.add(nuevaCuenta);
     java.util.Date fechaActual = new Date();
@@ -62,9 +62,10 @@ public class Cliente extends Persona{
     mensaje+= "Número del teléfono 'asociado' a la cuenta: " + numeroTelefonico + "\n";
     mensaje+= "Dirección de correo electrónico 'asociada' a la cuenta: " + correoElectronico + "\n";
            
-    return mensaje;
-     
+    return mensaje;   
   }
+  
+  
   
   public String registrarPersona(){
    

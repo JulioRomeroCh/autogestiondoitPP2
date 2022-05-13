@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import static logicadeintegracion.ControladorCuenta.cuentas;
-import static logicadeintegracion.ControladorPersona.buscarPersona;
 import logicadenegocios.*;
 import logicadevalidacion.*;
 import logicadeaccesoadatos.ClienteDao;
@@ -15,9 +13,7 @@ public class ControladorCliente {
   
   public static ArrayList<Cliente> clientes = new ArrayList<Cliente>();
      
-  public void iniciar(){
-      
-  }  
+ 
   
   public static Cliente buscarCliente(String pIdentificacion){
     Cliente cliente = new Cliente();
@@ -55,7 +51,7 @@ public class ControladorCliente {
   
   }
   
-  public static Date convertirTextoAFecha(String pFechaEnTexto) throws ParseException{
+  private static Date convertirTextoAFecha(String pFechaEnTexto) throws ParseException{
       SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
       return formatoFecha.parse(pFechaEnTexto);
       

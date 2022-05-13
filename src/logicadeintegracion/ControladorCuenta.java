@@ -13,7 +13,6 @@ public class ControladorCuenta {
     
   public static ArrayList<Cuenta> cuentas = new ArrayList();
   
-  public static void iniciar(){}
   
 
   public static Cuenta buscarCuenta(String pNumeroCuenta){
@@ -28,7 +27,7 @@ public class ControladorCuenta {
 
   
  public static String consultarDatosCuentaCliente(String pNumeroCuenta){
-   return CuentaDao.recorrerconsultarClienteCuenta(pNumeroCuenta);
+   return CuentaDao.recorrerConsultarClienteCuenta(pNumeroCuenta);
  }
  
  
@@ -56,7 +55,7 @@ public class ControladorCuenta {
    String mensaje = "Número de cuenta: " + nuevaCuenta.getNumeroCuenta()+ "\n";
    mensaje += "Estatus: " + nuevaCuenta.getEstatus() + "\n";
    mensaje += "Saldo: " + nuevaCuenta.getSaldo() + "\n";
-   mensaje += CuentaDao.recorrerconsultarClienteCuenta(pNumeroCuenta) + "\n";
+   mensaje += CuentaDao.recorrerConsultarClienteCuenta(pNumeroCuenta) + "\n";
    
    return mensaje;
  }
@@ -127,7 +126,7 @@ public class ControladorCuenta {
      mensaje += arregloCuentas[contador].getNumeroCuenta() + "\n";
      mensaje += arregloCuentas[contador].getEstatus() + "\n";
      mensaje += arregloCuentas[contador].getSaldo() + "\n";
-     mensaje += CuentaDao.recorrerconsultarClienteCuenta(arregloCuentas[contador].getNumeroCuenta()) + "\n";
+     mensaje += CuentaDao.recorrerConsultarClienteCuenta(arregloCuentas[contador].getNumeroCuenta()) + "\n";
    }
    return mensaje;
   }
@@ -218,10 +217,10 @@ public class ControladorCuenta {
       return "La cuenta no está registrada en el sistema";
     }
      
-     public static String llamarcalcularComisionesTotalesCuantaUnica(String pNumeroCuenta){
+     public static String llamarcalcularComisionesTotalesCuentaUnica(String pNumeroCuenta){
       if (CuentaDao.verificarExistenciaCuenta(pNumeroCuenta)){
         Cuenta nuevaCuenta = buscarCuenta(pNumeroCuenta);
-        return nuevaCuenta.calcularComisionesTotalesCuantaUnica(pNumeroCuenta);
+        return nuevaCuenta.calcularComisionesTotalesCuentaUnica(pNumeroCuenta);
       }
       return "La cuenta no está registrada en el sistema";
     }
@@ -231,7 +230,7 @@ public class ControladorCuenta {
         String comisiones = "";
         comisiones += llamarCalcularComisionesDepositosCuentaUnica(pNumeroCuenta)+ "\n";
         comisiones += llamarCalcularComisionesRetirosCuentaUnica(pNumeroCuenta) + "\n";
-        comisiones += llamarcalcularComisionesTotalesCuantaUnica(pNumeroCuenta) + "\n";
+        comisiones += llamarcalcularComisionesTotalesCuentaUnica(pNumeroCuenta) + "\n";
         return comisiones;
       }
       else{

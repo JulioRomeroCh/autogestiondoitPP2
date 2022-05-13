@@ -17,9 +17,8 @@ public class Ordenacion {//Inicio de la clase Ordenacion
       
     pArreglo[indice + 1] = nuevoDato;
               
-    }//Fin ciclo for
-      
-      
-  }//Fin del método ordenamientoInserción
-    
+    }//Fin ciclo for          
+  }//Fin del método ordenamientoInserción    
 }//Fin de la clase Ordenacion
+
+

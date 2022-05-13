@@ -1,7 +1,5 @@
 package logicadenegocios;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import logicadeaccesoadatos.*;
@@ -18,16 +16,13 @@ public class Persona implements Comparable{
   
   public Persona (String pIdentificacion, String pNombre, String pPrimerApellido, String pSegundoApellido, Date pFechaNacimiento) {
       
-    cuentas = new ArrayList<Cuenta>();  
-      
+    cuentas = new ArrayList<Cuenta>();        
     this.identificacion = pIdentificacion;   
     this.nombre = pNombre;
     this.primerApellido = pPrimerApellido;
     this.segundoApellido = pSegundoApellido;
     this.fechaNacimiento = pFechaNacimiento;
-    
-    
-    
+     
   } 
   
   public Persona(){
@@ -36,12 +31,9 @@ public class Persona implements Comparable{
   
   public String registrarPersona(){
        
-
-   PersonaDao.insertarPersona(this.identificacion, this.nombre, this.primerApellido, this.segundoApellido, this.fechaNacimiento, "Usuario");
-    
+   PersonaDao.insertarPersona(this.identificacion, this.nombre, this.primerApellido, this.segundoApellido, this.fechaNacimiento, "Usuario");  
    String mensaje = "Se ha creado un nuevo usuario en el sistema, los datos que fueron almacenados son: " + "\n";
-   mensaje+= this.toString();
-   
+   mensaje+= this.toString();  
    return mensaje;
    
   }
@@ -95,6 +87,14 @@ public class Persona implements Comparable{
     return this.identificacion;
   }
   
+  public String getSegundoApellido(){
+    return this.segundoApellido;
+  }
+  
+  public String getNombre(){
+    return this.nombre;
+  }
+  
   public ArrayList<Cuenta> getCuentas(){
     return this.cuentas;
   }
@@ -112,4 +112,6 @@ public class Persona implements Comparable{
     }
   }
 }
+
+
 

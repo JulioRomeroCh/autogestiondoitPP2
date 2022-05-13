@@ -21,7 +21,6 @@ public class MensajeTexto {
   public String getPalabraSecreta() {
     return palabraSecreta;
   }
-  
     
   public String generarPalabraSecreta(){
     int tamano = (int)(Math.random()*4+2);

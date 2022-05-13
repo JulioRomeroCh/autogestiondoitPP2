@@ -1,13 +1,10 @@
 package logicadenegocios;
 
 import java.util.Date;
-import logicadeaccesoadatos.*;
-import webservice.TipoCambio;
+import webservice.ITipoCambio;
 
 public class Operacion {
 
-  
- 
   private Date fechaOperacion;
   private TipoOperacion tipo;
   private boolean cargoComision;
@@ -46,7 +43,7 @@ public class Operacion {
       
   }    
   
-  public String dolarizar(TipoCambio pCompra){
+  public String dolarizar(ITipoCambio pCompra){
    
     String mensaje = "";
 
@@ -54,7 +51,7 @@ public class Operacion {
     mensaje+= "Tipo: " + this.getTipo() + "\n";
     mensaje+= "Cargo comisión: " + this.cargoComision + "\n";
     mensaje+= "Monto operación: " + (this.getMonto() / pCompra.consultarCompraDolar()) + "\n";
-    mensaje+= "Monto comisión: " + (this.getMontoComision() / pCompra.consultarCompraDolar()) + "\n"+"\n"+"\n";
+    mensaje+= "Monto comisión: " + (this.getMontoComision() / pCompra.consultarCompraDolar()) + "\n"+"\n";
     
     return mensaje; 
       
