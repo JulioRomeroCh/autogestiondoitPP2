@@ -2,7 +2,10 @@ package logicadenegocios;
 
 
 public class Ordenacion {//Inicio de la clase Ordenacion
-    
+  /**
+   * <p> Método que ordena un arreglo de tipo Comparable, de forma ascendente o descendente según corresponda.
+   * @param pArreglo: Arreglo de tipo Comparable. 
+   */  
   public void ordenamientoInsercion(Comparable [] pArreglo){//Inicio del método ordenamientoInserción
    
     for(int contador = 1; contador < pArreglo.length; contador++){//Inicio ciclo for

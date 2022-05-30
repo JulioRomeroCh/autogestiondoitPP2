@@ -16,6 +16,14 @@ public class ConversorXML {
   private String xml;
   private Element elementoBase;
   
+  
+  /**
+   * Constructor de la clase ConversorXML
+   * @param pDatos Documento XML.
+   * @throws SAXException
+   * @throws IOException
+   * @throws ParserConfigurationException
+   */  
   public ConversorXML(String pDatos) throws SAXException, IOException, ParserConfigurationException{
     //Reemplaza caracteres especiales
     pDatos =  remplazarCaracter(pDatos);
@@ -44,7 +52,7 @@ public class ConversorXML {
       return "0";
     }
   }
-
+  
   private String remplazarCaracter(String pMensaje){
     pMensaje = pMensaje.replace("&lt;", "<");
     pMensaje = pMensaje.replace("&gt;", ">");

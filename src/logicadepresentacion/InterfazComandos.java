@@ -250,7 +250,7 @@ public class InterfazComandos {
             monto = entrada.nextLine();
             System.out.println("Indique el número de cuenta a la que desea transferir los fondos: ");
             numeroCuentaDestino = entrada.nextLine();
-            return ControladorCuenta.llamarTransferirFondos(pNumeroCuentaOrigen, pPin, monto, numeroCuentaDestino);
+            return ControladorCuenta.llamarTransferirFondos(pNumeroCuentaOrigen, pPin, monto, numeroCuentaDestino, "CLI");
           }
           else{
               System.out.println("Palabra incorrecta " + "\n");
@@ -299,7 +299,7 @@ public class InterfazComandos {
           numeroCuenta = entrada.nextLine();
           System.out.println("Ingrese el monto en colones, a depositar: ");
           monto = entrada.nextLine();
-          System.out.println(ControladorCuenta.llamarDepositarColones(numeroCuenta, monto));     
+          System.out.println(ControladorCuenta.llamarDepositarColones(numeroCuenta, monto, "CLI"));     
       }
       
       else if (opcion.equals("2")){
@@ -310,7 +310,7 @@ public class InterfazComandos {
           System.out.println("Ingrese el monto en dólares, a depositar: ");
           monto = entrada.nextLine();
                   
-          System.out.println(ControladorCuenta.llamarDepositarDolares(numeroCuenta, monto)); 
+          System.out.println(ControladorCuenta.llamarDepositarDolares(numeroCuenta, monto, "CLI")); 
       }
       
       else{
@@ -379,7 +379,7 @@ public class InterfazComandos {
           if (mensaje.corroborarPalabraSecreta(palabraSecreta, pNumeroTelefonico)){
             System.out.println("Ingrese el monto por retirar (en colones): ");
             monto = entrada.nextLine();
-            return ControladorCuenta.llamarRetirarColones(pNumeroCuenta, pPin, monto);
+            return ControladorCuenta.llamarRetirarColones(pNumeroCuenta, pPin, monto, "CLI");
           }
           else{
               System.out.println("Palabra incorrecta " + "\n");
@@ -425,7 +425,7 @@ public class InterfazComandos {
           if (mensaje.corroborarPalabraSecreta(palabraSecreta, pNumeroTelefonico)){
             System.out.println("Ingrese el monto por retirar (en dólares): ");
             monto = entrada.nextLine();
-            return ControladorCuenta.llamarRetirarDolares(pNumeroCuenta, pPin, monto);
+            return ControladorCuenta.llamarRetirarDolares(pNumeroCuenta, pPin, monto, "CLI");
           }
           else{
               System.out.println("Palabra incorrecta " + "\n");
@@ -512,7 +512,7 @@ public class InterfazComandos {
       if (ValidacionIntentos.validarCantidadIntentosPin(pinActual, numeroCuenta) == true){
           System.out.println("Ingrese el nuevo PIN: ");
           nuevoPin = entrada.nextLine();
-          return ControladorCuenta.llamarCambiarPinCLI(numeroCuenta, pinActual, nuevoPin);         
+          return ControladorCuenta.llamarCambiarPinCLI(numeroCuenta, pinActual, nuevoPin, "CLI");         
           
       }
       else{
@@ -663,7 +663,7 @@ public class InterfazComandos {
     public String menuEstadoCuentaDolares() throws MessagingException{
       String numeroCuenta;
       String pin;
-      System.out.println("Ingrese el número de cuenta del que desea consultar el estado en colones: ");
+      System.out.println("Ingrese el número de cuenta del que desea consultar el estado en dólares: ");
       numeroCuenta = entrada.nextLine();
       int contador = 0;
       while (contador < 2){
@@ -746,7 +746,7 @@ public class InterfazComandos {
         String numeroCuenta;
           System.out.println("Ingrese el número de cuenta del cual desea conocer el estatus: ");
           numeroCuenta = entrada.nextLine();
-          System.out.println(ControladorCuenta.llamarConsultarEstatus(numeroCuenta));
+          System.out.println(ControladorCuenta.llamarConsultarEstatus(numeroCuenta, "CLI"));
       }
       
       else{
@@ -789,7 +789,7 @@ public class InterfazComandos {
          System.out.println("Indique el número PIN actual: " + "\n" + "intentos restantes: " + (2 - contador));
          pin = entrada.nextLine();
       if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuenta) == true){
-        return ControladorCuenta.llamarConsultarSaldoColones(numeroCuenta, pin);
+        return ControladorCuenta.llamarConsultarSaldoColones(numeroCuenta, pin, "CLI");
           
       }
       else{
@@ -812,7 +812,7 @@ public class InterfazComandos {
          System.out.println("Indique el número PIN actual: " + "\n" + "intentos restantes: " + (2 - contador));
          pin = entrada.nextLine();
       if (ValidacionIntentos.validarCantidadIntentosPin(pin, numeroCuenta) == true){
-        return ControladorCuenta.llamarConsultarSaldoDolares(numeroCuenta, pin);
+        return ControladorCuenta.llamarConsultarSaldoDolares(numeroCuenta, pin, "CLI");
           
       }
       else{

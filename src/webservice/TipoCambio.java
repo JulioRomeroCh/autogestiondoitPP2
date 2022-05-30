@@ -15,6 +15,9 @@ public class TipoCambio implements ITipoCambio{
   private String enlace;
   private final String VALOR_ETIQUETA = "NUM_VALOR";
   
+  /**
+   * <p> Constructor de TipoCambio.
+   */
   public TipoCambio(){
     Date date = new Date();
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -23,7 +26,10 @@ public class TipoCambio implements ITipoCambio{
     this.fechaFinal = fechaInicio;
   }
 
-  
+  /**
+   * <p> Método que consulta el tipo de cambio de la compra para hoy
+   * @return double que corresponde al tipo de cambio de la compra para hoy.
+   */
   @Override
   public double consultarCompraDolar(){
     this.indicador = 317;
@@ -31,6 +37,10 @@ public class TipoCambio implements ITipoCambio{
     return valor;
   }
   
+  /**
+   * <p> Método que consulta el tipo de cambio de la venta para hoy
+   * @return double que corresponde al tipo de cambio de la venta para hoy.
+   */
   @Override
   public double consultarVentaDolar(){
     this.indicador = 318;   
@@ -38,6 +48,10 @@ public class TipoCambio implements ITipoCambio{
     return valor;
   }
   
+  /**
+   * Obtiene el XML del WebService del BCCR y parsea el documento para obtener el valor.
+   * @return String
+   */  
   @Override
   public String obtenerValores(){
     try{
@@ -52,12 +66,14 @@ public class TipoCambio implements ITipoCambio{
     }
   }
   
+  /**
+   * <p> Método que establece el valor del atributo enlace.
+   */
   @Override
   public void establecerDireccionWeb(){
     String parametros = "Indicador=" + indicador + "&FechaInicio=" + fechaInicio + "&FechaFinal=" + fechaFinal + "&Nombre=" + NOMBRE + "&SubNiveles=" + SUBNIVELES + "&CorreoElectronico=KevRjs172@gmail.com&Token=VR50MO22J4";
     this.enlace = HOST + "?" + parametros;
   }
-  
   @Override
   public ConversorXML establecerXml(String pDatos) throws Exception{
       establecerDireccionWeb();     
