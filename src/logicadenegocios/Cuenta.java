@@ -118,7 +118,9 @@ public class Cuenta implements Comparable {
     this.estatus = "inactiva";  
     CuentaDao.inactivarCuentaBaseDeDatos(getNumeroCuenta());
     String mensaje = "Su cuenta ha sido inactivada por el siguiente motivo: " + pMotivo;
-    CorreoElectronico.generarCorreoElectronico(pCorreo, pMotivo);
+    ICorreoElectronico correoElectronico = new CorreoElectronico();
+    ICorreoElectronico correoIngles = new CorreoIngles(correoElectronico);
+    correoIngles.generarCorreoElectronico(pCorreo, pMotivo);
     return mensaje;
   }
   /**

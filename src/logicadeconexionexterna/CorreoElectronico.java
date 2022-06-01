@@ -22,7 +22,8 @@ public class CorreoElectronico implements ICorreoElectronico{
    * @throws AddressException: Excepción lanzada en caso de que la dirección del destinatario sea incorrecta.
    * @throws MessagingException: Excepción lanzada en caso de error en el momento de enviar un correo electrónico.
    */
-  public static void generarCorreoElectronico(String pCorreo, String pMotivo) throws AddressException, MessagingException {
+  @Override
+  public void generarCorreoElectronico(String pCorreo, String pMotivo) throws AddressException, MessagingException {
       
    //Se establecen las propiedades del correo
    
@@ -55,8 +56,7 @@ public class CorreoElectronico implements ICorreoElectronico{
     
    ICorreoElectronico correo = new CorreoElectronico();
    correo = new CorreoIngles(correo);
-    mensaje.setText("El motivo de inactivación de su cuenta se debe a: " + pMotivo + "\n" + 
-            "The cause of the inactivation of your account is due to: " + correo.crearTextoCorreo(pMotivo));
+    mensaje.setText("El motivo de inactivación de su cuenta se debe a: " + pMotivo);
     
     //Servidor de envío del correo
     Transport mensajero = sesion.getTransport("smtp");
@@ -64,11 +64,6 @@ public class CorreoElectronico implements ICorreoElectronico{
     mensajero.sendMessage(mensaje, mensaje.getRecipients(Message.RecipientType.TO));
     mensajero.close();
     System.out.println("Correo enviado exitosamente");
-  }
-  
-  @Override
-  public String crearTextoCorreo(String pMotivo){
-    return pMotivo;
   }
   
   

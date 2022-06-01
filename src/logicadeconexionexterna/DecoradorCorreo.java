@@ -4,6 +4,9 @@
  */
 package logicadeconexionexterna;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 /**
  *
  * @author Jose Blanco
@@ -12,8 +15,11 @@ public abstract class DecoradorCorreo implements ICorreoElectronico{
     
   protected ICorreoElectronico correoElectronico;
   
+  public DecoradorCorreo(ICorreoElectronico pCorreoElectronico){
+    correoElectronico = pCorreoElectronico;
+  }
  
   @Override
-  public abstract String crearTextoCorreo (String pMotivo);
+  public abstract void generarCorreoElectronico(String pCorreo, String pMotivo) throws AddressException, MessagingException;
     
 }
