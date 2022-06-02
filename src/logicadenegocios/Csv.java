@@ -78,13 +78,14 @@ public class Csv extends Bitacora{
       PrintWriter writer = new PrintWriter(new File(ruta));
       StringBuilder stringBuilder = new StringBuilder();
       ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraTodaVista();
+   
       for (int indice=0;indice!=listaTotal.size();indice++){
         stringBuilder.append(listaTotal.get(indice).get(0)+ ",");
         stringBuilder.append(listaTotal.get(indice).get(1)+ ",");
         stringBuilder.append(listaTotal.get(indice).get(2)+ ",");
-        stringBuilder.append('\n');
-        writer.write(stringBuilder.toString());  
+        stringBuilder.append('\n');  
       }
+      writer.write(stringBuilder.toString());
       writer.close();  
       }
         catch (Exception error){
