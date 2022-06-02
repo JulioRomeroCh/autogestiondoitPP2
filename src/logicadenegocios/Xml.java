@@ -87,13 +87,13 @@ public class Xml extends Bitacora{
     ArrayList<ArrayList<String>> listaTotal = new ArrayList<ArrayList<String>>(); 
     
     if(pCondicion.equals("todos")){
-      listaTotal = BitacoraDao.recorrerConsultaBitacoraTodaVistaXmlCsv();
+      listaTotal = BitacoraDao.recorrerConsultaBitacoraTodaVista();
     }
     else if(pCondicion.equals("hoy")){
-      listaTotal = BitacoraDao.recorrerConsultaBitacoraHoyXmlCsv();
+      listaTotal = BitacoraDao.recorrerConsultaBitacoraHoy();
     }
     else{
-      listaTotal = BitacoraDao.recorrerConsultaBitacoraSegunVistaCsvXml(pCondicion);
+      listaTotal = BitacoraDao.recorrerConsultaBitacoraSegunVista(pCondicion);
     }  
     
     return listaTotal;

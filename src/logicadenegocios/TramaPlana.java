@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.awt.*;
+import java.util.ArrayList;
 import logicadeaccesoadatos.BitacoraDao;
 
 public class TramaPlana extends Bitacora{
@@ -36,8 +37,11 @@ public class TramaPlana extends Bitacora{
       if (!archivo.exists()){
         archivo.createNewFile();
       }
+
       
-      texto += crearTextoBitacoraSegunCondicion(pCondicion);
+
+      
+      texto += recorrerLista(pCondicion);
       
       FileWriter documento = new FileWriter(archivo);
       BufferedWriter escritor = new BufferedWriter(documento);
@@ -55,22 +59,22 @@ public class TramaPlana extends Bitacora{
     }
     
     
-    private String crearTextoBitacoraSegunCondicion(String pCondicion){
+    private ArrayList<ArrayList<String>> crearTextoBitacoraSegunCondicion(String pCondicion){
        
-      String texto = "";  
+      ArrayList<ArrayList<String>> listaFinal  = new ArrayList<ArrayList<String>>();  
       
       if (pCondicion.equals("todos")){
-        texto += BitacoraDao.recorrerConsultaBitacoraTodaVistaTramaPlana();
+        listaFinal = BitacoraDao.recorrerConsultaBitacoraTodaVista();
       }
       
       else if (pCondicion.equals("hoy")){
-        texto += BitacoraDao.recorrerConsultaBitacoraHoyTramaPlana();
+        listaFinal = BitacoraDao.recorrerConsultaBitacoraHoy();
       }
       
       else{
-        texto += BitacoraDao.recorrerConsultaBitacoraSegunVistaTramaPlana(pCondicion);
+        listaFinal = BitacoraDao.recorrerConsultaBitacoraSegunVista(pCondicion);
       }  
-      return texto;
+      return listaFinal;
     }
     
     
@@ -89,6 +93,42 @@ public class TramaPlana extends Bitacora{
          System.out.println("Error al abrir la bitácora, trama plana");
      }
     }
+    
+  
+    private String generarPalabraPosicional (String pPalabra, int pLargoDefinido){
+      
+      int largoPalabra = pPalabra.length();
+      String resultado = pPalabra;
+      
+      for (int contador = largoPalabra; contador <= pLargoDefinido; contador++){
+        resultado += " ";
+      }
+      return resultado;
+    }
+    
+    private String recorrerLista(String pCondicion){
+      
+      String textoFinal = "";
+      int largoDefinidoFechaConHora = 17;
+      int largoDefinidoAccion = 16;
+      int largoDefinidoVista = 6;
+      
+      ArrayList<Integer> listaLargos = new ArrayList<Integer>();
+      listaLargos.add(largoDefinidoAccion);
+      listaLargos.add(largoDefinidoFechaConHora);
+      listaLargos.add(largoDefinidoVista);
+      
+      ArrayList<ArrayList<String>> listaFinal = crearTextoBitacoraSegunCondicion(pCondicion);
+      
+      for (int contador = 0; contador != listaFinal.size(); contador++){
+        for (int indice = 0; indice != listaFinal.get(contador).size(); indice++){
+           textoFinal += generarPalabraPosicional(listaFinal.get(contador).get(indice), listaLargos.get(indice));
+        }
+        textoFinal += "\r\n";
+      }
+      return textoFinal;
+    }
+    
   
   
 }

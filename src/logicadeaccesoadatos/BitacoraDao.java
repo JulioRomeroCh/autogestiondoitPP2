@@ -23,7 +23,7 @@ public class BitacoraDao {
     return resultado;
   }
 
-
+/*
   public static String recorrerConsultaBitacoraSegunVistaTramaPlana(String pVista){
     try{
       String datosBitacora = "";
@@ -40,8 +40,9 @@ public class BitacoraDao {
       return "";
     }
   }
+  */
   
-  public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraSegunVistaCsvXml(String pVista){
+  public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraSegunVista(String pVista){
       ArrayList<ArrayList<String>> listaTotal= new ArrayList<ArrayList<String>>();
       try{
       ArrayList<String> listaDatos=new ArrayList<String>();
@@ -82,6 +83,7 @@ public class BitacoraDao {
     return resultado;
   }
 
+  /*
   public static String recorrerConsultaBitacoraTodaVistaTramaPlana(){
     try{
       String datosBitacora = "";
@@ -98,8 +100,9 @@ public class BitacoraDao {
       return "";
     }
   }
-  
-  public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraTodaVistaXmlCsv(){
+  */
+       
+  public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraTodaVista(){
       ArrayList<ArrayList<String>> listaTotal= new ArrayList<ArrayList<String>>();
       try{
       ArrayList<String> listaDatos=new ArrayList<String>();
@@ -138,6 +141,7 @@ public class BitacoraDao {
     return resultado;
   }
 
+   /*
   public static String recorrerConsultaBitacoraHoyTramaPlana(){
     try{
       String datosBitacora = "";
@@ -154,8 +158,9 @@ public class BitacoraDao {
       return "";
     }
   }
-  
-  public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraHoyXmlCsv(){
+  */
+   
+  public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraHoy(){
       ArrayList<ArrayList<String>> listaTotal= new ArrayList<ArrayList<String>>();
       try{
       ArrayList<String> listaDatos=new ArrayList<String>();

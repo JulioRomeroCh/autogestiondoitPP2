@@ -56,7 +56,7 @@ public class Csv extends Bitacora{
     private void consultarBitacoraSegunVistaCSV(String pVista) throws SQLException, FileNotFoundException{
       PrintWriter writer = new PrintWriter(new File(ruta));
       StringBuilder stringBuilder = new StringBuilder();
-      ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraSegunVistaCsvXml(pVista);
+      ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraSegunVista(pVista);
       for (int indice=0;indice!=listaTotal.size();indice++){
         System.out.println(listaTotal.get(indice).get(0));
         stringBuilder.append(listaTotal.get(indice).get(0)+ ",");
@@ -74,7 +74,7 @@ public class Csv extends Bitacora{
     private void consultarBitacoraTodaVistaCSV() throws SQLException, FileNotFoundException{
       PrintWriter writer = new PrintWriter(new File(ruta));
       StringBuilder stringBuilder = new StringBuilder();
-      ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraTodaVistaXmlCsv();
+      ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraTodaVista();
       for (int indice=0;indice!=listaTotal.size();indice++){
         stringBuilder.append(listaTotal.get(indice).get(0)+ ",");
         stringBuilder.append(listaTotal.get(indice).get(1)+ ",");
@@ -88,7 +88,7 @@ public class Csv extends Bitacora{
     private void consultarBitacoraHoyCSV() throws FileNotFoundException, SQLException{
       PrintWriter writer = new PrintWriter(new File(ruta));
       StringBuilder stringBuilder = new StringBuilder();
-      ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraHoyXmlCsv();
+      ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraHoy();
       for (int indice=0;indice!=listaTotal.size();indice++){
         stringBuilder.append(listaTotal.get(indice).get(0)+ ",");
         stringBuilder.append(listaTotal.get(indice).get(1)+ ",");
