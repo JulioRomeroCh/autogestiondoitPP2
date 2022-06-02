@@ -23,24 +23,7 @@ public class BitacoraDao {
     return resultado;
   }
 
-/*
-  public static String recorrerConsultaBitacoraSegunVistaTramaPlana(String pVista){
-    try{
-      String datosBitacora = "";
-      ResultSet resultado = consultarBitacoraSegunVista(pVista);
-      while (resultado.next()){
-        datosBitacora += resultado.getObject(1).toString();
-        datosBitacora += resultado.getObject(2).toString();
-        datosBitacora += resultado.getObject(3).toString();
-      }
-      return datosBitacora;
-    }
-    catch(Exception error){
-      System.out.println("Error al recorrer la consulta de una bitácora según la vista");
-      return "";
-    }
-  }
-  */
+
   
   public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraSegunVista(String pVista){
       ArrayList<ArrayList<String>> listaTotal= new ArrayList<ArrayList<String>>();
@@ -83,24 +66,7 @@ public class BitacoraDao {
     return resultado;
   }
 
-  /*
-  public static String recorrerConsultaBitacoraTodaVistaTramaPlana(){
-    try{
-      String datosBitacora = "";
-      ResultSet resultado = consultarBitacoraTodaVista();
-      while (resultado.next()){
-        datosBitacora += resultado.getObject(1).toString();
-        datosBitacora += resultado.getObject(2).toString();
-        datosBitacora += resultado.getObject(3).toString();
-      }
-      return datosBitacora;
-    }
-    catch(Exception error){
-      System.out.println("Error al recorrer la consulta de una bitácora para todas las vistas");
-      return "";
-    }
-  }
-  */
+
        
   public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraTodaVista(){
       ArrayList<ArrayList<String>> listaTotal= new ArrayList<ArrayList<String>>();
@@ -121,7 +87,7 @@ public class BitacoraDao {
       return listaTotal;
     }
   }
-  //-------------------------------------
+  //--------------------------------------
   
     
    private static ResultSet consultarBitacoraHoy(){
@@ -141,24 +107,6 @@ public class BitacoraDao {
     return resultado;
   }
 
-   /*
-  public static String recorrerConsultaBitacoraHoyTramaPlana(){
-    try{
-      String datosBitacora = "";
-      ResultSet resultado = consultarBitacoraHoy();
-      while (resultado.next()){
-        datosBitacora += resultado.getObject(1).toString();
-        datosBitacora += resultado.getObject(2).toString();
-        datosBitacora += resultado.getObject(3).toString();
-      }
-      return datosBitacora;
-    }
-    catch(Exception error){
-      System.out.println("Error al recorrer la consulta de una bitácora de hoy");
-      return "";
-    }
-  }
-  */
    
   public static ArrayList<ArrayList<String>> recorrerConsultaBitacoraHoy(){
       ArrayList<ArrayList<String>> listaTotal= new ArrayList<ArrayList<String>>();

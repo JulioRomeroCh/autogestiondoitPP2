@@ -37,7 +37,7 @@ public class Csv extends Bitacora{
     
     @Override
     public void crearBitacora(String pCondicion){
-        try{
+        
         if (pCondicion.equals("todos")){
             consultarBitacoraTodaVistaCSV();
         }
@@ -47,13 +47,11 @@ public class Csv extends Bitacora{
         else{
             consultarBitacoraSegunVistaCSV(pCondicion);
         }
-        }
-        catch (Exception error){
-            System.out.println("Error al crear un archivo CSV");
-        }
+        
     }
     
-    private void consultarBitacoraSegunVistaCSV(String pVista) throws SQLException, FileNotFoundException{
+    private void consultarBitacoraSegunVistaCSV(String pVista){
+      try{
       PrintWriter writer = new PrintWriter(new File(ruta));
       StringBuilder stringBuilder = new StringBuilder();
       ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraSegunVista(pVista);
@@ -67,11 +65,16 @@ public class Csv extends Bitacora{
         System.out.println("Terminó la consulta!");        
       }
       writer.write(stringBuilder.toString());
-      writer.close();  
+      writer.close(); 
+      }
+      catch (Exception error){
+          System.out.println("Error al consultar bitácora según vista CSV");
+      }
     }
     
     
-    private void consultarBitacoraTodaVistaCSV() throws SQLException, FileNotFoundException{
+    private void consultarBitacoraTodaVistaCSV(){
+      try{
       PrintWriter writer = new PrintWriter(new File(ruta));
       StringBuilder stringBuilder = new StringBuilder();
       ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraTodaVista();
@@ -83,9 +86,14 @@ public class Csv extends Bitacora{
         writer.write(stringBuilder.toString());  
       }
       writer.close();  
+      }
+        catch (Exception error){
+          System.out.println("Error al consultar bitácora toda vista CSV");
+      }
     }
 
-    private void consultarBitacoraHoyCSV() throws FileNotFoundException, SQLException{
+    private void consultarBitacoraHoyCSV(){
+      try{
       PrintWriter writer = new PrintWriter(new File(ruta));
       StringBuilder stringBuilder = new StringBuilder();
       ArrayList<ArrayList<String>> listaTotal = BitacoraDao.recorrerConsultaBitacoraHoy();
@@ -96,9 +104,16 @@ public class Csv extends Bitacora{
         stringBuilder.append('\n');
         writer.write(stringBuilder.toString());     
       }
-      writer.close();  
+      writer.close(); 
+      }
+        catch (Exception error){
+          System.out.println("Error al consultar bitácora registros de hoy CSV");
+      }
     }
     
+    
+    
+    @Override
     public void abrirArchivo(){
      try{
        File archivo = new File(ruta);
